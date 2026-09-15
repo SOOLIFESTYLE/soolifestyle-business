@@ -315,63 +315,159 @@ const ANGLES_DESIR = [
     angle: "Argent",
     ressort: "La perte, pas le gain",
     pourquoi: `Un gain promis, on y croit à moitié. Une perte chiffrée, ça serre le ventre tout de suite.`,
-    exemple: `J'ai fait le calcul l'autre soir.\nPas pour me faire du mal. Juste pour voir.\n\n14 mois à publier. Zéro offre claire.\nÀ deux clients ratés par mois, au prix où je vends aujourd'hui…\n\nLe chiffre m'a retourné l'estomac.\n\nCe que tu ne vends pas ne disparaît pas.\nÇa s'accumule ailleurs.`,
+    exemples: [
+      `J'ai fait le calcul l'autre soir.\nPas pour me faire du mal. Juste pour voir.\n\n14 mois à publier. Zéro offre claire.\nÀ deux clients ratés par mois, au prix où je vends aujourd'hui…\n\nLe chiffre m'a retourné l'estomac.\n\nCe que tu ne vends pas ne disparaît pas.\nÇa s'accumule ailleurs.`,
+      `Personne ne parle du prix de l'attente.\n\nPas le prix d'une formation. Pas le prix d'un accompagnement.\nLe prix des mois où tu as tout fait correctement, sauf la seule chose qui rapportait.\n\nCelui-là, tu ne le vois jamais passer sur ton compte.\nIl part quand même.`,
+      `Un jour, un client m'a dit : « ça me paraît cher ».\n\nOn a sorti une feuille. On a écrit ce que lui coûtait son mois actuel.\nPuis on a écrit le prix.\n\nIl a arrêté de parler pendant dix secondes.\nPas parce que j'avais gagné. Parce qu'il venait de voir les deux chiffres côte à côte pour la première fois.`,
+    ],
+    pertinence: (c) => 30 + (/(€|euro|\d\s?k\b|\d{3,})/.test(c.cout) ? 35 : 0) + (c.prix >= 300 ? 15 : 0) + (/(coach|freelance|consultant|entrepre|business|vente|chiffre d'affaire|ca mensuel)/.test(c.tout) ? 10 : 0),
+    terrain: (state) => (state.offre.coutInaction && /(€|euro|\d\s?k\b|\d{3,})/.test(state.offre.coutInaction))
+      ? `Tu as déjà le chiffre, tu me l'as donné :\n${minuscule(state.offre.coutInaction)}\n\nIl est dans ce formulaire. Il n'est nulle part dans tes Threads.`
+      : null,
   },
   {
     angle: "Temps",
     ressort: "Les heures qui ne reviennent pas",
-    pourquoi: `Le temps perdu ne se rattrape jamais. C'est la seule perte qu'on ne peut pas rembourser.`,
-    exemple: `Deux heures par jour à écrire des posts.\nCinq jours sur sept.\nDepuis un an et demi.\n\nFais le calcul, je te laisse.\n\nLe problème n'a jamais été la quantité.\nÇa fait un moment que je le sais.\nJ'ai juste mis longtemps à l'admettre.`,
+    pourquoi: `Le temps perdu ne se rembourse jamais. C'est la seule perte qu'on ne peut pas rattraper en travaillant plus.`,
+    exemples: [
+      `Deux heures par jour à écrire des posts.\nCinq jours sur sept.\nDepuis un an et demi.\n\nFais le calcul, je te laisse.\n\nLe problème n'a jamais été la quantité.\nÇa fait un moment que je le sais. J'ai juste mis longtemps à l'admettre.`,
+      `On m'a dit : « il faut poster tous les jours ».\n\nJ'ai posté tous les jours.\nPendant onze mois.\n\nCe qui a fini par changer les choses, je l'ai fait un dimanche après-midi.\nEn deux heures. Une seule fois.`,
+      `Le pire calcul que j'ai fait cette année.\n\nPas l'argent. Les dimanches.\n\nCombien de dimanches soir j'ai passés à préparer une semaine de contenu qui n'a rien vendu.\n\nL'argent, tu peux le refaire.`,
+    ],
+    pertinence: (c) => 35 + (/(temps|charge|débord|deborde|jongl|épuis|epuis|surcharg|organis)/.test(c.tout) ? 40 : 0) + (/(salarié|salarie|parent|maman|papa|double)/.test(c.cible) ? 15 : 0),
+    terrain: null,
   },
   {
     angle: "Liberté",
     ressort: "Ne plus dépendre",
-    pourquoi: `On ne veut pas « être indépendant ». On veut pouvoir dire non sans calculer.`,
-    exemple: `Le vrai luxe, ce n'est pas de gagner plus.\n\nC'est de raccrocher au bout de quatre minutes parce que le client te parle mal.\nSans faire le calcul dans ta tête pendant qu'il parle.\n\nTant que tu fais le calcul, tu n'es pas libre.\nTu es juste occupé.`,
+    pourquoi: `On ne veut pas « être indépendant ». On veut pouvoir dire non sans faire le calcul.`,
+    exemples: [
+      `Le vrai luxe, ce n'est pas de gagner plus.\n\nC'est de raccrocher au bout de quatre minutes parce que le client te parle mal.\nSans faire le calcul dans ta tête pendant qu'il parle.\n\nTant que tu fais le calcul, tu n'es pas libre.\nTu es juste occupé.`,
+      `J'ai refusé un client la semaine dernière.\n\nIl y a trois ans, j'aurais dit oui. J'aurais râlé pendant six mois, mais j'aurais dit oui.\n\nLa différence entre les deux versions de moi, ce n'est pas le talent.\nC'est le nombre de personnes qui attendaient derrière.`,
+      `« Tu es à ton compte, tu fais ce que tu veux. »\n\nAlors ça, c'est la blague de l'année.\n\nÊtre à son compte sans demande, c'est juste avoir remplacé un patron par douze.\nLa liberté ne vient pas du statut. Elle vient du carnet plein.`,
+    ],
+    pertinence: (c) => 35 + (/(freelance|indépendant|independant|solo|à son compte|a son compte|agence|client)/.test(c.tout) ? 35 : 0) + (/(salarié|salarie|reconversion|quitter)/.test(c.cible) ? 20 : 0),
+    terrain: null,
   },
   {
     angle: "Statut",
     ressort: "Le regard des autres",
-    pourquoi: `Personne ne l'avoue. Tout le monde le ressent. C'est pour ça que ça marche si bien.`,
-    exemple: `Il y a un moment que personne ne raconte.\n\nCelui où quelqu'un de ton milieu — quelqu'un que tu regardais de loin — te répond.\nPas par politesse. Parce qu'il a besoin de savoir comment tu fais.\n\nCe jour-là tu ne gagnes pas d'argent.\nMais quelque chose bascule.`,
+    pourquoi: `Personne ne l'avoue. Tout le monde le ressent. C'est précisément pour ça que ça fonctionne aussi bien.`,
+    exemples: [
+      `Il y a un moment que personne ne raconte.\n\nCelui où quelqu'un de ton milieu — quelqu'un que tu regardais de loin — te répond.\nPas par politesse. Parce qu'il a besoin de savoir comment tu fais.\n\nCe jour-là tu ne gagnes pas d'argent.\nMais quelque chose bascule.`,
+      `« Tu fais quoi, déjà ? »\n\nPendant deux ans, j'ai bafouillé à cette question.\nJ'expliquais. Je nuançais. Je voyais le regard partir.\n\nAujourd'hui je réponds en une phrase et on me demande le prix.\nLe travail n'a pas changé. La phrase, si.`,
+      `On ne cherche pas la célébrité.\n\nOn cherche juste à ne plus avoir à se justifier au repas de famille.\n\nC'est un objectif minuscule, presque gênant à formuler.\nC'est aussi un des plus puissants que je connaisse.`,
+    ],
+    pertinence: (c) => 30 + (c.prix >= 500 ? 25 : 0) + (/(expert|consultant|autorité|autorite|visib|personal branding|reconnu|crédib|credib)/.test(c.tout) ? 30 : 0),
+    terrain: null,
   },
   {
     angle: "Sécurité",
     ressort: "Dormir tranquille",
-    pourquoi: `La peur de l'instabilité fait bouger plus vite que l'envie de croissance.`,
-    exemple: `On parle beaucoup de scaler.\nOn parle rarement du 3 du mois.\n\nCe moment où tu ouvres ton appli bancaire avant le prélèvement, avec cette petite contraction.\n\nLa vraie ambition, au début, c'est pas 10k.\nC'est arrêter d'avoir cette contraction.`,
+    pourquoi: `La peur de l'instabilité fait bouger plus vite que l'envie de croissance. Toujours.`,
+    exemples: [
+      `On parle beaucoup de scaler.\nOn parle rarement du 3 du mois.\n\nCe moment où tu ouvres ton appli bancaire avant le prélèvement, avec cette petite contraction.\n\nLa vraie ambition, au début, ce n'est pas 10k.\nC'est arrêter d'avoir cette contraction.`,
+      `Mon meilleur mois ne m'a pas rassuré.\n\nParce qu'un bon mois qu'on ne sait pas reproduire, ce n'est pas un revenu.\nC'est un coup de chance avec une facture dedans.\n\nCe qui rassure, ce n'est jamais le montant.\nC'est de savoir d'où il vient.`,
+      `La question que personne ne pose : « et le mois prochain ? »\n\nOn célèbre les pics. On ne regarde jamais ce qu'il y a entre.\n\nMoi, ce sont les creux qui m'ont appris quelque chose.\nParce qu'ils avaient tous exactement la même cause.`,
+    ],
+    pertinence: (c) => 30 + (c.ventes === 0 ? 30 : 0) + (/(instab|irrégul|irregul|incertain|stress|peur|stabilit|revenu)/.test(c.tout) ? 25 : 0) + (c.cas === "ZERO_VENTE" ? 15 : 0),
+    terrain: null,
   },
   {
     angle: "Confort",
     ressort: "Moins d'effort, pas plus de performance",
     pourquoi: `Une solution simple bat une solution supérieure. L'effort perçu compte plus que le résultat promis.`,
-    exemple: `J'ai testé la méthode des 3 posts par jour.\nJ'ai tenu onze jours.\n\nCe qui a changé les choses ensuite tenait sur une feuille A5.\nUne promesse. Deux scènes. Une sortie.\n\nMoins de travail. Pas moins de résultat.\nC'est ça qui m'a vexé, d'ailleurs.`,
+    exemples: [
+      `J'ai testé la méthode des 3 posts par jour.\nJ'ai tenu onze jours.\n\nCe qui a changé les choses ensuite tenait sur une feuille A5.\nUne promesse. Deux scènes. Une sortie.\n\nMoins de travail. Pas moins de résultat.\nC'est ça qui m'a vexé, d'ailleurs.`,
+      `On te vend de la discipline.\n\nMais si la discipline suffisait, tout le monde aurait réussi — les gens sont beaucoup plus travailleurs qu'on ne le dit.\n\nCe qui manque, ce n'est presque jamais l'effort.\nC'est l'ordre dans lequel on le dépense.`,
+      `La version qui a marché était plus courte que la version qui n'a pas marché.\n\nÀ chaque fois. Sans exception. Depuis deux ans.\n\nJ'ai arrêté de me battre avec ça.`,
+    ],
+    pertinence: (c) => 30 + (c.prix > 0 && c.prix < 150 ? 25 : 0) + (/(template|outil|méthode|methode|système|systeme|simplif|productiv|rapide|automat)/.test(c.tout) ? 30 : 0),
+    terrain: null,
   },
   {
     angle: "Contrôle",
     ressort: "Reprendre la main",
-    pourquoi: `Ne plus subir réduit l'angoisse. Et l'angoisse est le premier frein à l'achat.`,
-    exemple: `Le pire, ce n'est pas de ne pas vendre.\n\nC'est de ne pas savoir pourquoi.\nDe republier en espérant. De regarder les chiffres comme on regarde la météo.\n\nÀ partir du moment où tu sais exactement où ça casse,\ntu n'espères plus. Tu répares.`,
+    pourquoi: `Ne plus subir réduit l'angoisse. Et l'angoisse est le premier frein à l'achat, avant le prix.`,
+    exemples: [
+      `Le pire, ce n'est pas de ne pas vendre.\n\nC'est de ne pas savoir pourquoi.\nDe republier en espérant. De regarder les chiffres comme on regarde la météo.\n\nÀ partir du moment où tu sais exactement où ça casse,\ntu n'espères plus. Tu répares.`,
+      `J'ai passé un an à croire que l'algorithme décidait de mes revenus.\n\nC'était pratique. Ça expliquait tout et ça n'engageait à rien.\n\nSauf que le mois où j'ai changé une seule ligne — pas mon rythme, pas mon format, une ligne — l'algorithme n'avait pas changé d'avis.\nMoi si.`,
+      `« Ça dépend de la portée. »\n\nNon.\n\nJ'ai eu des posts à 200 000 vues qui n'ont rien rapporté, et des posts à 800 vues qui ont rempli un mois.\n\nCe n'est pas la météo. Il y a une mécanique. Et une mécanique, ça se démonte.`,
+    ],
+    pertinence: (c) => 35 + (c.cas === "VANITY_ALERT" ? 35 : 0) + (c.cas === "ZERO_VENTE" ? 20 : 0) + (/(algorithme|portée|portee|vues|visib|comprendre|pilot)/.test(c.tout) ? 15 : 0),
+    terrain: (state) => (state.audience.vuesMois > 20000 && state.audience.ventesMois === 0)
+      ? `Ton cas est exactement celui-là.\n\nDes vues, aucune vente : le genre de situation qui donne envie de tout mettre sur le dos de l'algorithme.\nC'est la seule explication qui n'aide en rien.`
+      : null,
   },
   {
     angle: "Reconnaissance",
     ressort: "Être vu pour ce qu'on vaut",
     pourquoi: `Être validé par ses pairs verrouille une décision déjà prise à moitié.`,
-    exemple: `« Tu fais quoi, déjà ? »\n\nPendant deux ans, j'ai bafouillé à cette question.\nJ'expliquais. Je nuançais. Je voyais le regard partir.\n\nAujourd'hui je réponds en une phrase et on me demande le prix.\nLe travail n'a pas changé.\nLa phrase, si.`,
+    exemples: [
+      `Le message qui m'a le plus marqué cette année faisait deux lignes.\n\n« J'ai utilisé ton truc. Ça a marché. Merci. »\n\nJe l'ai relu je ne sais pas combien de fois.\nCe n'est pas de la vanité. C'est la première preuve que ce que tu fais existe en dehors de ta tête.`,
+      `On croit vouloir des clients.\n\nEn vrai, la première fois, on veut surtout une preuve.\nQue ce n'était pas une lubie. Que quelqu'un était prêt à payer pour ce truc dont tout le monde disait poliment « c'est intéressant ».\n\nLe premier client ne change pas ton chiffre. Il change ton statut à tes propres yeux.`,
+      `Ce qui fait tenir, ce n'est pas la motivation.\n\nC'est le moment où quelqu'un cite ta phrase sans savoir que tu es derrière.\n\nÇa m'est arrivé une fois. Ça m'a tenu six mois.`,
+    ],
+    pertinence: (c) => 25 + (/(créateur|createur|artiste|auteur|coach|formation|communaut|audience)/.test(c.tout) ? 25 : 0) + (c.fuite === "connexion" ? 20 : 0),
+    terrain: null,
   },
   {
     angle: "Transformation",
     ressort: "Devenir quelqu'un d'autre",
     pourquoi: `On n'achète pas un résultat. On achète la version de soi qui l'a déjà obtenu.`,
-    exemple: `Ce n'est pas le chiffre qui change quelqu'un.\n\nC'est le moment où il arrête de se présenter comme « je me lance »\net commence à dire « je bosse avec ».\n\nLes deux personnes n'écrivent pas pareil.\nNe vendent pas pareil.\nNe sont pas payées pareil.`,
+    exemples: [
+      `Ce n'est pas le chiffre qui change quelqu'un.\n\nC'est le moment où il arrête de se présenter comme « je me lance »\net commence à dire « je bosse avec ».\n\nLes deux personnes n'écrivent pas pareil.\nNe vendent pas pareil.\nNe sont pas payées pareil.`,
+      `Il y a la personne qui publie en espérant.\nEt il y a celle qui publie en sachant ce qu'elle déclenche.\n\nEntre les deux, ce n'est pas une question de temps passé.\nJ'ai vu des gens faire le trajet en trois semaines, et d'autres tourner trois ans.`,
+      `On m'a demandé ce qui avait changé.\n\nJ'ai voulu répondre « ma méthode ». C'est faux.\n\nCe qui a changé, c'est que j'ai arrêté de demander la permission avant d'écrire.\nTout le reste en découle.`,
+    ],
+    pertinence: (c) => 40 + (c.fuite === "desir" ? 25 : 0) + (/(transform|devenir|passer de|niveau|évolu|evolu)/.test(c.tout) ? 20 : 0),
+    terrain: (state) => state.business.resultat
+      ? `Ton terrain à toi, c'est celui-ci :\n${minuscule(state.business.resultat)}\n\nÉcris la personne qui a ça, pas le résultat lui-même.`
+      : null,
   },
   {
     angle: "Évitement de douleur",
     ressort: "Fuir, pas conquérir",
-    pourquoi: `Éviter une perte motive à peu près deux fois plus que gagner l'équivalent. C'est le levier le plus sous-utilisé.`,
-    exemple: `Tu peux continuer exactement comme maintenant.\nSincèrement, c'est une option.\n\nDans six mois tu auras 180 posts de plus.\nUn peu plus d'abonnés. La même conversation avec toi-même le dimanche soir.\n\nCe n'est pas dramatique.\nC'est juste très, très cher.`,
+    pourquoi: `Éviter une perte motive environ deux fois plus que gagner l'équivalent. C'est le levier le plus sous-utilisé de la liste.`,
+    exemples: [
+      `Tu peux continuer exactement comme maintenant.\nSincèrement, c'est une option.\n\nDans six mois tu auras 180 posts de plus.\nUn peu plus d'abonnés. La même conversation avec toi-même le dimanche soir.\n\nCe n'est pas dramatique.\nC'est juste très, très cher.`,
+      `Je ne vais pas te dire que tu vas rater ta vie.\n\nTu vas juste refaire cette année. À l'identique.\n\nEt la version de toi qui lira ce post dans douze mois aura exactement les mêmes chiffres, avec un an de moins pour les changer.`,
+      `Le danger, ce n'est pas l'échec.\n\nL'échec, au moins, ça se voit. Ça oblige à bouger.\n\nLe danger, c'est le tiède. Un peu de vues, un peu de likes, un peu d'espoir.\nAssez pour continuer, jamais assez pour vivre.`,
+    ],
+    pertinence: (c) => 45 + (c.cout ? 25 : 0) + (c.fuite === "desir" ? 25 : 0),
+    terrain: (state) => !state.offre.coutInaction
+      ? `Tu as laissé la case « ce qu'il risque » vide dans le questionnaire.\n\nCe levier est le plus puissant de la liste, et c'est précisément celui que tu n'as pas armé.`
+      : null,
   },
 ];
+
+/* Les mêmes dix leviers pour tout le monde, ce serait une liste.
+   On les classe selon ce qu'il vend, à qui, et où il fuit. */
+
+function anglesPourLui(state, scores, cle, cas, graine) {
+  const t = (s) => (s || "").toLowerCase();
+  const ctx = {
+    cible: t(state.business.cible),
+    cout: t(state.offre.coutInaction),
+    prix: state.business.prix || 0,
+    ventes: state.audience.ventesMois || 0,
+    fuite: cle,
+    cas,
+    tout: t([state.business.cible, state.business.offre, state.business.resultat,
+      state.offre.probleme, state.offre.coutInaction, state.offre.promesse].join(" ")),
+  };
+
+  return ANGLES_DESIR
+    .map((a, i) => ({
+      angle: a.angle,
+      ressort: a.ressort,
+      pourquoi: a.pourquoi,
+      exemple: a.exemples[(graine + i * 7) % a.exemples.length],
+      terrain: a.terrain ? a.terrain(state) : null,
+      poids: a.pertinence(ctx) + ((graine + i * 13) % 11) - 5,
+    }))
+    .sort((x, y) => y.poids - x.poids);
+}
 
 /* ============================================================
    OBJECTIONS
@@ -650,6 +746,8 @@ function genererRapport(state, scores) {
     repartition,
     objections,
     convergence: convergenceObjections(objections, principale.cle, prenom),
+    profil: auditProfil(state, scores),
+    angles: anglesPourLui(state, scores, principale.cle, cas, graine),
     threadsRemarquables: threadsRemarquables(scores.analysesThreads),
     ancrages: ancragesPersonnels(state, scores, principale.cle),
     gapDesir: Math.max(0, 70 - scores.desir),
@@ -701,6 +799,75 @@ function motSurThread(a, estLeMeilleur) {
   if (a.pertinence <= 5) return `Il est peut-être bon. Il ne parle juste pas du terrain de ton offre — donc il ne te ramènera jamais un client.`;
   if (a.conversion === 0 && a.desir <= 5) return `Ni envie, ni sortie. Ce post informe, et s'arrête là.`;
   return `Il n'est pas raté. Il est tiède — et le tiède ne déclenche rien du tout.`;
+}
+
+/* Le profil : la marche entre le Thread et l'offre.
+   On ne peut pas aller le lire pour toi — mais mal réglée,
+   cette marche annule tout ce qui se passe avant. */
+
+function auditProfil(state, scores) {
+  const bio = (state.audience.bio || "").trim();
+  const handle = (state.audience.handle || "").replace(/^@/, "").trim();
+  const destination = (state.audience.destination || "").trim();
+  if (!bio && !destination) return null;
+
+  const E = window.CashEngine;
+  const b = bio.toLowerCase();
+  const points = [];
+  let score = 0;
+
+  const parleAuLecteur = /\b(tu|ton|ta|tes|toi|vous|votre)\b/.test(b);
+  const aUnChiffre = /\d/.test(bio);
+  const nommeCible = E.occ(bio, (state.business.cible || "").toLowerCase().split(/\s+/).filter(w => w.length > 4)) > 0;
+  const aUneDirection = /(↓|👇|en dessous|ci-dessous|lien|clique|télécharge|telecharge|guide|gratuit|réserve|reserve)/.test(b);
+  const longueurOk = bio.length >= 25 && bio.length <= 180;
+
+  if (parleAuLecteur) { score += 25; points.push({ ok: true, mot: `Tu t'adresses au lecteur. C'est la moitié du travail, et la plupart des bios l'oublient.` }); }
+  else if (bio) points.push({ ok: false, mot: `Ta bio parle de toi, pas de lui.\n\nOn arrive sur ton profil avec une question en tête : « est-ce que ce type parle de mon problème ? »\nUne bio au « je » ne répond jamais à cette question.` });
+
+  if (aUnChiffre) { score += 25; points.push({ ok: true, mot: `Il y a un chiffre. C'est ce qui rend une bio vérifiable au lieu de décorative.` }); }
+  else if (bio) points.push({ ok: false, mot: `Aucun chiffre.\n\n« J'aide les coachs à développer leur activité » et « 5 clients par mois en 90 jours » ne déclenchent pas la même chose.\nLa première rassure. La seconde fait cliquer.` });
+
+  if (nommeCible) { score += 20; points.push({ ok: true, mot: `Ta cible est nommée dans ta bio. Ceux qui ne sont pas concernés le voient tout de suite, et c'est très bien.` }); }
+  else if (bio) points.push({ ok: false, mot: `On ne sait pas pour qui tu es là.\n\nUne bio qui ne trie personne fait rester tout le monde — y compris ceux qui n'achèteront jamais.` });
+
+  if (aUneDirection) score += 15;
+  else if (bio) points.push({ ok: false, mot: `Aucune direction vers ton lien.\n\nLe lien existe, mais rien ne dit pourquoi cliquer. Une flèche et une raison suffisent.` });
+
+  if (longueurOk) score += 15;
+  else if (bio && bio.length > 180) points.push({ ok: false, mot: `Ta bio est trop longue pour un profil qu'on scanne en deux secondes. Coupe la moitié : ce qui reste sera plus fort.` });
+  else if (bio) points.push({ ok: false, mot: `Ta bio est trop courte pour dire quoi que ce soit d'utile. Il te manque au moins le pour-qui et le résultat.` });
+
+  if (destination && !bio) score = 30;
+
+  return {
+    handle,
+    bio,
+    destination,
+    score: E.clamp(score),
+    points,
+    verdictDestination: destination
+      ? (/(gratuit|guide|newsletter|liste|pdf|checklist)/i.test(destination)
+        ? `Derrière ton lien, tu proposes quelque chose de gratuit. C'est la bonne marche : on ne demande pas un achat à quelqu'un qui découvre ton profil.`
+        : `Derrière ton lien, on tombe directement sur ton offre.\n\nÇa marche pour ceux qui sont déjà chauds. Pour tous les autres — la majorité — c'est trop tôt, et cette marche-là est trop haute.`)
+      : null,
+    bioReecrite: construireBio(state),
+  };
+}
+
+function construireBio(state) {
+  const cible = (state.business.cible || "").trim();
+  const resultat = (state.business.resultat || "").trim();
+  const preuve = (state.offre.differenciation || "").trim();
+  if (!cible && !resultat) return null;
+
+  const lignes = [];
+  if (resultat && cible) lignes.push(`${majuscule(resultat)}.`);
+  else if (resultat) lignes.push(`${majuscule(resultat)}.`);
+  if (cible) lignes.push(`Pour ${minuscule(cible)}.`);
+  if (preuve) lignes.push(majuscule(preuve).replace(/\.$/, "") + ".");
+  lignes.push(`↓ La méthode, gratuitement`);
+  return lignes.join("\n");
 }
 
 /* Ses propres mots, ressortis au moment où ça fait mal. */
@@ -962,5 +1129,5 @@ const PROGRAMMES = {
 };
 
 if (typeof window !== "undefined") {
-  window.CashRapport = { genererRapport, ANGLES_DESIR, FUITES, ATELIERS, PROGRAMMES, majuscule, minuscule };
+  window.CashRapport = { genererRapport, ANGLES_DESIR, anglesPourLui, FUITES, ATELIERS, PROGRAMMES, majuscule, minuscule };
 }

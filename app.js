@@ -5,7 +5,7 @@
 const etat = {
   ecranActuel: 0,
   business: { prenom: "", offre: "", prix: 0, resultat: "", cible: "", anciennete: "moins d'1 mois" },
-  audience: { abonnes: 0, vuesMois: 0, ventesMois: 0, visitesProfil: 0, clicsOffre: 0 },
+  audience: { abonnes: 0, vuesMois: 0, ventesMois: 0, visitesProfil: 0, clicsOffre: 0, handle: "", bio: "", destination: "" },
   threads: [{}, {}, {}, {}, {}],
   offre: { promesse: "", probleme: "", coutInaction: "", urgence: "", differenciation: "", objectionsChoisies: [], objectionAutre: "", preuves: [] },
 };
@@ -87,6 +87,9 @@ function collecterEcranActuel() {
     etat.audience.ventesMois = nombre("q-ventes");
     etat.audience.visitesProfil = nombre("q-visitesprofil");
     etat.audience.clicsOffre = nombre("q-clics");
+    etat.audience.handle = valeur("q-handle");
+    etat.audience.bio = valeur("q-bio");
+    etat.audience.destination = valeur("q-destination");
   } else if (n === 3) {
     for (let i = 0; i < 5; i++) {
       etat.threads[i] = {
@@ -299,6 +302,26 @@ function afficherRapport(r) {
       </div>`, "b-extremes");
   }
 
+  // Le profil
+  if (r.profil) {
+    const p = r.profil;
+    h += bloc("Ton profil, la marche oubliée", `
+      <div class="carte">
+        ${p.handle ? `<p class="handle-profil">@${escapeHtml(p.handle)}</p>` : ""}
+        ${p.bio ? `<blockquote class="citation-utilisateur">${escapeHtml(p.bio)}</blockquote>` : ""}
+        ${barre("Ton profil", p.score)}
+        <div class="points-profil">
+          ${p.points.map(pt => `<p class="point-profil ${pt.ok ? "point-ok" : "point-ko"}">${escapeHtml(pt.mot)}</p>`).join("")}
+        </div>
+        ${p.verdictDestination ? `<p class="sous-label" style="margin-top:20px;">Ce qu'il y a derrière le lien</p>${soo(p.verdictDestination)}` : ""}
+      </div>
+      ${p.bioReecrite ? `<div class="carte">
+        <p class="sous-label">Ta bio, réécrite à partir de tes réponses</p>
+        <div class="thread-brouillon">${escapeHtml(p.bioReecrite)}${boutonCopier(p.bioReecrite)}</div>
+        <p class="ou-repare">Teste-la une semaine. Si tes visites de profil se transforment mieux en clics, tu sauras.</p>
+      </div>` : ""}`, "b-profil");
+  }
+
   // Objections
   h += bloc("Derrière leurs objections", r.objections.length ? `
     ${r.objections.map(o => `
@@ -330,14 +353,19 @@ function afficherRapport(r) {
     </div>`).join("")}
   </div>`, "b-plan");
 
-  // Angles de désir
+  // Angles de désir, classés selon ce qu'il vend et où il fuit
   h += bloc("10 façons de donner faim", `
-    <p class="intro-bloc">Dix ressorts. Un exemple écrit pour chacun — pique la structure, pas les mots.</p>
-    ${window.CashRapport.ANGLES_DESIR.map(a => `
-      <div class="carte carte-angle">
-        <div class="entete-angle"><strong>${a.angle}</strong><span>${a.ressort}</span></div>
+    <p class="intro-bloc">Classés pour ton cas : les trois premiers sont ceux qui devraient porter le plus chez toi.<br>Pique la structure, pas les mots.</p>
+    ${r.angles.map((a, i) => `
+      <div class="carte carte-angle${i < 3 ? " angle-prioritaire" : ""}">
+        <div class="entete-angle">
+          <strong>${escapeHtml(a.angle)}</strong>
+          <span>${escapeHtml(a.ressort)}</span>
+          ${i < 3 ? `<em class="badge-prio">prioritaire</em>` : ""}
+        </div>
         <p class="pourquoi-angle">${escapeHtml(a.pourquoi)}</p>
         <div class="exemple-angle">${escapeHtml(a.exemple)}${boutonCopier(a.exemple)}</div>
+        ${a.terrain ? `<div class="terrain-angle">${soo(a.terrain)}</div>` : ""}
       </div>`).join("")}`, "b-angles");
 
   // Threads prêts

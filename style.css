@@ -226,6 +226,43 @@ html, body {
   font-variant-numeric: tabular-nums; font-size: 12.5px;
 }
 
+.separateur-champ { height: 1px; background: var(--gris-clair); margin: 34px 0 0; }
+
+/* Angles classés : les prioritaires se distinguent */
+.angle-prioritaire { border-color: var(--noir); border-width: 2px; }
+
+.badge-prio {
+  font-size: 9.5px; font-style: normal; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--noir); color: var(--blanc);
+  padding: 3px 8px; border-radius: 999px;
+}
+
+.terrain-angle {
+  margin-top: 14px; padding: 14px 16px;
+  background: #fff7f7;
+  border-left: 3px solid var(--rouge);
+  border-radius: 0 8px 8px 0;
+}
+.terrain-angle .texte-soo { font-size: 14.5px; }
+
+/* Profil */
+.handle-profil {
+  font-family: var(--serif); font-size: 17px;
+  color: var(--rouge); margin: 0 0 14px; font-weight: 700;
+}
+
+.points-profil { margin-top: 18px; }
+
+.point-profil {
+  white-space: pre-line;
+  font-size: 14.5px; line-height: 1.55;
+  margin: 0 0 14px; padding-left: 24px; position: relative;
+}
+.point-profil:last-child { margin-bottom: 0; }
+.point-ok::before { content: "✓"; position: absolute; left: 0; top: 0; color: #1a7a3c; font-weight: 700; }
+.point-ko::before { content: "✕"; position: absolute; left: 0; top: 0; color: var(--rouge); font-weight: 700; }
+
 /* Sélecteur d'objections : des phrases, pas des étiquettes */
 .grille-objections { display: flex; flex-direction: column; gap: 8px; }
 
