@@ -59,6 +59,32 @@ function mapRatio(valeur, bas, haut) {
   return clamp(((valeur - bas) / (haut - bas)) * 100);
 }
 
+/* L'échelle de vues propre à Threads, sur 30 jours.
+   Un même volume ne vaut pas la même chose ici et ailleurs. */
+const ECHELLE_VUES = [
+  { max: 10000, label: "médiocre", bas: 0, haut: 20 },
+  { max: 25000, label: "faible", bas: 20, haut: 35 },
+  { max: 50000, label: "bof", bas: 35, haut: 50 },
+  { max: 75000, label: "moyen", bas: 50, haut: 65 },
+  { max: 100000, label: "bon", bas: 65, haut: 78 },
+  { max: 150000, label: "très bon", bas: 78, haut: 90 },
+  { max: Infinity, label: "excellent", bas: 90, haut: 100 },
+];
+
+function paliersVues(vuesMois) {
+  const v = vuesMois || 0;
+  let plancher = 0;
+  for (const p of ECHELLE_VUES) {
+    if (v < p.max) {
+      const etendue = p.max === Infinity ? 150000 : p.max - plancher;
+      const avancee = Math.min(1, (v - plancher) / etendue);
+      return { label: p.label, score: clamp(p.bas + avancee * (p.haut - p.bas)) };
+    }
+    plancher = p.max;
+  }
+  return { label: "excellent", score: 100 };
+}
+
 // Moyenne pondérée qui ignore les signaux absents (stats non fournies).
 function melange(parts) {
   let total = 0, poids = 0;
@@ -145,7 +171,7 @@ function analyserThread(thread, ctx) {
   const nAutorite = occ(texte, Dico.autorite);
   const categories = {
     ATTIRER: hook,
-    RELIER: connexion,
+    CONNECTER: connexion,
     ÉDUQUER: Math.round(signal(nEducation, 4) * 20),
     DÉSIRER: desir,
     CONVERTIR: conversion,
@@ -187,13 +213,15 @@ function calculerScores(state) {
   const visites = audience.visitesProfil || 0;
   const clics = audience.clicsOffre || 0;
 
-  // ATTENTION
+  // ATTENTION — le volume se juge sur l'échelle Threads, pas sur un ratio maison
+  const volume = vuesMois > 0 ? paliersVues(vuesMois).score : null;
   const portee = abonnes > 0 && vuesMois > 0 ? mapRatio(vuesMois / abonnes, 0.5, 6) : null;
   const meilleurThread = aDesThreads ? Math.max(...analyses.map(a => a.vues || 0)) : 0;
   const picViral = meilleurThread > 0 && vuesMois > 0 ? mapRatio(meilleurThread / (vuesMois / 12), 0.5, 4) : null;
   const attention = clamp(melange([
     { valeur: aDesThreads ? moy(a => a.hook) * 5 : null, poids: 3 },
-    { valeur: portee, poids: 2 },
+    { valeur: volume, poids: 3 },
+    { valeur: portee, poids: 1 },
     { valeur: picViral, poids: 1 },
     ...amorti,
   ]));
@@ -382,10 +410,12 @@ function detecterCasParticulier(state) {
   const visites = a.visitesProfil || 0, clics = a.clicsOffre || 0;
 
   if (abonnes > 500 && ventes === 0) {
-    if (vues > abonnes * 5 && vues > 2000) return "VANITY_ALERT";
+    // « beaucoup de vues » sur Threads commence au palier moyen : 50 000 sur 30 jours.
+    if (vues >= 50000) return "VANITY_ALERT";
     return "ZERO_VENTE";
   }
-  if (vues > 0 && vues < 1000 && ventes > 0) return "PEPITE_CACHEE";
+  // Palier médiocre (< 10 000 vues) et pourtant des ventes : le système marche dans une pièce vide.
+  if (vues > 0 && vues < 10000 && ventes > 0) return "PEPITE_CACHEE";
   if (clics > 50 && (ventes / clics) < 0.02) return "CLICS_SANS_VENTES";
   if (visites > 100 && clics > 0 && (clics / visites) < 0.05) return "VISITES_SANS_CLICS";
   return null;
@@ -405,7 +435,8 @@ function profilDeVente(scores) {
 
 const CashEngineAPI = {
   analyserThread, calculerScores, scoreGlobal, indiceDeFuite, fuitePrioritaire, niveauScore,
-  detecterCasParticulier, profilDeVente, POIDS, FACILITE, LIBELLES, Dico, occ, clamp, empreinte,
+  detecterCasParticulier, profilDeVente, paliersVues, ECHELLE_VUES,
+  POIDS, FACILITE, LIBELLES, Dico, occ, clamp, empreinte,
 };
 
 if (typeof module !== "undefined") module.exports = CashEngineAPI;

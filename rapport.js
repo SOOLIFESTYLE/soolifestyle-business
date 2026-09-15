@@ -547,10 +547,14 @@ function lectureDesChiffres(state, scores) {
   const a = state.audience;
   const lignes = [];
 
+  if (a.vuesMois > 0) {
+    const p = window.CashEngine.paliersVues(a.vuesMois);
+    lignes.push(`${nombreFr(a.vuesMois)} vues sur 30 jours — sur l'échelle Threads, c'est *${p.label}*.`);
+  }
   if (a.abonnes > 0 && a.vuesMois > 0) {
     const ratio = a.vuesMois / a.abonnes;
-    if (ratio > 4) lignes.push(`Tu fais ${ratio.toFixed(1)} vues par abonné. L'algorithme te sort de ton cercle — c'est rare, garde ça.`);
-    else if (ratio < 1) lignes.push(`Moins d'une vue par abonné. Même les gens qui t'ont suivi ne te voient plus passer.`);
+    if (ratio > 4) lignes.push(`${ratio.toFixed(1)} vues par abonné : l'algorithme te sort de ton cercle. C'est rare, garde ça.`);
+    else if (ratio < 1) lignes.push(`Moins d'une vue par abonné. Même ceux qui t'ont suivi ne te voient plus passer.`);
     else lignes.push(`${ratio.toFixed(1)} vue par abonné : tu tournes surtout dans ton propre cercle.`);
   }
   if (a.vuesMois > 0 && a.visitesProfil > 0) {
@@ -615,7 +619,7 @@ function repartitionClassifications(analyses) {
   const compte = {};
   analyses.forEach(a => { compte[a.classification] = (compte[a.classification] || 0) + 1; });
   const r = {};
-  ["ATTIRER", "RELIER", "ÉDUQUER", "DÉSIRER", "CONVERTIR", "AUTORITÉ"].forEach(c => {
+  ["ATTIRER", "CONNECTER", "ÉDUQUER", "DÉSIRER", "CONVERTIR", "AUTORITÉ"].forEach(c => {
     r[c] = Math.round(((compte[c] || 0) / total) * 100);
   });
   return r;

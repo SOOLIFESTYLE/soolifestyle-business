@@ -179,6 +179,11 @@ function soo(texte) {
   return `<p class="texte-soo">${escapeHtml(texte)}</p>`;
 }
 
+// Échappe d'abord, puis n'autorise que *mot* → gras.
+function ligneRiche(texte) {
+  return escapeHtml(texte).replace(/\*([^*]+)\*/g, "<strong>$1</strong>");
+}
+
 function afficherRapport(r) {
   const s = r.scores;
   const hist = lireHistorique();
@@ -218,7 +223,7 @@ function afficherRapport(r) {
 
   // Chiffres
   h += bloc("Ce que disent tes chiffres", `<div class="carte">
-    ${r.lecture.map(l => `<p class="ligne-chiffre">${escapeHtml(l)}</p>`).join("")}
+    ${r.lecture.map(l => `<p class="ligne-chiffre">${ligneRiche(l)}</p>`).join("")}
   </div>`);
 
   // 7 étapes
