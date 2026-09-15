@@ -377,33 +377,184 @@ const ANGLES_DESIR = [
    OBJECTIONS
    ============================================================ */
 
-const OBJECTIONS_CONNUES = [
-  { motifs: ["cher", "prix", "budget", "coûte", "moyens"], apparente: "C'est trop cher.",
-    reelle: `Le prix n'est presque jamais le sujet.\nCe qu'il dit vraiment : « je ne vois pas encore ce que ça vaut ».\nUn prix ne se baisse pas. Une valeur se montre.` },
-  { motifs: ["moi-même", "moi meme", "seul", "seule", "gratuit", "youtube", "internet"], apparente: "Je peux le faire moi-même.",
-    reelle: `Il ne doute pas de la méthode. Il doute de lui.\nIl sait qu'il a déjà trois formations non terminées sur son disque dur.\nCe qu'il achète, ce n'est pas l'info. C'est le fait de ne pas abandonner cette fois.` },
-  { motifs: ["marchera pas", "pas pour moi", "different", "différent", "mon cas", "mon secteur"], apparente: "Ça ne marchera pas pour moi.",
-    reelle: `Il ne se reconnaît dans aucun de tes exemples.\nCe n'est pas ta méthode qu'il rejette, c'est le casting.\nMontre-lui quelqu'un qui lui ressemble, et l'objection tombe seule.` },
-  { motifs: ["réfléchir", "reflechir", "voir", "plus tard", "recontacte"], apparente: "Je vais réfléchir.",
-    reelle: `« Je vais réfléchir » veut dire : rien ne m'oblige à décider aujourd'hui.\nLe confort de ne rien faire est encore moins cher que ton offre.\nTant que le coût de l'inaction reste invisible, il gagne toujours.` },
-  { motifs: ["besoin maintenant", "pas urgent", "un jour", "plus tard"], apparente: "Je n'en ai pas besoin maintenant.",
-    reelle: `Le problème existe mais il ne saigne pas encore.\nTon travail n'est pas de pousser. C'est de rendre visible ce qui se dégrade pendant qu'il attend.` },
-  { motifs: ["connais pas", "sais pas qui", "confiance", "arnaque"], apparente: "Je ne te connais pas assez.",
-    reelle: `Il n'y a pas assez de traces.\nPas de visage, pas de preuve, pas de continuité dans ce que tu racontes.\nLa confiance, c'est de la répétition — pas de l'éloquence.` },
-  { motifs: ["déjà essayé", "deja essaye", "jamais marché", "arnaqué"], apparente: "J'ai déjà essayé.",
-    reelle: `C'est l'objection la plus sérieuse, et la meilleure nouvelle.\nIl a déjà dépensé. Il achète.\nIl lui manque juste une raison de croire que cette fois c'est différent — nommée, précise, pas une promesse de plus.` },
+/* Les objections qu'on entend vraiment. Chacune a son propre décodage,
+   l'étape où elle se répare, et un post pour la désamorcer. */
+
+const CATALOGUE_OBJECTIONS = [
+  {
+    id: "prix",
+    phrase: "C'est trop cher",
+    pointe: "desir",
+    resistance: `Le prix n'est presque jamais le sujet.\nQuelqu'un qui veut vraiment trouve l'argent — tu l'as déjà fait toi-même, pour des choses moins utiles.\n\nCe que ça dit en vrai : « je ne vois pas encore ce que ça vaut ».\nUn prix ne se baisse pas. Une valeur se montre.`,
+    repare: "Le désir, pas la page de vente",
+    post: `On me dit souvent que c'est cher.\n\nJe comprends. Vraiment.\n\nMais personne ne m'a jamais dit combien coûtait l'autre option.\nCelle de ne rien changer, et de relire le même bilan dans un an.\n\nCelle-là, elle ne s'affiche nulle part.\nElle se paye quand même.`,
+  },
+  {
+    id: "reflechir",
+    phrase: "Je vais réfléchir",
+    pointe: "desir",
+    resistance: `Traduction : rien ne m'oblige à décider aujourd'hui.\n\nEt c'est vrai. Ne rien faire est gratuit, immédiat, et ça ne demande aucun courage.\nTant que ça reste le cas, l'inaction gagne à tous les coups.\n\nCe n'est pas une hésitation. C'est un refus poli avec une porte laissée ouverte.`,
+    repare: "Le coût de l'inaction, rendu visible",
+    post: `« Je vais réfléchir. »\n\nJ'ai dit ça des dizaines de fois dans ma vie.\n\nEt tu sais ce que j'ai remarqué ?\nJe n'ai jamais réfléchi. Pas une seule fois.\n\nJ'ai juste laissé le temps décider à ma place.\nCe qui est une décision aussi. Sauf qu'on ne la choisit pas.`,
+  },
+  {
+    id: "seul",
+    phrase: "Je peux le faire moi-même",
+    pointe: "conviction",
+    resistance: `Il ne doute pas de la méthode. Il doute de lui.\n\nIl a déjà trois formations non terminées sur son disque dur, et il le sait.\nCe qu'il achète ce n'est pas l'information — elle est gratuite, partout, il en a trop.\n\nC'est le fait de ne pas abandonner cette fois.`,
+    repare: "Ton mécanisme, et ce qui fait tenir",
+    post: `Tu peux tout faire seul.\nSincèrement. L'info est gratuite, elle est partout.\n\nLa vraie question n'est pas « est-ce que je peux ».\nC'est « est-ce que je l'ai fait ».\n\nParce que ça fait combien de temps que tu sais exactement ce que tu devrais faire ?`,
+  },
+  {
+    id: "temps",
+    phrase: "Je n'ai pas le temps",
+    pointe: "desir",
+    resistance: `Ce n'est jamais une question de temps.\nC'est une question de rang.\n\n« Je n'ai pas le temps » veut dire : ce n'est pas assez haut dans ma liste.\nEt ça, ce n'est pas un problème d'agenda. C'est un problème d'envie.\n\nPersonne ne manque de temps pour ce qui lui fait vraiment peur de rater.`,
+    repare: "L'intensité du désir, pas la logistique",
+    post: `« Je n'ai pas le temps. »\n\nOn s'est tous entendus dire ça.\n\nPourtant on trouve toujours deux heures pour ce qui nous obsède.\n\nDonc la vraie phrase, c'est : ce n'est pas encore assez important.\nEt honnêtement, c'est une réponse acceptable.\nÀ condition de savoir ce que ça coûte de la garder.`,
+  },
+  {
+    id: "moncas",
+    phrase: "Ça ne marchera pas dans mon cas",
+    pointe: "connexion",
+    resistance: `Il ne se reconnaît dans aucun de tes exemples.\n\nCe n'est pas ta méthode qu'il rejette. C'est le casting.\nTes preuves parlent de gens qui ne lui ressemblent pas : pas le même niveau, pas le même métier, pas la même galère.\n\nMontre-lui quelqu'un qui lui ressemble, et l'objection tombe toute seule.`,
+    repare: "L'identification, avant la preuve",
+    post: `« Ça ne marchera pas dans mon cas. »\n\nCelui qui m'a dit ça avait le profil le plus improbable que j'aie croisé.\n\nPas d'audience. Pas de temps. Pas d'envie de se montrer.\n\nJe raconte ce qu'on a fait, parce que si ça a marché là, la question du « cas particulier » se pose autrement.`,
+  },
+  {
+    id: "dejaessaye",
+    phrase: "J'ai déjà essayé, ça n'a rien donné",
+    pointe: "conviction",
+    resistance: `C'est l'objection la plus sérieuse. Et la meilleure nouvelle de la journée.\n\nIl a déjà sorti sa carte. Il achète, ce n'est pas le problème.\nIl s'est juste fait avoir une fois, et il ne veut pas raconter ça deux fois à sa femme.\n\nIl lui manque une raison nommée de croire que cette fois c'est différent. Nommée : pas « moi je suis sérieux ».`,
+    repare: "Un mécanisme qui a un nom",
+    post: `« J'ai déjà essayé. »\n\nTant mieux. Ça veut dire que tu sais déjà ce qui ne marche pas.\n\nLa plupart des méthodes échouent au même endroit, et ce n'est presque jamais l'endroit qu'on croit.\n\nCe n'est pas la discipline qui lâche.\nC'est l'ordre dans lequel on fait les choses.`,
+  },
+  {
+    id: "confiance",
+    phrase: "Je ne te connais pas assez",
+    pointe: "connexion",
+    resistance: `Il n'y a pas assez de traces.\n\nPas de visage, pas de continuité, pas de version de toi qui se plante.\nOn ne sait pas d'où tu parles, donc on ne sait pas si on peut te suivre.\n\nLa confiance, ce n'est pas de l'éloquence. C'est de la répétition — et un peu de casse assumée.`,
+    repare: "Ta propre histoire, datée",
+    post: `Tu ne me connais pas.\n\nNormal. Je passe mon temps à parler de toi, pas de moi.\n\nAlors voilà, une fois : d'où je parle, ce que j'ai raté avant, et pourquoi je me suis retrouvé à faire exactement ça.\n\nCe n'est pas une histoire de réussite. C'est une histoire de ras-le-bol.`,
+  },
+  {
+    id: "parouco",
+    phrase: "Je ne sais pas par où commencer",
+    pointe: "offre",
+    resistance: `Ce n'est pas un manque d'information. C'est l'inverse.\n\nIl en a trop. Quinze onglets ouverts, quatre méthodes contradictoires, zéro décision.\nLa surcharge paralyse exactement comme le vide.\n\nCe qu'il cherche, ce n'est pas un menu de plus.\nC'est quelqu'un qui tranche à sa place.`,
+    repare: "La clarté de ton offre et une seule porte",
+    post: `Si tu ne sais pas par où commencer, ce n'est pas que tu manques d'informations.\n\nC'est que tu en as trop.\n\nQuinze onglets ouverts. Quatre avis contradictoires. Aucune décision.\n\nAlors je vais trancher pour toi : une seule chose cette semaine.\nLa voilà.`,
+  },
+  {
+    id: "moment",
+    phrase: "Ce n'est pas le bon moment",
+    pointe: "desir",
+    resistance: `Le problème existe, mais il ne saigne pas encore.\nOu alors il saigne depuis si longtemps qu'on s'y est habitué — ce qui revient au même.\n\nTon travail n'est pas de pousser.\nC'est de rendre visible ce qui se dégrade pendant qu'il attend le bon moment.\n\nSpoiler : le bon moment, c'est une chose qui n'arrive jamais dans un agenda.`,
+    repare: "Ce qui se dégrade pendant l'attente",
+    post: `« Ce n'est pas le bon moment. »\n\nJ'ai attendu le bon moment pendant presque deux ans.\n\nIl n'est jamais venu. Évidemment.\n\nCe qui est venu, en revanche : les mêmes chiffres, douze mois plus tard, avec un an de moins pour les changer.`,
+  },
 ];
 
-function mapperObjection(texte) {
-  const t = (texte || "").toLowerCase();
-  for (const o of OBJECTIONS_CONNUES) {
-    if (o.motifs.some(m => t.includes(m))) return { saisie: texte, apparente: o.apparente, reelle: o.reelle };
+/* Résolution des objections choisies, plus le cas « Autre » saisi à la main.
+   Le texte libre est décodé par mots-clés ; s'il reste inconnu, chaque
+   objection reçoit tout de même une lecture différente. */
+
+const LECTURES_LIBRES = [
+  {
+    resistance: `Celle-là n'est dans aucun manuel, et c'est une bonne nouvelle : elle vient de ton terrain à toi.
+
+Pose-lui une seule question : est-ce qu'on doute du résultat, ou est-ce qu'on doute de soi ?
+
+Doute du résultat, ça se répare avec de la preuve.
+Doute de soi, ça se répare en montrant ce qui fait tenir quand on lâche d'habitude.`,
+    repare: "À trancher : preuve, ou accompagnement",
+  },
+  {
+    resistance: `Note la phrase exacte, mot pour mot, la prochaine fois qu'on te la sort.
+
+La formulation compte plus que le fond : « c'est cher » et « je ne peux pas me le permettre » ne se réparent pas au même endroit.
+La première parle de valeur. La seconde parle de priorité.
+
+Et en attendant, réponds-y publiquement. Une objection non traitée continue de travailler, en silence, chez tous ceux qui ne te l'ont pas dite.`,
+    repare: "À publier avant qu'on te la repose",
+  },
+  {
+    resistance: `Celle-ci t'appartient — elle vient de ton marché, pas d'une liste générique.
+
+Regarde qui te la dit. Si ce sont toujours les mêmes profils, ce n'est pas une objection : c'est un signal de ciblage.
+Tu parles peut-être à côté de ceux qui achètent.
+
+Si elle vient de tout le monde, alors c'est ton offre qui la provoque.`,
+    repare: "Un signal de ciblage, ou d'offre",
+  },
+];
+
+function resoudreObjections(selectionnees, texteLibre, graine) {
+  const sorties = [];
+  (selectionnees || []).forEach(id => {
+    const o = CATALOGUE_OBJECTIONS.find(x => x.id === id);
+    if (o) sorties.push({ phrase: o.phrase, resistance: o.resistance, repare: o.repare, post: o.post, pointe: o.pointe });
+  });
+
+  const libre = (texteLibre || "").trim();
+  if (libre) {
+    const t = libre.toLowerCase();
+    const indices = {
+      prix: ["cher", "prix", "budget", "coûte", "moyens", "argent"],
+      reflechir: ["réfléchir", "reflechir", "recontacte", "rappelle"],
+      seul: ["moi-même", "moi meme", "seul", "gratuit", "youtube", "tout seul"],
+      temps: ["temps", "occupé", "occupe", "charge", "dispo"],
+      moncas: ["mon cas", "marchera pas", "pas pour moi", "mon secteur", "particulier"],
+      dejaessaye: ["déjà essayé", "deja essaye", "rien donné", "arnaqué", "arnaque"],
+      confiance: ["connais pas", "confiance", "sais pas qui", "sérieux"],
+      parouco: ["par où", "par ou", "commencer", "perdu", "sais pas quoi"],
+      moment: ["moment", "urgent", "plus tard", "un jour", "année prochaine", "rentrée", "rentree",
+        "attendre", "septembre", "janvier", "cet été", "cet ete", "après les"],
+    };
+    let trouve = null;
+    for (const id in indices) {
+      if (indices[id].some(m => t.includes(m)) && !(selectionnees || []).includes(id)) { trouve = id; break; }
+    }
+    const modele = trouve ? CATALOGUE_OBJECTIONS.find(x => x.id === trouve) : null;
+    if (modele) {
+      sorties.push({ phrase: libre, resistance: modele.resistance, repare: modele.repare, post: modele.post, pointe: modele.pointe });
+    } else {
+      const lecture = LECTURES_LIBRES[graine % LECTURES_LIBRES.length];
+      sorties.push({ phrase: libre, resistance: lecture.resistance, repare: lecture.repare, post: null, pointe: null });
+    }
   }
-  return {
-    saisie: texte,
-    apparente: texte || "Objection non précisée",
-    reelle: `Celle-là, le scanner ne sait pas la décoder tout seul.\nPose-toi une question : est-ce qu'on doute du résultat, ou est-ce qu'on doute de soi ?\nLes deux ne se réparent pas au même endroit.`,
-  };
+  return sorties;
+}
+
+/* Est-ce que les objections choisies pointent toutes au même endroit ? */
+function convergenceObjections(objections, fuitePrincipale, prenom) {
+  const cibles = objections.map(o => o.pointe).filter(Boolean);
+  if (cibles.length < 2) return null;
+  const compte = {};
+  cibles.forEach(c => { compte[c] = (compte[c] || 0) + 1; });
+  const [cle, n] = Object.entries(compte).sort((a, b) => b[1] - a[1])[0];
+  if (n < 2) {
+    return `Tes objections ne pointent pas toutes au même endroit.
+Celles-là se traitent une par une, pas en bloc.`;
+  }
+  const nom = FUITES[cle].titre.toLowerCase();
+  const tete = prenom ? `${prenom}, regarde bien.` : `Regarde bien.`;
+  if (cle === fuitePrincipale) {
+    return `${tete}
+
+Sur tes ${cibles.length} objections, ${n} se réparent exactement au même endroit : ${nom}.
+
+Et c'est là que ton scan a trouvé ta fuite.
+
+Ce n'est pas une coïncidence. Tes prospects te disent avec leurs mots ce que tes chiffres disent avec les leurs.`;
+  }
+  return `${tete}
+
+Sur tes ${cibles.length} objections, ${n} se réparent au même endroit : ${nom}.
+
+Ton scan, lui, pointe ailleurs.
+
+Ça arrive souvent, et c'est intéressant : ce que les gens verbalisent n'est presque jamais ce qui les bloque vraiment. Traite ta fuite d'abord, puis regarde si ces objections ne tombent pas toutes seules.`;
 }
 
 /* ============================================================
@@ -480,10 +631,12 @@ function genererRapport(state, scores) {
   const F = FUITES[principale.cle];
   const F2 = FUITES[secondaire.cle];
 
+  const prenom = (state.business.prenom || "").trim();
   const repartition = repartitionClassifications(scores.analysesThreads);
-  const objections = (state.offre.objections || []).filter(o => o && o.trim()).map(mapperObjection);
+  const objections = resoudreObjections(state.offre.objectionsChoisies, state.offre.objectionAutre, graine);
 
   return {
+    prenom,
     global,
     niveauGlobal: E.niveauScore(global),
     scores,
@@ -496,6 +649,9 @@ function genererRapport(state, scores) {
     graine,
     repartition,
     objections,
+    convergence: convergenceObjections(objections, principale.cle, prenom),
+    threadsRemarquables: threadsRemarquables(scores.analysesThreads),
+    ancrages: ancragesPersonnels(state, scores, principale.cle),
     gapDesir: Math.max(0, 70 - scores.desir),
     autopsie: autopsieOffre(state, scores),
     fuite: {
@@ -507,7 +663,7 @@ function genererRapport(state, scores) {
     },
     arreter: [pioche(F.arreter, graine), pioche(F2.arreter, graine + 2), arretUniversel(state, graine)],
     commencer: [pioche(F.commencer, graine), pioche(F2.commencer, graine + 3), commenceUniversel(state, graine)],
-    ouverture: ouverture(state, scores, principale, cas),
+    ouverture: ouverture(state, scores, principale, cas, prenom),
     lecture: lectureDesChiffres(state, scores),
     plan: plan7Jours(principale.cle, state),
     threadsPrets: threadsPrets(principale.cle, state, graine),
@@ -517,9 +673,92 @@ function genererRapport(state, scores) {
   };
 }
 
-function ouverture(state, scores, principale, cas) {
+/* Ce qu'il a écrit, relu et commenté ligne par ligne.
+   C'est ce qui fait la différence entre un rapport et un horoscope. */
+
+function threadsRemarquables(analyses) {
+  if (!analyses || analyses.length < 2) return null;
+  const indexes = analyses.map((a, i) => ({ ...a, num: i + 1 }));
+  const tries = [...indexes].sort((a, b) => b.total - a.total);
+  const meilleur = tries[0];
+  const pire = tries[tries.length - 1];
+  if (meilleur.num === pire.num) return null;
+
+  return {
+    meilleur: { num: meilleur.num, ligne: meilleur.premiereLigne, total: meilleur.total, mot: motSurThread(meilleur, true) },
+    pire: { num: pire.num, ligne: pire.premiereLigne, total: pire.total, mot: motSurThread(pire, false) },
+  };
+}
+
+function motSurThread(a, estLeMeilleur) {
+  if (estLeMeilleur) {
+    if (a.conversion >= 10) return `Celui-là fait le travail jusqu'au bout : il accroche et il indique une sortie. C'est ton modèle, garde-le sous le coude.`;
+    if (a.connexion >= 12) return `Ce qui le sauve, c'est qu'on s'y reconnaît. Il manque juste une porte à la fin — ajoute-la et tu as ton meilleur post.`;
+    if (a.desir >= 12) return `Il donne envie. C'est le plus dur, et tu l'as fait là. Reproduis cette structure, pas ce sujet.`;
+    return `C'est ton meilleur, mais il est meilleur par défaut : il est simplement moins faible que les autres.`;
+  }
+  if (a.hook <= 6) return `Le problème commence à cette ligne : elle ne promet rien. Personne ne lira la deuxième.`;
+  if (a.pertinence <= 5) return `Il est peut-être bon. Il ne parle juste pas du terrain de ton offre — donc il ne te ramènera jamais un client.`;
+  if (a.conversion === 0 && a.desir <= 5) return `Ni envie, ni sortie. Ce post informe, et s'arrête là.`;
+  return `Il n'est pas raté. Il est tiède — et le tiède ne déclenche rien du tout.`;
+}
+
+/* Ses propres mots, ressortis au moment où ça fait mal. */
+
+function ancragesPersonnels(state, scores, cle) {
+  const a = [];
+  const promesse = (state.offre.promesse || "").trim();
+  const cout = (state.offre.coutInaction || "").trim();
+  const diff = (state.offre.differenciation || "").trim();
+  const urgence = (state.offre.urgence || "").trim();
+
+  if (promesse) {
+    a.push({
+      titre: "Ta promesse, telle que tu me l'as donnée",
+      citation: promesse,
+      mot: promesse.length < 30
+        ? `Relis-la à voix haute.\nElle tient en un souffle, mais elle ne dit ni pour qui, ni en combien de temps.\nC'est une intention, pas encore une promesse.`
+        : (/\d/.test(promesse)
+          ? `Il y a un chiffre dedans. C'est déjà plus que la plupart.\nVérifie maintenant qu'un client saurait la répéter de mémoire — c'est le vrai test.`
+          : `Aucun chiffre, aucun délai.\nDonc rien à vérifier. Donc rien à croire, et rien à comparer.`),
+    });
+  }
+  if (cout) {
+    a.push({
+      titre: "Ce que tu dis qu'il risque",
+      citation: cout,
+      mot: /\d/.test(cout)
+        ? `Tu as chiffré. Très bien.\nMaintenant la vraie question : est-ce que ce chiffre apparaît quelque part dans tes Threads ?\nParce que pour l'instant, il est dans ce formulaire. Pas dans la tête de ton prospect.`
+        : `Tu le décris, tu ne le chiffres pas.\nUn risque flou ne fait pas bouger. Un risque chiffré, si.\nMets un nombre là-dedans, même approximatif.`,
+    });
+  } else {
+    a.push({
+      titre: "Ce que tu dis qu'il risque",
+      citation: null,
+      mot: `Tu as laissé cette case vide.\n\nC'est la case la plus lourde du questionnaire.\nSi tu ne sais pas ce qu'il perd à ne rien faire, lui non plus ne le sait pas.\nEt personne ne paye pour éviter un risque qu'il n'a jamais vu.`,
+    });
+  }
+  if (diff && cle !== "offre") {
+    a.push({
+      titre: "Pourquoi toi",
+      citation: diff,
+      mot: `Garde cette phrase. Elle est plus utile dans tes Threads que sur ta page de vente — c'est avant le clic qu'on choisit, pas après.`,
+    });
+  }
+  if (!urgence && cle === "desir") {
+    a.push({
+      titre: "Pourquoi maintenant",
+      citation: null,
+      mot: `Vide aussi.\n\nSans raison d'agir aujourd'hui, ton offre attend patiemment son tour derrière quinze autres priorités.\nEt ce tour n'arrive jamais.`,
+    });
+  }
+  return a;
+}
+
+function ouverture(state, scores, principale, cas, prenom) {
   const a = state.audience;
   const lignes = [];
+  const salut = prenom ? `Bon. ${prenom}.\n\n` : "";
 
   if (cas === "VANITY_ALERT") {
     lignes.push(`${nombreFr(a.vuesMois)} vues par mois. Zéro vente.`);
@@ -540,6 +779,7 @@ function ouverture(state, scores, principale, cas) {
     lignes.push(`${nombreFr(a.abonnes)} abonnés, ${nombreFr(a.vuesMois)} vues, ${nombreFr(a.ventesMois)} vente(s) par mois.`);
     lignes.push(`On ne va pas discuter de ces chiffres.\nOn va chercher l'endroit précis où ils arrêtent de se transformer en argent.`);
   }
+  lignes[1] = salut + lignes[1];
   return lignes;
 }
 

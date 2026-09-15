@@ -226,6 +226,82 @@ html, body {
   font-variant-numeric: tabular-nums; font-size: 12.5px;
 }
 
+/* Sélecteur d'objections : des phrases, pas des étiquettes */
+.grille-objections { display: flex; flex-direction: column; gap: 8px; }
+
+.grille-objections button {
+  border: 1.5px solid var(--gris-clair);
+  background: var(--blanc);
+  border-radius: 10px;
+  padding: 13px 16px;
+  font-size: 14.5px;
+  font-family: var(--serif);
+  font-style: italic;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+  padding-left: 42px;
+  color: var(--noir);
+}
+
+.grille-objections button::before {
+  content: "";
+  position: absolute;
+  left: 15px; top: 50%;
+  transform: translateY(-50%);
+  width: 15px; height: 15px;
+  border: 1.5px solid var(--gris-clair);
+  border-radius: 4px;
+}
+
+.grille-objections button.selectionne { border-color: var(--rouge); background: #fff7f7; }
+.grille-objections button.selectionne::before { background: var(--rouge); border-color: var(--rouge); }
+.grille-objections button.selectionne::after {
+  content: "✓";
+  position: absolute;
+  left: 18px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--blanc);
+  font-size: 10px;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Citations de ses propres textes */
+.citation-utilisateur {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.45;
+  margin: 0 0 16px;
+  padding: 0 0 0 18px;
+  border-left: 3px solid var(--rouge);
+  color: var(--noir);
+}
+
+.citation-vide {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--gris);
+  margin: 0 0 16px;
+  padding-left: 18px;
+  border-left: 3px solid var(--gris-clair);
+}
+
+.carte-extreme { border-left-width: 4px; }
+.carte-meilleur { border-left-color: #1a7a3c; }
+.carte-pire { border-left-color: var(--rouge); }
+
+.carte-objection .objection-apparente { margin-bottom: 16px; }
+.ou-repare {
+  font-size: 13.5px;
+  color: var(--gris);
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--gris-clair);
+}
+.ou-repare strong { color: var(--noir); }
+
 .grille-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 @media (max-width: 560px) { .grille-2 { grid-template-columns: 1fr; } }
 

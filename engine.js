@@ -187,7 +187,12 @@ function analyserThread(thread, ctx) {
   const tauxReponse = vues > 0 ? (thread.reponses || 0) / vues : null;
   const tauxClic = vues > 0 && thread.clics ? thread.clics / vues : null;
 
-  return { hook, pertinence, connexion, desir, conversion, total, classification, vues, tauxReponse, tauxClic };
+  return {
+    hook, pertinence, connexion, desir, conversion, total, classification,
+    vues, tauxReponse, tauxClic,
+    premiereLigne: premiereLigne.trim(),
+    nbLignes: lignes.length,
+  };
 }
 
 /* ---------- Les 7 scores ---------- */

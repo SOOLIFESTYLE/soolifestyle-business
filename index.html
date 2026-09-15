@@ -57,6 +57,12 @@ Ou si peu.</p>
       <p class="sous-titre">Réponds vite. La première formulation est souvent la plus honnête.</p>
 
       <div class="champ">
+        <label for="q-prenom">D'abord, ton prénom</label>
+        <input type="text" id="q-prenom" placeholder="Ex : Sofiane" />
+        <p class="aide">Pour que ce rapport te parle à toi, et pas à « l'utilisateur ».</p>
+      </div>
+
+      <div class="champ">
         <label for="q-offre">Tu vends quoi, concrètement ?</label>
         <input type="text" id="q-offre" placeholder="Ex : un accompagnement de 3 mois, en groupe" />
       </div>
@@ -181,11 +187,21 @@ Ou si peu.</p>
       </div>
 
       <div class="champ">
-        <label>Les 3 objections que tu entends le plus</label>
-        <p class="aide" style="margin-top:-2px;margin-bottom:10px;">Mot pour mot si tu les as en tête. Les vraies phrases, pas les versions polies.</p>
-        <input type="text" id="q-objection1" placeholder="« … »" style="margin-bottom:10px;" />
-        <input type="text" id="q-objection2" placeholder="« … »" style="margin-bottom:10px;" />
-        <input type="text" id="q-objection3" placeholder="« … »" />
+        <label>Qu'est-ce qu'on te répond avant d'acheter ?</label>
+        <p class="aide" style="margin-top:-2px;margin-bottom:12px;">Coche tout ce que tu entends vraiment. Chacune est décodée séparément dans ton rapport.</p>
+        <div class="grille-objections" id="options-objections">
+          <button type="button" data-valeur="prix">« C'est trop cher »</button>
+          <button type="button" data-valeur="reflechir">« Je vais réfléchir »</button>
+          <button type="button" data-valeur="seul">« Je peux le faire moi-même »</button>
+          <button type="button" data-valeur="temps">« Je n'ai pas le temps »</button>
+          <button type="button" data-valeur="moncas">« Ça ne marchera pas dans mon cas »</button>
+          <button type="button" data-valeur="dejaessaye">« J'ai déjà essayé, ça n'a rien donné »</button>
+          <button type="button" data-valeur="confiance">« Je ne te connais pas assez »</button>
+          <button type="button" data-valeur="parouco">« Je ne sais pas par où commencer »</button>
+          <button type="button" data-valeur="moment">« Ce n'est pas le bon moment »</button>
+        </div>
+        <label for="q-objection-autre" style="margin-top:18px;">Autre — la phrase exacte qu'on te sort</label>
+        <input type="text" id="q-objection-autre" placeholder="Mot pour mot, la version non polie" />
       </div>
 
       <div class="champ">

@@ -4,10 +4,10 @@
 
 const etat = {
   ecranActuel: 0,
-  business: { offre: "", prix: 0, resultat: "", cible: "", anciennete: "moins d'1 mois" },
+  business: { prenom: "", offre: "", prix: 0, resultat: "", cible: "", anciennete: "moins d'1 mois" },
   audience: { abonnes: 0, vuesMois: 0, ventesMois: 0, visitesProfil: 0, clicsOffre: 0 },
   threads: [{}, {}, {}, {}, {}],
-  offre: { promesse: "", probleme: "", coutInaction: "", urgence: "", differenciation: "", objections: ["", "", ""], preuves: [] },
+  offre: { promesse: "", probleme: "", coutInaction: "", urgence: "", differenciation: "", objectionsChoisies: [], objectionAutre: "", preuves: [] },
 };
 
 let rapportCourant = null;
@@ -37,14 +37,14 @@ function construireBlocsThreads() {
   document.getElementById("conteneur-threads").innerHTML = html;
 }
 
-function initPreuves() {
-  document.querySelectorAll("#options-preuve button").forEach(btn => {
+function brancherPastilles(selecteur, liste) {
+  document.querySelectorAll(selecteur + " button").forEach(btn => {
     btn.addEventListener("click", () => {
       btn.classList.toggle("selectionne");
       const v = btn.dataset.valeur;
-      const idx = etat.offre.preuves.indexOf(v);
-      if (idx === -1) etat.offre.preuves.push(v);
-      else etat.offre.preuves.splice(idx, 1);
+      const idx = liste.indexOf(v);
+      if (idx === -1) liste.push(v);
+      else liste.splice(idx, 1);
     });
   });
 }
@@ -75,6 +75,7 @@ function nombre(id) { const el = document.getElementById(id); const v = el ? par
 function collecterEcranActuel() {
   const n = etat.ecranActuel;
   if (n === 1) {
+    etat.business.prenom = valeur("q-prenom");
     etat.business.offre = valeur("q-offre");
     etat.business.prix = nombre("q-prix");
     etat.business.anciennete = valeur("q-anciennete");
@@ -104,7 +105,7 @@ function collecterEcranActuel() {
     etat.offre.coutInaction = valeur("q-cout");
     etat.offre.urgence = valeur("q-urgence");
     etat.offre.differenciation = valeur("q-diff");
-    etat.offre.objections = [valeur("q-objection1"), valeur("q-objection2"), valeur("q-objection3")];
+    etat.offre.objectionAutre = valeur("q-objection-autre");
   }
 }
 
@@ -272,13 +273,45 @@ function afficherRapport(r) {
       <p class="mot-autopsie">${escapeHtml(v.mot)}</p>`).join("")}
   </div>`, "b-offre");
 
+  // Tes propres mots
+  if (r.ancrages.length) {
+    h += bloc("Tes mots, relus à froid", r.ancrages.map(a => `
+      <div class="carte carte-ancrage">
+        <p class="sous-label">${escapeHtml(a.titre)}</p>
+        ${a.citation ? `<blockquote class="citation-utilisateur">${escapeHtml(a.citation)}</blockquote>` : `<p class="citation-vide">— rien —</p>`}
+        ${soo(a.mot)}
+      </div>`).join(""), "b-ancrages");
+  }
+
+  // Ses Threads, nommés
+  if (r.threadsRemarquables) {
+    const tr = r.threadsRemarquables;
+    h += bloc("Ton meilleur et ton plus faible", `
+      <div class="carte carte-extreme carte-meilleur">
+        <p class="sous-label">Ton Thread n°${tr.meilleur.num} — ${tr.meilleur.total}/100, le plus solide</p>
+        <blockquote class="citation-utilisateur">${escapeHtml(tr.meilleur.ligne)}</blockquote>
+        ${soo(tr.meilleur.mot)}
+      </div>
+      <div class="carte carte-extreme carte-pire">
+        <p class="sous-label">Ton Thread n°${tr.pire.num} — ${tr.pire.total}/100, celui qui te coûte</p>
+        <blockquote class="citation-utilisateur">${escapeHtml(tr.pire.ligne)}</blockquote>
+        ${soo(tr.pire.mot)}
+      </div>`, "b-extremes");
+  }
+
   // Objections
-  h += bloc("Derrière leurs objections", r.objections.length ? r.objections.map(o => `
-    <div class="carte">
-      <p class="objection-apparente">« ${escapeHtml(o.apparente)} »</p>
-      <p class="sous-label">Ce que ça veut dire, en vrai</p>
-      ${soo(o.reelle)}
-    </div>`).join("") : `<div class="carte">${soo(`Tu n'as renseigné aucune objection.\nC'est dommage : ce sont les phrases les plus utiles de ton business.\nNote les trois prochaines, mot pour mot.`)}</div>`, "b-objections");
+  h += bloc("Derrière leurs objections", r.objections.length ? `
+    ${r.objections.map(o => `
+      <div class="carte carte-objection">
+        <p class="objection-apparente">« ${escapeHtml(o.phrase)} »</p>
+        <p class="sous-label">Ce que ça veut dire, en vrai</p>
+        ${soo(o.resistance)}
+        <p class="ou-repare">Ça se répare ici : <strong>${escapeHtml(o.repare)}</strong></p>
+        ${o.post ? `<p class="sous-label" style="margin-top:18px;">Le post qui la désamorce</p>
+          <div class="thread-brouillon">${escapeHtml(o.post)}${boutonCopier(o.post)}</div>` : ""}
+      </div>`).join("")}
+    ${r.convergence ? `<div class="carte carte-conseil">${soo(r.convergence)}</div>` : ""}`
+    : `<div class="carte">${soo(`Tu n'as coché aucune objection.\nC'est dommage : ce sont les phrases les plus utiles de ton business.\nNote les trois prochaines, mot pour mot, et refais un scan.`)}</div>`, "b-objections");
 
   // Stop / Start
   h += bloc("À arrêter", `<div class="carte"><ul class="liste-puce arreter">
@@ -321,7 +354,7 @@ function afficherRapport(r) {
 
   // Prochain mouvement → atelier
   h += `<div class="mouvement-final">
-    <p class="eyebrow">Ton prochain mouvement</p>
+    <p class="eyebrow">${r.prenom ? escapeHtml(r.prenom) + ", ton prochain mouvement" : "Ton prochain mouvement"}</p>
     <p class="texte-soo">${escapeHtml(r.fuite.prochain)}</p>
     <button class="btn" id="btn-atelier">Ouvrir l'atelier : ${escapeHtml(r.atelier.titre.toLowerCase())} →</button>
     <p class="note-mouvement">5 minutes. Tu repars avec un texte à publier.</p>
@@ -449,7 +482,7 @@ function ouvrirAtelier() {
 
   conteneur.innerHTML = `
     <div class="atelier-entete">
-      <p class="eyebrow">Ta priorité — une seule</p>
+      <p class="eyebrow">${r.prenom ? escapeHtml(r.prenom) + " — ta priorité, une seule" : "Ta priorité — une seule"}</p>
       <h1>${escapeHtml(a.titre)}</h1>
       <p class="texte-soo atelier-intro">${escapeHtml(a.intro)}</p>
     </div>
@@ -519,4 +552,5 @@ function relancerScan() {
 }
 
 construireBlocsThreads();
-initPreuves();
+brancherPastilles("#options-preuve", etat.offre.preuves);
+brancherPastilles("#options-objections", etat.offre.objectionsChoisies);
