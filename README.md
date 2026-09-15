@@ -31,10 +31,25 @@ python3 -m http.server 8000
 - `style.css` — le branding (noir / blanc / rouge `#DB0000`).
 - `engine.js` — le moteur de scoring (7 scores, score global, Indice de Fuite,
   détection des cas particuliers, profil de vente).
-- `rapport.js` — la génération des 20 sections du diagnostic (textes,
-  recommandations, plan d'action).
+- `rapport.js` — tous les textes du diagnostic, les 10 angles de désir, les
+  phrases à voler, et les **ateliers de réparation** (un par fuite).
 - `app.js` — l'interface : navigation du funnel, collecte des réponses,
-  rendu du rapport, historique des scans (stockage local navigateur).
+  rendu du rapport, atelier, historique des scans (stockage local navigateur).
+
+### L'atelier
+
+Le rapport ne s'arrête pas au diagnostic. Le bouton final ouvre l'atelier
+correspondant à la fuite détectée : 3 questions, puis un texte assemblé à
+partir des réponses, prêt à publier (post, promesse reconstruite, appels à
+l'action calibrés selon la fuite).
+
+### Comment la fuite est choisie
+
+Le moteur ne prend pas simplement le score le plus bas. Une fuite en amont
+rend les suivantes illisibles — inutile de parler désir à quelqu'un que
+personne ne lit. Un arbre de règles (`fuitePrioritaire` dans `engine.js`)
+tranche dans l'ordre : offre cassée → audience hors-sujet → attention →
+qualification → connexion → désir → conviction → offre → action.
 
 ### Principe directeur du moteur
 

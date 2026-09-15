@@ -1,5 +1,5 @@
 /* ============================================================
-   THREADYPRENEURS CASH SCANNER™ — Interface (funnel + rapport)
+   THREADYPRENEURS CASH SCANNER™ — Interface
    ============================================================ */
 
 const etat = {
@@ -10,19 +10,19 @@ const etat = {
   offre: { promesse: "", probleme: "", coutInaction: "", urgence: "", differenciation: "", objections: ["", "", ""], preuves: [] },
 };
 
-const TOTAL_ECRANS = 5; // 0 à 4
+let rapportCourant = null;
+const TOTAL_ECRANS = 5;
 
-/* ---------- Génération des blocs Thread ---------- */
+/* ---------- Blocs Thread ---------- */
 
 function construireBlocsThreads() {
-  const conteneur = document.getElementById("conteneur-threads");
   let html = "";
   for (let i = 0; i < 5; i++) {
     html += `
       <div class="bloc-thread">
         <label><span class="num">${i + 1}</span>Thread n°${i + 1}</label>
         <div class="champ" style="margin-top:12px;margin-bottom:8px;">
-          <textarea id="thread-texte-${i}" placeholder="Colle le texte de ton Thread ici..."></textarea>
+          <textarea id="thread-texte-${i}" placeholder="${i === 0 ? "Colle ton Thread ici. Tel quel, avec les fautes s'il y en a." : "Colle-en un autre…"}"></textarea>
         </div>
         <div class="stats-thread">
           <div><span class="mini-label">Vues</span><input type="number" id="thread-vues-${i}" /></div>
@@ -34,10 +34,8 @@ function construireBlocsThreads() {
         </div>
       </div>`;
   }
-  conteneur.innerHTML = html;
+  document.getElementById("conteneur-threads").innerHTML = html;
 }
-
-/* ---------- Sélections pills (préomotion / objections) ---------- */
 
 function initPreuves() {
   document.querySelectorAll("#options-preuve button").forEach(btn => {
@@ -51,11 +49,10 @@ function initPreuves() {
   });
 }
 
-/* ---------- Navigation funnel ---------- */
+/* ---------- Navigation ---------- */
 
 function majProgression() {
-  const segments = document.querySelectorAll("#barre-progression .segment span");
-  segments.forEach((seg, i) => {
+  document.querySelectorAll("#barre-progression .segment span").forEach((seg, i) => {
     seg.style.width = i <= etat.ecranActuel ? "100%" : "0%";
   });
 }
@@ -68,9 +65,12 @@ function afficherEcran(n) {
   majProgression();
   document.getElementById("nav-boutons").style.display = n === 0 ? "none" : "flex";
   document.getElementById("btn-precedent").style.visibility = n <= 1 ? "hidden" : "visible";
-  document.getElementById("btn-suivant").textContent = n === TOTAL_ECRANS - 1 ? "VOIR MON DIAGNOSTIC →" : "Suivant →";
+  document.getElementById("btn-suivant").textContent = n === TOTAL_ECRANS - 1 ? "SCANNER →" : "Suivant →";
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+function valeur(id) { const el = document.getElementById(id); return el ? el.value.trim() : ""; }
+function nombre(id) { const el = document.getElementById(id); const v = el ? parseFloat(el.value) : 0; return isNaN(v) ? 0 : v; }
 
 function collecterEcranActuel() {
   const n = etat.ecranActuel;
@@ -108,35 +108,16 @@ function collecterEcranActuel() {
   }
 }
 
-function valeur(id) {
-  const el = document.getElementById(id);
-  return el ? el.value.trim() : "";
-}
-function nombre(id) {
-  const el = document.getElementById(id);
-  const v = el ? parseFloat(el.value) : 0;
-  return isNaN(v) ? 0 : v;
-}
-
-function ecranValide(n) {
-  if (n === 1) return etat.business.offre.length > 1 && etat.business.cible.length > 1;
-  if (n === 4) return true;
-  return true;
-}
-
 document.getElementById("btn-lancer").addEventListener("click", () => afficherEcran(1));
 
 document.getElementById("btn-suivant").addEventListener("click", () => {
   collecterEcranActuel();
-  if (!ecranValide(etat.ecranActuel)) {
-    alert("Merci de préciser au moins ce que tu vends et à qui, pour un diagnostic exploitable.");
+  if (etat.ecranActuel === 1 && (etat.business.offre.length < 2 || etat.business.cible.length < 2)) {
+    alert("Il me faut au moins ce que tu vends et à qui. Sinon je te sors un diagnostic générique, et un diagnostic générique ne sert à rien.");
     return;
   }
-  if (etat.ecranActuel === TOTAL_ECRANS - 1) {
-    lancerDiagnostic();
-  } else {
-    afficherEcran(etat.ecranActuel + 1);
-  }
+  if (etat.ecranActuel === TOTAL_ECRANS - 1) lancerDiagnostic();
+  else afficherEcran(etat.ecranActuel + 1);
 });
 
 document.getElementById("btn-precedent").addEventListener("click", () => {
@@ -144,323 +125,393 @@ document.getElementById("btn-precedent").addEventListener("click", () => {
   afficherEcran(Math.max(1, etat.ecranActuel - 1));
 });
 
-/* ---------- Lancement du diagnostic ---------- */
+/* ---------- Diagnostic ---------- */
 
 function lancerDiagnostic() {
   const scores = window.CashEngine.calculerScores(etat);
-  const rapport = window.CashRapport.genererRapport(etat, scores);
-  enregistrerHistorique(rapport);
-  afficherRapport(rapport);
+  rapportCourant = window.CashRapport.genererRapport(etat, scores);
+  enregistrerHistorique(rapportCourant);
+  afficherRapport(rapportCourant);
   document.getElementById("wizard").style.display = "none";
   document.getElementById("nav-boutons").style.display = "none";
   document.getElementById("barre-progression").style.display = "none";
-  const r = document.getElementById("rapport");
-  r.classList.add("actif");
+  document.getElementById("rapport").classList.add("actif");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-/* ---------- Historique (localStorage) ---------- */
-
-function enregistrerHistorique(rapport) {
+function enregistrerHistorique(r) {
   try {
-    const cle = "tcs_historique";
-    const historique = JSON.parse(localStorage.getItem(cle) || "[]");
-    historique.push({ date: new Date().toISOString(), score: rapport.global, fuite: rapport.fuitePrincipale.libelle, scores: rapport.scores });
-    localStorage.setItem(cle, JSON.stringify(historique));
-  } catch (e) { /* stockage indisponible, on continue sans historique */ }
+    const h = JSON.parse(localStorage.getItem("tcs_historique") || "[]");
+    h.push({ date: new Date().toISOString(), score: r.global, fuite: r.fuitePrincipale.libelle });
+    localStorage.setItem("tcs_historique", JSON.stringify(h));
+  } catch (e) { /* stockage bloqué : on continue sans historique */ }
 }
 
 function lireHistorique() {
-  try {
-    return JSON.parse(localStorage.getItem("tcs_historique") || "[]");
-  } catch (e) { return []; }
+  try { return JSON.parse(localStorage.getItem("tcs_historique") || "[]"); } catch (e) { return []; }
 }
 
-/* ---------- Rendu du rapport ---------- */
+/* ---------- Rendu ---------- */
 
-function barreScore(nom, valeur) {
-  const niv = window.CashEngine.niveauScore(valeur);
-  return `
-    <div class="barre-score">
-      <div class="nom">${nom}</div>
-      <div class="piste"><div class="remplissage" style="width:${valeur}%"></div></div>
-      <div class="valeur">${niv.emoji} ${valeur}</div>
-    </div>`;
+function barre(nom, val) {
+  const niv = window.CashEngine.niveauScore(val);
+  return `<div class="barre-score">
+    <div class="nom">${nom}</div>
+    <div class="piste"><div class="remplissage" style="width:${val}%"></div></div>
+    <div class="valeur">${niv.emoji} ${val}</div>
+  </div>`;
+}
+
+function bloc(titre, contenu, id) {
+  return `<section class="bloc-rapport"${id ? ` id="${id}"` : ""}>
+    ${titre ? `<h2>${titre}</h2>` : ""}
+    ${contenu}
+  </section>`;
+}
+
+function escapeHtml(str) {
+  const d = document.createElement("div");
+  d.textContent = str == null ? "" : str;
+  return d.innerHTML;
+}
+
+function soo(texte) {
+  return `<p class="texte-soo">${escapeHtml(texte)}</p>`;
 }
 
 function afficherRapport(r) {
   const s = r.scores;
   const hist = lireHistorique();
+  let h = "";
 
-  let html = "";
+  // Ouverture
+  h += `<div class="rapport-entete">
+    <p class="eyebrow">Diagnostic confidentiel</p>
+    <div class="cash-score-cercle">
+      <div class="chiffre">${r.global}</div>
+      <div class="sur100">/100 ${r.niveauGlobal.emoji}</div>
+    </div>
+    <p class="texte-soo score-note">Ce chiffre ne sert presque à rien.\nCe qui suit, si.</p>
+  </div>`;
 
-  // En-tête + Cash Score
-  html += `
-    <div class="rapport-entete">
-      <p class="eyebrow" style="justify-content:center;display:flex;">Ton Cash Report™</p>
-      <div class="cash-score-cercle">
-        <div class="chiffre">${r.global}</div>
-        <div class="sur100">/ 100 — ${r.niveauGlobal.emoji} ${r.niveauGlobal.label}</div>
-      </div>
-      <p style="color:var(--gris);max-width:480px;margin:0 auto;">Ce score est secondaire. Ce qui compte, c'est où tu perds ton prospect.</p>
-      ${r.casParticulier ? blocCasParticulier(r.casParticulier) : ""}
-    </div>`;
-
-  // 2. Diagnostic exécutif
-  html += section(2, "Diagnostic exécutif", "", `
-    <div class="carte">
-      ${r.diagnosticExecutif.map(l => `<p style="margin:0 0 12px;line-height:1.6;">${l}</p>`).join("")}
+  h += bloc("", `<div class="carte carte-ouverture">
+      <p class="chiffres-bruts">${escapeHtml(r.ouverture[0])}</p>
+      ${soo(r.ouverture[1])}
     </div>`);
 
-  // 3-4-5. Money Leak + pourquoi + impact
-  html += section(3, "Ta fuite principale — Indice de Fuite", "", `
+  // LA FUITE
+  h += `<section class="bloc-rapport">
     <div class="carte-fuite-principale">
-      <div class="label">💰 Money Leak Index™ — Score ${r.fuitePrincipale.score}/100</div>
-      <h3>${r.fuitePrincipale.libelle}</h3>
-      <p>${r.tplPrincipale.pourquoi}</p>
-      <p><strong style="color:#fff;">Mécanisme psychologique :</strong> ${r.tplPrincipale.mecanisme}</p>
-      <p><strong style="color:#fff;">Ce qu'il faut corriger :</strong> ${r.tplPrincipale.correction}</p>
+      <div class="label">Ta fuite principale</div>
+      <h3>${r.fuite.titre}</h3>
+      <p class="texte-soo">${escapeHtml(r.fuite.constat)}</p>
+      <div class="separateur-fin"></div>
+      <p class="sous-label">Pourquoi ça bloque la vente</p>
+      <p class="texte-soo">${escapeHtml(r.fuite.mecanisme)}</p>
+      <div class="separateur-fin"></div>
+      <p class="sous-label">Ce qu'il faut changer</p>
+      <p class="texte-soo">${escapeHtml(r.fuite.correction)}</p>
     </div>
-    <p class="intro-section">Fuite secondaire : <strong>${r.deuxiemeFuite.libelle}</strong> (score ${r.deuxiemeFuite.score}/100) — à traiter seulement une fois la première réparée.</p>
-  `);
+    <p class="note-regle">${escapeHtml(r.regleAppliquee)}<br>
+    Juste derrière : <strong>${r.deuxiemeFuite.libelle}</strong>. On y touchera plus tard — pas maintenant.</p>
+  </section>`;
 
-  // 6. Les 7 étapes
-  html += section(6, "Analyse des 7 étapes", "Attention → Intérêt → Confiance → Désir → Conviction → Action → Achat.", `
+  // Chiffres
+  h += bloc("Ce que disent tes chiffres", `<div class="carte">
+    ${r.lecture.map(l => `<p class="ligne-chiffre">${escapeHtml(l)}</p>`).join("")}
+  </div>`);
+
+  // 7 étapes
+  h += bloc("Les 7 marches", `
+    <p class="intro-bloc">Attention → intérêt → confiance → désir → conviction → action → achat.<br>Là où la barre s'effondre, l'argent s'arrête.</p>
     <div class="carte">
-      ${barreScore("Attention", Math.round(s.attention))}
-      ${barreScore("Qualification (attraction acheteur)", Math.round(s.attractionAcheteur))}
-      ${barreScore("Connexion", Math.round(s.connexion))}
-      ${barreScore("Désir", Math.round(s.desir))}
-      ${barreScore("Conviction", Math.round(s.conviction))}
-      ${barreScore("Offre", Math.round(s.offre))}
-      ${barreScore("Conversion", Math.round(s.conversion))}
+      ${barre("Attention", s.attention)}
+      ${barre("Qualification", s.attractionAcheteur)}
+      ${barre("Connexion", s.connexion)}
+      ${barre("Désir", s.desir)}
+      ${barre("Conviction", s.conviction)}
+      ${barre("Offre", s.offre)}
+      ${barre("Action", s.conversion)}
     </div>
-    <div class="grille-scores" style="margin-top:20px;">
-      ${["attention","attractionAcheteur","connexion","desir","conviction","offre","conversion"].map(cle => {
-        const niv = window.CashEngine.niveauScore(Math.round(s[cle]));
-        return `<div class="tuile-score"><div class="emoji">${niv.emoji}</div><div class="chiffre">${Math.round(s[cle])}</div><div class="nom">${window.CashEngine.LIBELLES[cle]}</div></div>`;
-      }).join("")}
-    </div>
-  `);
+    <p class="note-profil">Ton profil, aujourd'hui : <strong>${r.profils.join(" + ")}</strong>.</p>`, "b-marches");
 
-  // 7. Audience
-  html += section(7, "Analyse de l'audience", "", `<div class="carte">${r.audienceAnalyse.map(l => `<p style="margin:0 0 10px;line-height:1.6;">${l}</p>`).join("")}</div>`);
+  // Threads
+  if (s.analysesThreads.length) {
+    h += bloc("Tes Threads, un par un", s.analysesThreads.map((a, i) => `
+      <div class="carte carte-thread">
+        <div class="entete-thread">
+          <span class="tag-classification">${a.classification}</span>
+          <span class="total-thread">${a.total}/100</span>
+        </div>
+        <p class="detail-thread">Accroche ${a.hook}/20 · Cible ${a.pertinence}/20 · Connexion ${a.connexion}/20 · Désir ${a.desir}/20 · Sortie ${a.conversion}/20</p>
+      </div>`).join(""), "b-threads");
 
-  // 8. Positionnement
-  html += section(8, "Analyse du positionnement", "", `<div class="carte"><p style="margin:0;line-height:1.6;">${r.positionnement}</p></div>`);
-
-  // 9. Autopsie de l'offre
-  html += section(9, "Autopsie de l'offre™", "", `
-    <div class="carte">
-      ${barreScore("Promesse", Math.round(r.autopsie.promesse))}
-      ${barreScore("Spécificité", Math.round(r.autopsie.specificite))}
-      ${barreScore("Désir", Math.round(r.autopsie.desir))}
-      ${barreScore("Différenciation", Math.round(r.autopsie.differenciation))}
-      ${barreScore("Valeur perçue", Math.round(r.autopsie.valeurPercue))}
-      ${barreScore("Confiance", Math.round(r.autopsie.confiance))}
-    </div>`, "section-autopsie");
-
-  // 10. Threads
-  html += section(10, "Analyse de tes 5 Threads", "", r.scores.analysesThreads.map((a, i) => `
-    <div class="carte">
-      <span class="tag-classification">${a.classification}</span>
-      <p style="margin:10px 0 4px;font-weight:700;">Thread n°${i + 1} — ${a.total}/100</p>
-      <p style="margin:0;color:var(--gris);font-size:13.5px;">Hook ${a.hook}/20 · Pertinence ${a.pertinence}/20 · Connexion ${a.connexion}/20 · Désir ${a.desir}/20 · Conversion ${a.conversion}/20</p>
-    </div>`).join(""), "section-threads");
-
-  // 11. Content Gap
-  html += section(11, "Écart de contenu™", "Répartition réelle de tes publications par objectif.", `
-    <div class="carte">
-      ${Object.entries(r.repartition).map(([cat, val]) => barreScore(cat, val)).join("")}
-      <p style="margin-top:14px;line-height:1.6;">
-        ${r.contentGap.trop.length ? `Tu fais trop de : <strong>${r.contentGap.trop.join(", ")}</strong>.<br>` : ""}
-        ${r.contentGap.pasAssez.length ? `Tu ne fais pas assez de : <strong>${r.contentGap.pasAssez.join(", ")}</strong>.` : "Ta répartition couvre déjà toutes les catégories."}
-      </p>
-    </div>`, "section-content-gap");
-
-  // 12. Desire Gap
-  html += section(12, "Écart de désir™", "", `
-    <div class="carte">
-      <p style="margin:0 0 10px;">Désir actuel : <strong>${Math.round(s.desir)}</strong> — Seuil recommandé à l'achat : <strong>70</strong> — Écart : <strong style="color:var(--rouge);">-${r.gapDesir}</strong></p>
-      <p style="margin:0;line-height:1.6;">Ton travail n'est pas de parler davantage de ton produit. Ton travail est de faire monter le désir de la situation future jusqu'à ce que l'action devienne suffisamment attractive.</p>
-    </div>`, "section-desir-gap");
-
-  // 13. Objections
-  html += section(13, "Carte des objections", "", r.objectionsMappees.length ? r.objectionsMappees.map(o => `
-    <div class="carte">
-      <p style="margin:0 0 8px;color:var(--gris);font-size:13px;text-transform:uppercase;letter-spacing:0.05em;">Objection apparente</p>
-      <p style="margin:0 0 14px;font-weight:600;">${o.apparente}</p>
-      <p style="margin:0 0 8px;color:var(--gris);font-size:13px;text-transform:uppercase;letter-spacing:0.05em;">Résistance psychologique probable</p>
-      <p style="margin:0;">${o.reelle}</p>
-    </div>`).join("") : `<div class="carte">Aucune objection renseignée pour l'instant.</div>`, "section-objections");
-
-  // 14. CTA
-  html += section(14, "Générateur d'appels à l'action™", "Adapté au niveau réel de conscience de ton audience.", r.ctaParNiveau.map(c => `
-    <div class="carte">
-      <p style="margin:0 0 4px;font-weight:700;">Niveau ${c.niveau} — ${c.nom} <span style="color:var(--gris);font-weight:400;">(${c.type})</span></p>
-      <p style="margin:0;color:var(--gris);">${c.exemple}</p>
-    </div>`).join(""), "section-cta");
-
-  // 15-16. Stop / Start
-  html += section(15, "3 choses à arrêter / à commencer", "", `
-    <div class="carte">
-      <ul class="liste-puce arreter">
-        <li>${r.tplPrincipale.arreter}</li>
-        <li>${r.tplSecondaire.arreter}</li>
-        <li>Arrête de mesurer la qualité de ton contenu uniquement aux vues.</li>
-      </ul>
-    </div>
-    <div class="carte">
-      <ul class="liste-puce commencer">
-        <li>${r.tplPrincipale.commencer}</li>
-        <li>${r.tplSecondaire.commencer}</li>
-        <li>Commence à mesurer ce qui se passe après le clic, pas seulement avant.</li>
-      </ul>
-    </div>`, "section-stop-start");
-
-  // 17. Plan 7 jours
-  html += section(17, "Plan de réparation 7 jours™", "", `
-    <div class="carte">
-      ${r.plan7Jours.map(j => `
-        <div class="jour-plan">
-          <div class="badge-jour">J${j.jour}</div>
-          <div><div class="titre-jour">${j.action}</div><div class="detail-jour">${j.detail}</div></div>
-        </div>`).join("")}
-    </div>`);
-
-  // 18. Angles de désir
-  html += section(18, "10 angles de désir™", "", `
-    <div class="carte">
-      ${window.CashRapport.ANGLES_DESIR.map(a => `
-        <div style="margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--gris-clair);">
-          <p style="margin:0 0 4px;font-weight:700;">${a.angle} <span style="font-weight:400;color:var(--gris);">— ${a.desirActive}</span></p>
-          <p style="margin:0 0 6px;color:var(--gris);font-size:13.5px;">${a.pourquoi}</p>
-          <p style="margin:0;font-style:italic;">${window.CashRapport.genererAngleThread(a, etat.business)}</p>
-        </div>`).join("")}
-    </div>`);
-
-  // 19. Threads prêts à publier
-  html += section(19, "3 Threads prêts à publier", "", r.threadsPrets.map(t => `<div class="thread-brouillon">${escapeHtml(t)}</div>`).join(""));
-
-  // Phrases à voler (bonus)
-  html += section("Bonus", "Phrases à voler™", "", `<div class="carte">${r.stealPhrases.map(p => `<div class="phrase-a-voler">« ${p} »</div>`).join("")}</div>`);
-
-  // 20. Next Best Action
-  html += `
-    <div class="mouvement-final">
-      <p class="eyebrow">Ton prochain mouvement</p>
-      <p>${r.tplPrincipale.prochain}<br><br>${r.tplPrincipale.outil}</p>
-      <button class="btn" id="btn-vers-outil" data-cible="${r.tplPrincipale.cibleId}">${r.tplPrincipale.boutonLabel}</button>
-    </div>`;
-
-  // Loop commercial
-  const programme = window.CashRapport.PROGRAMMES[r.fuitePrincipale.cle];
-  html += `
-    <div class="carte accent-rouge" style="margin-top:30px;">
-      <p class="eyebrow">Pour aller plus loin</p>
-      <p style="margin:0 0 14px;line-height:1.6;">Ton problème principal est <strong>${r.fuitePrincipale.libelle.toLowerCase()}</strong>. C'est exactement ce que travaille en profondeur <strong>${programme.nom}</strong>.</p>
-      <p style="margin:0 0 18px;line-height:1.6;color:var(--gris);">${programme.accroche}</p>
-      <p style="margin:0 0 18px;font-size:14px;">Code <strong style="color:var(--rouge);">THREADYPRENEURS70</strong> pour -70 € sur ${programme.nom}.</p>
-      <a class="btn btn-primaire" href="https://soolifestyle.fr" target="_blank" rel="noopener">Découvrir ${programme.nom} →</a>
-    </div>`;
-
-  // Carte partageable
-  html += `
-    <div class="carte-partage" id="carte-partage">
-      <div class="titre-marque">Threads Cash Score™</div>
-      <div class="score-central">${r.global}<span style="font-size:22px;color:#999;">/100</span></div>
-      <div class="ligne-mini"><span>🧲 Attention</span><span>${Math.round(s.attention)}</span></div>
-      <div class="ligne-mini"><span>❤️ Connexion</span><span>${Math.round(s.connexion)}</span></div>
-      <div class="ligne-mini"><span>🔥 Désir</span><span>${Math.round(s.desir)}</span></div>
-      <div class="ligne-mini"><span>🛡️ Conviction</span><span>${Math.round(s.conviction)}</span></div>
-      <div class="ligne-mini"><span>💰 Offre</span><span>${Math.round(s.offre)}</span></div>
-      <div class="ligne-mini"><span>🚀 Conversion</span><span>${Math.round(s.conversion)}</span></div>
-      <p class="citation">Fuite principale : ${r.fuitePrincipale.libelle}<br>« ${citationPartage(r.fuitePrincipale.cle)} »</p>
-      <p class="signature-partage">par SOOLIFESTYLE</p>
-    </div>`;
-
-  // Historique
-  if (hist.length > 1) {
-    html += section("Bonus", "Historique de tes scans", "", `
-      <div class="carte historique-liste">
-        ${hist.map((h, i) => `<div class="historique-item"><span>Scan #${i + 1} — ${new Date(h.date).toLocaleDateString("fr-FR")}</span><strong>${h.score}/100</strong></div>`).join("")}
-      </div>`);
+    h += bloc("Ce que tu publies vraiment", `<div class="carte">
+      ${Object.entries(r.repartition).map(([c, v]) => barre(c, v)).join("")}
+      ${soo(commentaireRepartition(r.repartition))}
+    </div>`, "b-repartition");
   }
 
-  // Pied de page + actions
-  html += `
-    <div class="pied-rapport">
-      <p style="color:var(--gris);font-size:13px;">THREADYPRENEURS CASH SCANNER™ — Diagnostic confidentiel généré pour ton activité.<br>Un outil conçu par <strong style="color:var(--noir);">SOOLIFESTYLE</strong>.</p>
-      <div class="actions-rapport">
-        <button class="btn btn-secondaire" id="btn-imprimer">Exporter mon Cash Report™ (PDF)</button>
-        <button class="btn btn-noir" id="btn-rescan">Je relance mon scan</button>
-      </div>
-    </div>`;
+  // Écart de désir
+  h += bloc("L'écart de désir", `<div class="carte">
+    <p class="ligne-chiffre">Désir mesuré : <strong>${s.desir}</strong> · Seuil où les gens achètent : <strong>70</strong>${r.gapDesir > 0 ? ` · Manque : <strong class="rouge">${r.gapDesir}</strong>` : ` · <strong>atteint</strong>`}</p>
+    ${soo(r.gapDesir > 0
+      ? `Ton travail n'est pas de parler davantage de ton offre.\nC'est de faire monter l'envie de la situation d'après, jusqu'à ce que bouger devienne plus confortable que rester.`
+      : `Le désir est là. Ne le gâche pas avec une sortie molle ou une preuve absente.`)}
+  </div>`, "b-desir");
 
-  document.getElementById("rapport").innerHTML = html;
+  // Offre
+  h += bloc("Ton offre au scalpel", `<div class="carte">
+    ${Object.entries(r.autopsie).map(([k, v]) => `
+      ${barre(nomAutopsie(k), Math.round(v.score))}
+      <p class="mot-autopsie">${escapeHtml(v.mot)}</p>`).join("")}
+  </div>`, "b-offre");
 
+  // Objections
+  h += bloc("Derrière leurs objections", r.objections.length ? r.objections.map(o => `
+    <div class="carte">
+      <p class="objection-apparente">« ${escapeHtml(o.apparente)} »</p>
+      <p class="sous-label">Ce que ça veut dire, en vrai</p>
+      ${soo(o.reelle)}
+    </div>`).join("") : `<div class="carte">${soo(`Tu n'as renseigné aucune objection.\nC'est dommage : ce sont les phrases les plus utiles de ton business.\nNote les trois prochaines, mot pour mot.`)}</div>`, "b-objections");
+
+  // Stop / Start
+  h += bloc("À arrêter", `<div class="carte"><ul class="liste-puce arreter">
+    ${r.arreter.map(x => `<li>${escapeHtml(x)}</li>`).join("")}
+  </ul></div>`, "b-arreter");
+
+  h += bloc("À commencer", `<div class="carte"><ul class="liste-puce commencer">
+    ${r.commencer.map(x => `<li>${escapeHtml(x)}</li>`).join("")}
+  </ul></div>`, "b-commencer");
+
+  // 7 jours
+  h += bloc("Tes 7 prochains jours", `<div class="carte">
+    ${r.plan.map(j => `<div class="jour-plan">
+      <div class="badge-jour">J${j.jour}</div>
+      <div><div class="titre-jour">${escapeHtml(j.action)}</div><div class="detail-jour">${escapeHtml(j.detail)}</div></div>
+    </div>`).join("")}
+  </div>`, "b-plan");
+
+  // Angles de désir
+  h += bloc("10 façons de donner faim", `
+    <p class="intro-bloc">Dix ressorts. Un exemple écrit pour chacun — pique la structure, pas les mots.</p>
+    ${window.CashRapport.ANGLES_DESIR.map(a => `
+      <div class="carte carte-angle">
+        <div class="entete-angle"><strong>${a.angle}</strong><span>${a.ressort}</span></div>
+        <p class="pourquoi-angle">${escapeHtml(a.pourquoi)}</p>
+        <div class="exemple-angle">${escapeHtml(a.exemple)}${boutonCopier(a.exemple)}</div>
+      </div>`).join("")}`, "b-angles");
+
+  // Threads prêts
+  h += bloc("3 Threads prêts à partir", r.threadsPrets.map(t => `
+    <div class="carte carte-thread-pret">
+      <span class="objectif-thread">${escapeHtml(t.objectif)}</span>
+      <div class="thread-brouillon">${escapeHtml(t.texte)}${boutonCopier(t.texte)}</div>
+    </div>`).join(""), "b-threads-prets");
+
+  // Phrases à voler
+  h += bloc("À voler", `<div class="carte">
+    ${r.phrases.map(p => `<div class="phrase-a-voler">« ${escapeHtml(p)} »</div>`).join("")}
+  </div>`, "b-phrases");
+
+  // Prochain mouvement → atelier
+  h += `<div class="mouvement-final">
+    <p class="eyebrow">Ton prochain mouvement</p>
+    <p class="texte-soo">${escapeHtml(r.fuite.prochain)}</p>
+    <button class="btn" id="btn-atelier">Ouvrir l'atelier : ${escapeHtml(r.atelier.titre.toLowerCase())} →</button>
+    <p class="note-mouvement">5 minutes. Tu repars avec un texte à publier.</p>
+  </div>`;
+
+  // Programme
+  h += `<div class="carte carte-programme">
+    <p class="eyebrow">Quand tu voudras aller au fond</p>
+    ${soo(r.programme.pourquoi)}
+    <p class="ligne-code">Code <strong>THREADYPRENEURS70</strong> — 70 € de moins sur ${escapeHtml(r.programme.nom)}.</p>
+    <a class="btn btn-primaire" href="https://soolifestyle.fr" target="_blank" rel="noopener">${escapeHtml(r.programme.nom)} →</a>
+  </div>`;
+
+  // Carte partageable
+  h += `<div class="carte-partage">
+    <div class="titre-marque">Threads Cash Score™</div>
+    <div class="score-central">${r.global}<span>/100</span></div>
+    <div class="ligne-mini"><span>Attention</span><span>${s.attention}</span></div>
+    <div class="ligne-mini"><span>Qualification</span><span>${s.attractionAcheteur}</span></div>
+    <div class="ligne-mini"><span>Connexion</span><span>${s.connexion}</span></div>
+    <div class="ligne-mini"><span>Désir</span><span>${s.desir}</span></div>
+    <div class="ligne-mini"><span>Conviction</span><span>${s.conviction}</span></div>
+    <div class="ligne-mini"><span>Offre</span><span>${s.offre}</span></div>
+    <div class="ligne-mini"><span>Action</span><span>${s.conversion}</span></div>
+    <p class="citation">Ma fuite : ${r.fuitePrincipale.libelle}<br>« ${escapeHtml(citationPartage(r.fuitePrincipale.cle))} »</p>
+    <p class="signature-partage">par SOOLIFESTYLE</p>
+  </div>`;
+
+  if (hist.length > 1) {
+    h += bloc("Tes scans", `<div class="carte">
+      ${hist.slice(-6).map((x, i) => `<div class="historique-item"><span>${new Date(x.date).toLocaleDateString("fr-FR")} — ${escapeHtml(x.fuite)}</span><strong>${x.score}/100</strong></div>`).join("")}
+      ${soo(hist[hist.length - 1].score > hist[hist.length - 2].score ? `Ça monte. Continue exactement comme ça.` : `Ça ne monte pas encore. Normal : un scan ne répare rien, c'est ce que tu publies entre deux scans qui compte.`)}
+    </div>`);
+  }
+
+  h += `<div class="pied-rapport">
+    <p>THREADYPRENEURS CASH SCANNER™ — analyse générée pour ton activité.<br>Un outil conçu par <strong>SOOLIFESTYLE</strong>.</p>
+    <div class="actions-rapport">
+      <button class="btn btn-secondaire" id="btn-imprimer">Exporter en PDF</button>
+      <button class="btn btn-noir" id="btn-rescan">Refaire un scan</button>
+    </div>
+  </div>`;
+
+  document.getElementById("rapport").innerHTML = h;
   document.getElementById("btn-imprimer").addEventListener("click", () => window.print());
   document.getElementById("btn-rescan").addEventListener("click", relancerScan);
-  const btnOutil = document.getElementById("btn-vers-outil");
-  if (btnOutil) btnOutil.addEventListener("click", () => {
-    const cible = document.getElementById(btnOutil.dataset.cible);
-    if (cible) {
-      cible.scrollIntoView({ behavior: "smooth", block: "start" });
-      cible.classList.add("section-surlignee");
-      setTimeout(() => cible.classList.remove("section-surlignee"), 1600);
-    }
-  });
+  document.getElementById("btn-atelier").addEventListener("click", ouvrirAtelier);
+  brancherCopie();
+}
+
+function nomAutopsie(k) {
+  return { promesse: "Promesse", specificite: "Spécificité", desir: "Désir", differenciation: "Différenciation", valeurPercue: "Valeur perçue", confiance: "Confiance" }[k];
+}
+
+function commentaireRepartition(rep) {
+  const vides = Object.entries(rep).filter(([, v]) => v === 0).map(([c]) => c.toLowerCase());
+  const gros = Object.entries(rep).sort((a, b) => b[1] - a[1])[0];
+  if (vides.includes("désirer") && vides.includes("convertir")) {
+    return `Tu nourris. Tu ne donnes jamais faim.\n\nRien qui fasse désirer, rien qui fasse agir.\nC'est le profil classique de quelqu'un qu'on adore suivre et à qui on n'achète rien.`;
+  }
+  if (gros && gros[1] >= 60) {
+    return `${gros[1]} % de tes posts font la même chose : ${gros[0].toLowerCase()}.\n\nUne audience qui reçoit toujours le même type de message finit par ne plus rien recevoir du tout.`;
+  }
+  if (vides.length) {
+    return `Il manque complètement : ${vides.join(", ")}.\n\nCe ne sont pas des cases à cocher. Ce sont les étapes que ton lecteur doit franchir pour acheter.`;
+  }
+  return `Ta répartition couvre toutes les étapes. C'est rare. Regarde plutôt la qualité de chacune.`;
 }
 
 function citationPartage(cle) {
-  const citations = {
-    attention: "Mon contenu se perd avant même d'être vu.",
-    attractionAcheteur: "J'attire du monde, pas les bonnes personnes.",
-    connexion: "On me comprend, mais on ne se sent pas compris.",
-    desir: "J'attire l'attention plus vite que je ne crée le désir.",
-    conviction: "On veut le résultat, on ne me croit pas encore assez.",
+  return {
+    attention: "J'écris pour des gens qui ne me lisent pas.",
+    attractionAcheteur: "J'attire du monde. Pas mon monde.",
+    connexion: "On me comprend. Personne ne se sent compris.",
+    desir: "J'attire l'attention plus vite que je ne crée l'envie.",
+    conviction: "On veut le résultat. On doute que ce soit moi.",
     offre: "Mon offre freine plus qu'elle n'attire.",
-    conversion: "L'intérêt existe. Le passage à l'action, non.",
-  };
-  return citations[cle] || "";
+    conversion: "Tout est là, sauf la dernière marche.",
+  }[cle] || "";
 }
 
-function blocCasParticulier(cas) {
-  const contenus = {
-    VANITY_ALERT: `<div class="carte accent-rouge" style="margin-top:20px;text-align:left;"><strong>🚨 Alerte métriques vanité</strong><br>Tes vues prouvent que tu sais attirer l'attention. Elles ne prouvent pas que tu sais créer de la demande.</div>`,
-    ZERO_VENTE: `<div class="carte accent-rouge" style="margin-top:20px;text-align:left;"><strong>Mode zéro vente activé</strong><br>Zéro vente ne signifie pas automatiquement zéro demande. Priorité : offre → désir → confiance → conversion → qualification de l'audience.</div>`,
-    PEPITE_CACHEE: `<div class="carte" style="margin-top:20px;text-align:left;border-color:#1a7a3c;"><strong>💎 Pépite cachée</strong><br>Ton système commercial semble fonctionner malgré une faible visibilité. Ne change surtout pas tout. Ton prochain levier est probablement l'attention / la distribution.</div>`,
-    CLICS_SANS_VENTES: `<div class="carte accent-rouge" style="margin-top:20px;text-align:left;"><strong>Clics sans ventes</strong><br>Ton contenu arrive à faire cliquer. Le problème apparaît probablement après le clic.</div>`,
-    VISITES_SANS_CLICS: `<div class="carte accent-rouge" style="margin-top:20px;text-align:left;"><strong>Visites sans clics</strong><br>Beaucoup de visites de profil, peu de clics. Regarde ton profil, ton positionnement et ton appel à l'action.</div>`,
-  };
-  return contenus[cas] || "";
+/* ---------- Copie ---------- */
+
+let compteurCopie = 0;
+const textesACopier = {};
+
+function boutonCopier(texte) {
+  const id = `cp${compteurCopie++}`;
+  textesACopier[id] = texte;
+  return `<button class="copier" data-copie="${id}">copier</button>`;
 }
 
-function section(num, titre, intro, contenu, id) {
-  const estNumerique = /^\d+$/.test(String(num));
-  return `
-    <div class="section-rapport"${id ? ` id="${id}"` : ""}>
-      <h2><span class="numero-section">${estNumerique ? num + "." : num}</span> ${titre}</h2>
-      ${intro ? `<p class="intro-section">${intro}</p>` : ""}
-      ${contenu}
+function brancherCopie() {
+  document.querySelectorAll("[data-copie]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const texte = textesACopier[btn.dataset.copie];
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(texte);
+        ok = true;
+      } catch (e) {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = texte;
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+        } catch (e2) { ok = false; }
+      }
+      btn.textContent = ok ? "copié" : "sélectionne-le";
+      setTimeout(() => { btn.textContent = "copier"; }, 1800);
+    });
+  });
+}
+
+/* ---------- L'ATELIER ---------- */
+
+function ouvrirAtelier() {
+  const r = rapportCourant;
+  const a = r.atelier;
+  const conteneur = document.getElementById("atelier");
+
+  conteneur.innerHTML = `
+    <div class="atelier-entete">
+      <p class="eyebrow">Ta priorité — une seule</p>
+      <h1>${escapeHtml(a.titre)}</h1>
+      <p class="texte-soo atelier-intro">${escapeHtml(a.intro)}</p>
+    </div>
+    <div class="carte">
+      ${a.questions.map((q, i) => `
+        <div class="champ champ-atelier">
+          <label for="at-${q.id}"><span class="num-question">${i + 1}</span>${escapeHtml(q.label)}</label>
+          <textarea id="at-${q.id}" placeholder="${escapeHtml(q.placeholder)}"></textarea>
+        </div>`).join("")}
+      <button class="btn btn-primaire btn-large" id="btn-assembler">Assembler mon texte →</button>
+    </div>
+    <div id="resultat-atelier"></div>
+    <div class="actions-rapport" style="margin-top:30px;">
+      <button class="btn btn-secondaire" id="btn-retour-rapport">← Revenir au diagnostic</button>
     </div>`;
+
+  document.getElementById("rapport").classList.remove("actif");
+  conteneur.classList.add("actif");
+  document.getElementById("btn-assembler").addEventListener("click", assemblerAtelier);
+  document.getElementById("btn-retour-rapport").addEventListener("click", () => {
+    conteneur.classList.remove("actif");
+    document.getElementById("rapport").classList.add("actif");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function escapeHtml(str) {
-  const div = document.createElement("div");
-  div.textContent = str;
-  return div.innerHTML;
+function assemblerAtelier() {
+  const a = rapportCourant.atelier;
+  const reponses = {};
+  let remplies = 0;
+  a.questions.forEach(q => {
+    reponses[q.id] = valeur(`at-${q.id}`);
+    if (reponses[q.id]) remplies++;
+  });
+
+  if (remplies === 0) {
+    alert("Réponds à au moins une question. Même mal. Surtout mal, en fait — on corrigera après.");
+    return;
+  }
+
+  const sortie = a.assembler(reponses);
+  const zone = document.getElementById("resultat-atelier");
+  zone.innerHTML = `
+    <div class="separateur-atelier"></div>
+    <h2 class="titre-sortie">${escapeHtml(sortie.titre)}</h2>
+    ${sortie.blocs.map(b => `
+      <div class="carte carte-sortie">
+        <span class="objectif-thread">${escapeHtml(b.etiquette)}</span>
+        <div class="thread-brouillon">${escapeHtml(b.texte)}${boutonCopier(b.texte)}</div>
+      </div>`).join("")}
+    <div class="carte carte-conseil">${soo(sortie.conseil)}</div>`;
+
+  brancherCopie();
+  zone.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+/* ---------- Rescan ---------- */
 
 function relancerScan() {
   document.getElementById("rapport").classList.remove("actif");
   document.getElementById("rapport").innerHTML = "";
+  document.getElementById("atelier").classList.remove("actif");
   document.getElementById("wizard").style.display = "block";
   document.getElementById("barre-progression").style.display = "flex";
   afficherEcran(1);
 }
-
-/* ---------- Initialisation ---------- */
 
 construireBlocsThreads();
 initPreuves();

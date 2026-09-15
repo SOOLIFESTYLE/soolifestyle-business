@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>THREADYPRENEURS CASH SCANNER™</title>
-  <meta name="description" content="Le scanner psychologique qui révèle pourquoi ton audience regarde... mais n'achète pas." />
+  <meta name="description" content="Le scanner qui trouve pourquoi ton audience ne devient pas tes clients." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -20,7 +20,7 @@
         <small>Cash Scanner™</small>
       </div>
     </div>
-    <span class="confidentiel">Diagnostic confidentiel</span>
+    <span class="confidentiel">Confidentiel</span>
   </header>
 
   <div class="progression" id="barre-progression">
@@ -34,43 +34,40 @@
 
   <main class="conteneur" id="wizard">
 
-    <!-- ÉCRAN 1 — Accueil -->
+    <!-- ACCUEIL -->
     <section class="ecran actif accueil" data-ecran="0">
-      <p class="eyebrow" style="justify-content:center;display:flex;">Diagnostic confidentiel d'entreprise</p>
       <h1>Scannons ton <em>business</em>.</h1>
-      <p class="sous-titre" style="margin:0 auto 30px;">
-        Tu as une audience.<br>
-        Tu as une offre.<br>
-        Tu publies.<br><br>
-        Mais les ventes ne suivent pas ?<br><br>
-        On va chercher où ton argent se perd.
-      </p>
-      <p class="mantra">
-        « Tu n'as pas besoin de plus d'attention.<br>
-        Tu as besoin de comprendre ce qui transforme l'attention en décision. »
-      </p>
-      <button class="btn btn-primaire" id="btn-lancer">LANCER MON SCAN →</button>
-      <div class="prix">15 minutes · <strong>37 €</strong> de valeur, offert dans cette démo</div>
+      <p class="texte-soo accroche-accueil">Tu as une audience.
+Tu as une offre.
+Tu publies.
+
+Et il ne se passe rien.
+
+Ou si peu.</p>
+      <p class="mantra">Tu n'as pas besoin de plus d'attention.<br>
+      Tu as besoin de comprendre ce qui transforme l'attention en décision.</p>
+      <button class="btn btn-primaire" id="btn-lancer">TROUVER MA FUITE →</button>
+      <div class="prix">15 minutes. Et tu repars avec un texte à publier.</div>
     </section>
 
-    <!-- ÉCRAN 2 — Ton activité -->
+    <!-- ACTIVITÉ -->
     <section class="ecran" data-ecran="1">
-      <p class="eyebrow">Écran 1 / 5</p>
-      <h1>Ton activité</h1>
-      <p class="sous-titre">Les bases de ce que tu vends, et à qui.</p>
+      <p class="eyebrow">1 / 4</p>
+      <h1>Ce que tu vends</h1>
+      <p class="sous-titre">Réponds vite. La première formulation est souvent la plus honnête.</p>
 
       <div class="champ">
-        <label for="q-offre">Que vends-tu ?</label>
-        <input type="text" id="q-offre" placeholder="Ex : Accompagnement coaching business en groupe" />
+        <label for="q-offre">Tu vends quoi, concrètement ?</label>
+        <input type="text" id="q-offre" placeholder="Ex : un accompagnement de 3 mois, en groupe" />
       </div>
 
       <div class="grille-2">
         <div class="champ">
-          <label for="q-prix">Quel est le prix de ton offre ?</label>
-          <input type="number" id="q-prix" placeholder="Ex : 497" />
+          <label for="q-prix">À quel prix ?</label>
+          <input type="number" id="q-prix" placeholder="497" />
         </div>
         <div class="champ">
-          <label for="q-anciennete">Depuis combien de temps ton offre existe-t-elle ?</label>
+          <label for="q-anciennete">Ça existe depuis quand ?</label>
           <select id="q-anciennete">
             <option value="moins d'1 mois">Moins d'1 mois</option>
             <option value="1 à 3 mois">1 à 3 mois</option>
@@ -82,108 +79,113 @@
       </div>
 
       <div class="champ">
-        <label for="q-resultat">Quel résultat concret ton offre permet-elle d'obtenir ?</label>
-        <textarea id="q-resultat" placeholder="Ex : Doubler son chiffre d'affaires en 90 jours grâce à Threads"></textarea>
+        <label for="q-resultat">Qu'est-ce que ça change, concrètement, pour celui qui achète ?</label>
+        <textarea id="q-resultat" placeholder="Ex : il passe de 2 clients par mois à 6, sans publier davantage"></textarea>
+        <p class="aide">Un chiffre, un délai. Pas d'adjectif.</p>
       </div>
 
       <div class="champ">
-        <label for="q-cible">À qui vends-tu ?</label>
-        <textarea id="q-cible" placeholder="Ex : Coachs et infopreneurs débutants qui galèrent à vendre sur Threads"></textarea>
+        <label for="q-cible">Et tu vends ça à qui ?</label>
+        <textarea id="q-cible" placeholder="Ex : un coach qui publie depuis 6 mois et n'a jamais dépassé 2 clients"></textarea>
+        <p class="aide">Une situation, pas un métier. « Coach » ne dit rien. « Coach qui publie sans jamais vendre », si.</p>
       </div>
     </section>
 
-    <!-- ÉCRAN 3 — Ton audience -->
+    <!-- AUDIENCE -->
     <section class="ecran" data-ecran="2">
-      <p class="eyebrow">Écran 2 / 5</p>
-      <h1>Ton audience</h1>
-      <p class="sous-titre">Des chiffres approximatifs suffisent largement.</p>
+      <p class="eyebrow">2 / 4</p>
+      <h1>Tes chiffres</h1>
+      <p class="sous-titre">À la louche, ça suffit. Personne ne va vérifier.</p>
 
       <div class="grille-2">
         <div class="champ">
-          <label for="q-abonnes">Combien d'abonnés as-tu sur Threads ?</label>
-          <input type="number" id="q-abonnes" placeholder="Ex : 3200" />
+          <label for="q-abonnes">Abonnés sur Threads</label>
+          <input type="number" id="q-abonnes" placeholder="3200" />
         </div>
         <div class="champ">
-          <label for="q-vues">Vues approximatives par mois</label>
-          <input type="number" id="q-vues" placeholder="Ex : 40000" />
+          <label for="q-vues">Vues par mois</label>
+          <input type="number" id="q-vues" placeholder="40000" />
         </div>
       </div>
 
       <div class="grille-2">
         <div class="champ">
-          <label for="q-ventes">Ventes générées par mois actuellement</label>
-          <input type="number" id="q-ventes" placeholder="Ex : 0" />
+          <label for="q-ventes">Ventes par mois, aujourd'hui</label>
+          <input type="number" id="q-ventes" placeholder="0" />
+          <p class="aide">Zéro est une réponse. C'est même la plus utile ici.</p>
         </div>
         <div class="champ">
-          <label for="q-visitesprofil">Visites de ton profil Threads / mois</label>
-          <input type="number" id="q-visitesprofil" placeholder="Ex : 900" />
+          <label for="q-visitesprofil">Visites sur ton profil / mois</label>
+          <input type="number" id="q-visitesprofil" placeholder="900" />
         </div>
       </div>
 
       <div class="champ">
-        <label for="q-clics">Clics vers ton offre / newsletter par mois</label>
-        <input type="number" id="q-clics" placeholder="Ex : 60" />
+        <label for="q-clics">Clics vers ton offre ou ta newsletter / mois</label>
+        <input type="number" id="q-clics" placeholder="60" />
       </div>
     </section>
 
-    <!-- ÉCRAN 4 — Ton contenu -->
+    <!-- CONTENU -->
     <section class="ecran" data-ecran="3">
-      <p class="eyebrow">Écran 3 / 5</p>
-      <h1>Ton contenu</h1>
-      <p class="sous-titre">Colle 5 Threads récents. Pas de statistiques disponibles ? Pas grave, colle simplement le texte.</p>
+      <p class="eyebrow">3 / 4</p>
+      <h1>Tes Threads</h1>
+      <p class="sous-titre">Colle-en cinq. Les derniers publiés, pas tes préférés — sinon le scan ment.<br>Pas de stats sous la main ? Laisse les cases vides, colle juste le texte.</p>
 
       <div id="conteneur-threads"></div>
     </section>
 
-    <!-- ÉCRAN 5 — Ton offre -->
+    <!-- OFFRE -->
     <section class="ecran" data-ecran="4">
-      <p class="eyebrow">Écran 4 / 5</p>
+      <p class="eyebrow">4 / 4</p>
       <h1>Ton offre</h1>
-      <p class="sous-titre">La partie la plus importante du scan.</p>
+      <p class="sous-titre">Là, ça pique un peu. Vas-y quand même.</p>
 
       <div class="champ">
-        <label for="q-promesse">Quelle est ta promesse actuelle ?</label>
-        <textarea id="q-promesse" placeholder="Ex : Je t'aide à vendre sur Threads"></textarea>
+        <label for="q-promesse">Ta promesse, telle que tu l'écris aujourd'hui</label>
+        <textarea id="q-promesse" placeholder="Copie-colle ce qu'il y a sur ta page, même si tu la trouves nulle"></textarea>
       </div>
 
       <div class="champ">
-        <label for="q-probleme">Quel problème ton offre résout-elle ?</label>
+        <label for="q-probleme">Quel problème tu règles ?</label>
         <textarea id="q-probleme"></textarea>
       </div>
 
       <div class="champ">
-        <label for="q-cout">Que se passe-t-il si ton prospect ne règle jamais ce problème ?</label>
-        <textarea id="q-cout"></textarea>
+        <label for="q-cout">Et s'il ne le règle jamais, il se passe quoi ?</label>
+        <textarea id="q-cout" placeholder="Sois précis. Des euros, des mois, une scène."></textarea>
+        <p class="aide">C'est la question qui pèse le plus lourd dans tout ce questionnaire.</p>
       </div>
 
       <div class="champ">
-        <label for="q-urgence">Pourquoi devrait-il agir maintenant ?</label>
+        <label for="q-urgence">Pourquoi maintenant, plutôt que dans six mois ?</label>
         <textarea id="q-urgence"></textarea>
       </div>
 
       <div class="champ">
-        <label for="q-diff">Pourquoi acheter chez toi plutôt qu'ailleurs ?</label>
+        <label for="q-diff">Pourquoi toi, plutôt qu'un autre ?</label>
         <textarea id="q-diff"></textarea>
       </div>
 
       <div class="champ">
-        <label>Quelles sont les 3 objections principales que tes prospects ont avant d'acheter ?</label>
-        <input type="text" id="q-objection1" placeholder="Objection n°1" style="margin-bottom:10px;" />
-        <input type="text" id="q-objection2" placeholder="Objection n°2" style="margin-bottom:10px;" />
-        <input type="text" id="q-objection3" placeholder="Objection n°3" />
+        <label>Les 3 objections que tu entends le plus</label>
+        <p class="aide" style="margin-top:-2px;margin-bottom:10px;">Mot pour mot si tu les as en tête. Les vraies phrases, pas les versions polies.</p>
+        <input type="text" id="q-objection1" placeholder="« … »" style="margin-bottom:10px;" />
+        <input type="text" id="q-objection2" placeholder="« … »" style="margin-bottom:10px;" />
+        <input type="text" id="q-objection3" placeholder="« … »" />
       </div>
 
       <div class="champ">
-        <label>Quelle preuve possèdes-tu ?</label>
+        <label>Tu as quoi comme preuve ?</label>
         <div class="options-pill" id="options-preuve">
           <button type="button" data-valeur="témoignages">Témoignages</button>
           <button type="button" data-valeur="résultats clients">Résultats clients</button>
-          <button type="button" data-valeur="expérience personnelle">Expérience personnelle</button>
+          <button type="button" data-valeur="expérience personnelle">Mon parcours</button>
           <button type="button" data-valeur="études de cas">Études de cas</button>
           <button type="button" data-valeur="démonstration">Démonstration</button>
-          <button type="button" data-valeur="audience">Audience</button>
-          <button type="button" data-valeur="expertise">Expertise</button>
-          <button type="button" data-valeur="aucune">Aucune</button>
+          <button type="button" data-valeur="audience">Mon audience</button>
+          <button type="button" data-valeur="expertise">Mon expertise</button>
+          <button type="button" data-valeur="aucune">Rien pour l'instant</button>
         </div>
       </div>
     </section>
@@ -194,8 +196,8 @@
     </div>
   </main>
 
-  <!-- RAPPORT -->
   <main class="conteneur" id="rapport"></main>
+  <main class="conteneur" id="atelier"></main>
 
   <footer class="pied-marque">Un outil <strong>THREADYPRENEURS</strong> — conçu par <strong>SOOLIFESTYLE</strong></footer>
 
