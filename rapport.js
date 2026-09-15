@@ -15,6 +15,8 @@ const TEMPLATES_FUITE = {
     commencer: "Commence chaque Thread par une phrase qui crée un manque d'information.",
     prochain: "Ne publie rien avant d'avoir retravaillé tes 3 prochaines accroches.",
     outil: "Générateur de Désir™ n'est pas la priorité ici — commence par un travail sur le Hook.",
+    cibleId: "section-threads",
+    boutonLabel: "Revoir mes accroches →",
   },
   attractionAcheteur: {
     titre: "QUALIFICATION",
@@ -25,6 +27,8 @@ const TEMPLATES_FUITE = {
     commencer: "Commence à nommer explicitement qui tu n'aides pas.",
     prochain: "Ne change rien à ton offre. Resserre d'abord qui tu adresses dans tes 5 prochains Threads.",
     outil: "Écart de Contenu™ t'aidera à voir ce que tu publies vraiment.",
+    cibleId: "section-content-gap",
+    boutonLabel: "Resserrer mon audience →",
   },
   connexion: {
     titre: "CONNEXION",
@@ -35,6 +39,8 @@ const TEMPLATES_FUITE = {
     commencer: "Commence à raconter un moment précis, daté, avec un ressenti physique.",
     prochain: "Ne publie pas de conseil aujourd'hui. Publie un souvenir.",
     outil: "Atelier de Réparation de Threads™ pour retravailler ton prochain post.",
+    cibleId: "section-stop-start",
+    boutonLabel: "Voir ce qui bloque ma connexion →",
   },
   desir: {
     titre: "DÉSIR",
@@ -45,6 +51,8 @@ const TEMPLATES_FUITE = {
     commencer: "Commence à décrire la vie de ton prospect si rien ne change, puis si tout change.",
     prochain: "Ne publie pas un nouveau Thread aujourd'hui. Réécris d'abord ta promesse.",
     outil: "Test de Résistance de la Promesse™ et Générateur de Désir™.",
+    cibleId: "section-desir-gap",
+    boutonLabel: "Réparer ma promesse →",
   },
   conviction: {
     titre: "CONVICTION",
@@ -55,6 +63,8 @@ const TEMPLATES_FUITE = {
     commencer: "Commence à publier une preuve concrète, même petite, plutôt qu'une affirmation.",
     prochain: "Ne vends pas plus fort. Prouve davantage.",
     outil: "Extracteur d'Objections™.",
+    cibleId: "section-objections",
+    boutonLabel: "Renforcer mes preuves →",
   },
   offre: {
     titre: "OFFRE",
@@ -65,6 +75,8 @@ const TEMPLATES_FUITE = {
     commencer: "Commence par une seule promesse, la plus spécifique possible.",
     prochain: "Ne touche à rien d'autre avant d'avoir clarifié ta promesse.",
     outil: "Autopsie de l'Offre™ et Test de Résistance de la Promesse™.",
+    cibleId: "section-autopsie",
+    boutonLabel: "Clarifier mon offre →",
   },
   conversion: {
     titre: "ACTION / CONVERSION",
@@ -75,6 +87,8 @@ const TEMPLATES_FUITE = {
     commencer: "Commence à indiquer une seule action possible, adaptée à la maturité du lecteur.",
     prochain: "Ne complique pas ton funnel. Simplifie ta prochaine étape.",
     outil: "Générateur d'Appels à l'Action™.",
+    cibleId: "section-cta",
+    boutonLabel: "Corriger mon appel à l'action →",
   },
 };
 
@@ -274,6 +288,37 @@ function construireStealPhrases(principale, state) {
   ];
 }
 
+const PROGRAMMES = {
+  attention: {
+    nom: "L'INFILTRATION ZEIGARNIK™",
+    accroche: "Ta fuite se situe avant même la lecture : c'est le programme qui t'apprend à ouvrir des boucles que le cerveau ne peut pas laisser fermées.",
+  },
+  attractionAcheteur: {
+    nom: "LE CODE SECTAIRE™",
+    accroche: "Ton audience est trop large pour être qualifiée : ce programme t'apprend à construire un cercle qui s'auto-sélectionne autour de ton offre.",
+  },
+  connexion: {
+    nom: "LE CODE SECTAIRE™",
+    accroche: "Ce qui manque, c'est le sentiment d'appartenance : ce programme t'apprend à transformer ton audience en cercle qui se reconnaît en toi.",
+  },
+  desir: {
+    nom: "INCEPTION GAME™",
+    accroche: "Ta fuite est la plus rentable à réparer : ce programme t'apprend à implanter un désir avant même de présenter ton offre.",
+  },
+  conviction: {
+    nom: "PSYCHÉ CAPITAL™",
+    accroche: "Le désir existe déjà, la preuve manque : ce programme t'apprend à construire un capital de crédibilité qui fait taire le doute.",
+  },
+  offre: {
+    nom: "INGÉNIERIE DE L'EMPRISE™",
+    accroche: "Le problème est structurel : ce programme t'apprend à construire une offre dont on a du mal à se détacher.",
+  },
+  conversion: {
+    nom: "VIREMENT NOBLE™",
+    accroche: "L'intérêt existe, l'action se dérobe : ce programme t'apprend à rendre le passage à l'achat évident et légitime.",
+  },
+};
+
 if (typeof window !== "undefined") {
-  window.CashRapport = { genererRapport, ANGLES_DESIR, genererAngleThread, TEMPLATES_FUITE };
+  window.CashRapport = { genererRapport, ANGLES_DESIR, genererAngleThread, TEMPLATES_FUITE, PROGRAMMES };
 }

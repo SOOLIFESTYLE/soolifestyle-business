@@ -436,6 +436,16 @@ body {
 .section-rapport {
   margin-bottom: 52px;
   padding-bottom: 6px;
+  border-radius: 14px;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.section-rapport.section-surlignee {
+  background: rgba(219,0,0,0.05);
+  box-shadow: 0 0 0 2px var(--rouge);
+  padding: 16px;
+  margin-left: -16px;
+  margin-right: -16px;
 }
 
 .section-rapport h2 {

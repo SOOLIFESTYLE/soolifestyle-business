@@ -258,7 +258,7 @@ function afficherRapport(r) {
       ${barreScore("Différenciation", Math.round(r.autopsie.differenciation))}
       ${barreScore("Valeur perçue", Math.round(r.autopsie.valeurPercue))}
       ${barreScore("Confiance", Math.round(r.autopsie.confiance))}
-    </div>`);
+    </div>`, "section-autopsie");
 
   // 10. Threads
   html += section(10, "Analyse de tes 5 Threads", "", r.scores.analysesThreads.map((a, i) => `
@@ -266,7 +266,7 @@ function afficherRapport(r) {
       <span class="tag-classification">${a.classification}</span>
       <p style="margin:10px 0 4px;font-weight:700;">Thread n°${i + 1} — ${a.total}/100</p>
       <p style="margin:0;color:var(--gris);font-size:13.5px;">Hook ${a.hook}/20 · Pertinence ${a.pertinence}/20 · Connexion ${a.connexion}/20 · Désir ${a.desir}/20 · Conversion ${a.conversion}/20</p>
-    </div>`).join(""));
+    </div>`).join(""), "section-threads");
 
   // 11. Content Gap
   html += section(11, "Écart de contenu™", "Répartition réelle de tes publications par objectif.", `
@@ -276,14 +276,14 @@ function afficherRapport(r) {
         ${r.contentGap.trop.length ? `Tu fais trop de : <strong>${r.contentGap.trop.join(", ")}</strong>.<br>` : ""}
         ${r.contentGap.pasAssez.length ? `Tu ne fais pas assez de : <strong>${r.contentGap.pasAssez.join(", ")}</strong>.` : "Ta répartition couvre déjà toutes les catégories."}
       </p>
-    </div>`);
+    </div>`, "section-content-gap");
 
   // 12. Desire Gap
   html += section(12, "Écart de désir™", "", `
     <div class="carte">
       <p style="margin:0 0 10px;">Désir actuel : <strong>${Math.round(s.desir)}</strong> — Seuil recommandé à l'achat : <strong>70</strong> — Écart : <strong style="color:var(--rouge);">-${r.gapDesir}</strong></p>
       <p style="margin:0;line-height:1.6;">Ton travail n'est pas de parler davantage de ton produit. Ton travail est de faire monter le désir de la situation future jusqu'à ce que l'action devienne suffisamment attractive.</p>
-    </div>`);
+    </div>`, "section-desir-gap");
 
   // 13. Objections
   html += section(13, "Carte des objections", "", r.objectionsMappees.length ? r.objectionsMappees.map(o => `
@@ -292,14 +292,14 @@ function afficherRapport(r) {
       <p style="margin:0 0 14px;font-weight:600;">${o.apparente}</p>
       <p style="margin:0 0 8px;color:var(--gris);font-size:13px;text-transform:uppercase;letter-spacing:0.05em;">Résistance psychologique probable</p>
       <p style="margin:0;">${o.reelle}</p>
-    </div>`).join("") : `<div class="carte">Aucune objection renseignée pour l'instant.</div>`);
+    </div>`).join("") : `<div class="carte">Aucune objection renseignée pour l'instant.</div>`, "section-objections");
 
   // 14. CTA
   html += section(14, "Générateur d'appels à l'action™", "Adapté au niveau réel de conscience de ton audience.", r.ctaParNiveau.map(c => `
     <div class="carte">
       <p style="margin:0 0 4px;font-weight:700;">Niveau ${c.niveau} — ${c.nom} <span style="color:var(--gris);font-weight:400;">(${c.type})</span></p>
       <p style="margin:0;color:var(--gris);">${c.exemple}</p>
-    </div>`).join(""));
+    </div>`).join(""), "section-cta");
 
   // 15-16. Stop / Start
   html += section(15, "3 choses à arrêter / à commencer", "", `
@@ -316,7 +316,7 @@ function afficherRapport(r) {
         <li>${r.tplSecondaire.commencer}</li>
         <li>Commence à mesurer ce qui se passe après le clic, pas seulement avant.</li>
       </ul>
-    </div>`);
+    </div>`, "section-stop-start");
 
   // 17. Plan 7 jours
   html += section(17, "Plan de réparation 7 jours™", "", `
@@ -350,14 +350,18 @@ function afficherRapport(r) {
     <div class="mouvement-final">
       <p class="eyebrow">Ton prochain mouvement</p>
       <p>${r.tplPrincipale.prochain}<br><br>${r.tplPrincipale.outil}</p>
-      <button class="btn" id="btn-vers-outil">Réparer ma promesse →</button>
+      <button class="btn" id="btn-vers-outil" data-cible="${r.tplPrincipale.cibleId}">${r.tplPrincipale.boutonLabel}</button>
     </div>`;
 
   // Loop commercial
+  const programme = window.CashRapport.PROGRAMMES[r.fuitePrincipale.cle];
   html += `
-    <div class="carte" style="margin-top:30px;">
+    <div class="carte accent-rouge" style="margin-top:30px;">
       <p class="eyebrow">Pour aller plus loin</p>
-      <p style="margin:0;line-height:1.6;">Ton problème principal est <strong>${r.fuitePrincipale.libelle.toLowerCase()}</strong>. C'est exactement ce que travaille en profondeur <strong>PSYCHOPERSUASION™</strong>, la suite logique de ce diagnostic.</p>
+      <p style="margin:0 0 14px;line-height:1.6;">Ton problème principal est <strong>${r.fuitePrincipale.libelle.toLowerCase()}</strong>. C'est exactement ce que travaille en profondeur <strong>${programme.nom}</strong>.</p>
+      <p style="margin:0 0 18px;line-height:1.6;color:var(--gris);">${programme.accroche}</p>
+      <p style="margin:0 0 18px;font-size:14px;">Code <strong style="color:var(--rouge);">THREADYPRENEURS70</strong> pour -70 € sur ${programme.nom}.</p>
+      <a class="btn btn-primaire" href="https://soolifestyle.fr" target="_blank" rel="noopener">Découvrir ${programme.nom} →</a>
     </div>`;
 
   // Carte partageable
@@ -399,7 +403,12 @@ function afficherRapport(r) {
   document.getElementById("btn-rescan").addEventListener("click", relancerScan);
   const btnOutil = document.getElementById("btn-vers-outil");
   if (btnOutil) btnOutil.addEventListener("click", () => {
-    document.getElementById("carte-partage").scrollIntoView({ behavior: "smooth" });
+    const cible = document.getElementById(btnOutil.dataset.cible);
+    if (cible) {
+      cible.scrollIntoView({ behavior: "smooth", block: "start" });
+      cible.classList.add("section-surlignee");
+      setTimeout(() => cible.classList.remove("section-surlignee"), 1600);
+    }
   });
 }
 
@@ -427,10 +436,10 @@ function blocCasParticulier(cas) {
   return contenus[cas] || "";
 }
 
-function section(num, titre, intro, contenu) {
+function section(num, titre, intro, contenu, id) {
   const estNumerique = /^\d+$/.test(String(num));
   return `
-    <div class="section-rapport">
+    <div class="section-rapport"${id ? ` id="${id}"` : ""}>
       <h2><span class="numero-section">${estNumerique ? num + "." : num}</span> ${titre}</h2>
       ${intro ? `<p class="intro-section">${intro}</p>` : ""}
       ${contenu}
