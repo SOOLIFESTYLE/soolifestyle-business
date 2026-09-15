@@ -1,0 +1,37 @@
+{
+  "pages": [
+    { "id": "page-1", "name": "Carrousel — 8 slides" },
+    { "id": "page-2", "name": "Variantes de cover" }
+  ],
+  "artboards": [
+    { "file": "Main.dc.html", "title": "01 — Cover", "page": "page-1", "x": 0, "y": 0, "w": 1080, "h": 1350 },
+    { "file": "Slide2.dc.html", "title": "02 — La question", "page": "page-1", "x": 1240, "y": 0, "w": 1080, "h": 1350 },
+    { "file": "Slide3.dc.html", "title": "03 — Le blanc", "page": "page-1", "x": 2480, "y": 0, "w": 1080, "h": 1350 },
+    { "file": "Slide4.dc.html", "title": "04 — La vraie réponse", "page": "page-1", "x": 3720, "y": 0, "w": 1080, "h": 1350 },
+    { "file": "Slide5.dc.html", "title": "05 — Triplé 1/3", "page": "page-1", "x": 0, "y": 1500, "w": 1080, "h": 1350 },
+    { "file": "Slide6.dc.html", "title": "06 — Triplé 2/3", "page": "page-1", "x": 1240, "y": 1500, "w": 1080, "h": 1350 },
+    { "file": "Slide7.dc.html", "title": "07 — Triplé 3/3", "page": "page-1", "x": 2480, "y": 1500, "w": 1080, "h": 1350 },
+    { "file": "Slide8.dc.html", "title": "08 — Punchline + CTA", "page": "page-1", "x": 3720, "y": 1500, "w": 1080, "h": 1350 },
+    { "file": "CoverB.dc.html", "title": "Cover B — phrase entière", "page": "page-2", "x": 0, "y": 0, "w": 1080, "h": 1350 },
+    { "file": "CoverC.dc.html", "title": "Cover C — rouge plein", "page": "page-2", "x": 1240, "y": 0, "w": 1080, "h": 1350 }
+  ],
+  "annotations": [
+    {
+      "id": "a-placeholders",
+      "page": "page-1",
+      "x": 5000,
+      "y": 0,
+      "w": 620,
+      "text": "À remplir avant publication :\n\n- [@TON HANDLE] sur les slides 03 à 08\n- [TON CTA — lien en bio] sur la slide 08\n\nLes slides 05-06-07 forment le triplé rythmique : même structure, la ligne rouge est la chute à chaque fois. Ne casse pas le parallélisme si tu réécris."
+    },
+    {
+      "id": "a-covers",
+      "page": "page-2",
+      "x": 2480,
+      "y": 0,
+      "w": 620,
+      "text": "Deux autres accroches pour la slide 1, même corps de carrousel derrière.\n\nCover B — la phrase entière, plus littéraire, freine moins le scroll mais qualifie mieux.\n\nCover C — la question du pote en rouge plein, la plus agressive visuellement ; elle ouvre une boucle au lieu d'annoncer le sujet.\n\nSi tu en gardes une, dis-le-moi et je la passe en slide 01."
+    }
+  ],
+  "launch": { "view": "canvas", "page": "page-1" }
+}
