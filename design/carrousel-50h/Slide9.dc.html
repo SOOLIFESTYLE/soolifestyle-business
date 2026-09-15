@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:wght@500;600&display=swap">
+  <style>
+    body { margin: 0; background: #0D0C0B; }
+    a { color: #db0000; } a:hover { color: #a30000; }
+  </style>
+</helmet>
+<div style="width: 1080px; height: 1350px; box-sizing: border-box; padding: 88px; background: #0D0C0B; display: flex; flex-direction: column; justify-content: space-between">
+
+  <div style="display: flex; align-items: center; gap: 28px">
+    <span style="font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 26px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: {{accent}}">09</span>
+    <div style="flex-grow: 1; height: 2px; background: rgba(251, 250, 248, 0.16)"></div>
+    <span style="font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 26px; font-weight: 600; letter-spacing: 0.14em; color: rgba(251, 250, 248, 0.52)">@soolifestyle</span>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 32px; align-items: flex-start">
+    <span style="font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 28px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: {{accent}}">Rejoins</span>
+    <p style="margin: 0; font-family: Lora, Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 86px; line-height: 1.08; letter-spacing: -0.025em; color: #FBFAF8">BETTER READ SOO™</p>
+    <div style="width: 160px; height: 6px; background: {{accent}}"></div>
+    <p style="margin: 0; font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 500; font-size: 38px; line-height: 1.42; letter-spacing: -0.01em; color: rgba(251, 250, 248, 0.78); max-width: 860px; text-wrap: pretty">La newsletter quotidienne qui t'apprend à vendre à des humains… en comprenant l'humain.</p>
+    <div style="margin-top: 20px; padding: 30px 46px; background: {{accent}}">
+      <span style="font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 600; font-size: 34px; letter-spacing: 0.1em; text-transform: uppercase; color: #FBFAF8">Lien en bio →</span>
+    </div>
+  </div>
+
+  <div style="display: flex; justify-content: flex-end; align-items: flex-end">
+    <span style="font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 26px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(251, 250, 248, 0.52)">Enregistre ce post</span>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#db0000","options":["#db0000","#E63946","#0D0C0B","#FBFAF8"]},"$preview":{"width":1080,"height":1350}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#db0000' };
+  }
+}
+</script>
+</body>
+</html>
