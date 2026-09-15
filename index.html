@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>THREADYPRENEURS CASH SCANNER™</title>
+  <meta name="description" content="Le scanner psychologique qui révèle pourquoi ton audience regarde... mais n'achète pas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="entete">
+    <div class="marque">
+      <span class="point"></span>
+      <div>
+        THREADYPRENEURS
+        <small>Cash Scanner™</small>
+      </div>
+    </div>
+    <span class="confidentiel">Diagnostic confidentiel</span>
+  </header>
+
+  <div class="progression" id="barre-progression">
+    <div class="segment"><span></span></div>
+    <div class="segment"><span></span></div>
+    <div class="segment"><span></span></div>
+    <div class="segment"><span></span></div>
+    <div class="segment"><span></span></div>
+    <div class="segment"><span></span></div>
+  </div>
+
+  <main class="conteneur" id="wizard">
+
+    <!-- ÉCRAN 1 — Accueil -->
+    <section class="ecran actif accueil" data-ecran="0">
+      <p class="eyebrow" style="justify-content:center;display:flex;">Diagnostic confidentiel d'entreprise</p>
+      <h1>Scannons ton <em>business</em>.</h1>
+      <p class="sous-titre" style="margin:0 auto 30px;">
+        Tu as une audience.<br>
+        Tu as une offre.<br>
+        Tu publies.<br><br>
+        Mais les ventes ne suivent pas ?<br><br>
+        On va chercher où ton argent se perd.
+      </p>
+      <p class="mantra">
+        « Tu n'as pas besoin de plus d'attention.<br>
+        Tu as besoin de comprendre ce qui transforme l'attention en décision. »
+      </p>
+      <button class="btn btn-primaire" id="btn-lancer">LANCER MON SCAN →</button>
+      <div class="prix">15 minutes · <strong>37 €</strong> de valeur, offert dans cette démo</div>
+    </section>
+
+    <!-- ÉCRAN 2 — Ton activité -->
+    <section class="ecran" data-ecran="1">
+      <p class="eyebrow">Écran 1 / 5</p>
+      <h1>Ton activité</h1>
+      <p class="sous-titre">Les bases de ce que tu vends, et à qui.</p>
+
+      <div class="champ">
+        <label for="q-offre">Que vends-tu ?</label>
+        <input type="text" id="q-offre" placeholder="Ex : Accompagnement coaching business en groupe" />
+      </div>
+
+      <div class="grille-2">
+        <div class="champ">
+          <label for="q-prix">Quel est le prix de ton offre ?</label>
+          <input type="number" id="q-prix" placeholder="Ex : 497" />
+        </div>
+        <div class="champ">
+          <label for="q-anciennete">Depuis combien de temps ton offre existe-t-elle ?</label>
+          <select id="q-anciennete">
+            <option value="moins d'1 mois">Moins d'1 mois</option>
+            <option value="1 à 3 mois">1 à 3 mois</option>
+            <option value="3 à 6 mois">3 à 6 mois</option>
+            <option value="6 à 12 mois">6 à 12 mois</option>
+            <option value="plus d'un an">Plus d'un an</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="champ">
+        <label for="q-resultat">Quel résultat concret ton offre permet-elle d'obtenir ?</label>
+        <textarea id="q-resultat" placeholder="Ex : Doubler son chiffre d'affaires en 90 jours grâce à Threads"></textarea>
+      </div>
+
+      <div class="champ">
+        <label for="q-cible">À qui vends-tu ?</label>
+        <textarea id="q-cible" placeholder="Ex : Coachs et infopreneurs débutants qui galèrent à vendre sur Threads"></textarea>
+      </div>
+    </section>
+
+    <!-- ÉCRAN 3 — Ton audience -->
+    <section class="ecran" data-ecran="2">
+      <p class="eyebrow">Écran 2 / 5</p>
+      <h1>Ton audience</h1>
+      <p class="sous-titre">Des chiffres approximatifs suffisent largement.</p>
+
+      <div class="grille-2">
+        <div class="champ">
+          <label for="q-abonnes">Combien d'abonnés as-tu sur Threads ?</label>
+          <input type="number" id="q-abonnes" placeholder="Ex : 3200" />
+        </div>
+        <div class="champ">
+          <label for="q-vues">Vues approximatives par mois</label>
+          <input type="number" id="q-vues" placeholder="Ex : 40000" />
+        </div>
+      </div>
+
+      <div class="grille-2">
+        <div class="champ">
+          <label for="q-ventes">Ventes générées par mois actuellement</label>
+          <input type="number" id="q-ventes" placeholder="Ex : 0" />
+        </div>
+        <div class="champ">
+          <label for="q-visitesprofil">Visites de ton profil Threads / mois</label>
+          <input type="number" id="q-visitesprofil" placeholder="Ex : 900" />
+        </div>
+      </div>
+
+      <div class="champ">
+        <label for="q-clics">Clics vers ton offre / newsletter par mois</label>
+        <input type="number" id="q-clics" placeholder="Ex : 60" />
+      </div>
+    </section>
+
+    <!-- ÉCRAN 4 — Ton contenu -->
+    <section class="ecran" data-ecran="3">
+      <p class="eyebrow">Écran 3 / 5</p>
+      <h1>Ton contenu</h1>
+      <p class="sous-titre">Colle 5 Threads récents. Pas de statistiques disponibles ? Pas grave, colle simplement le texte.</p>
+
+      <div id="conteneur-threads"></div>
+    </section>
+
+    <!-- ÉCRAN 5 — Ton offre -->
+    <section class="ecran" data-ecran="4">
+      <p class="eyebrow">Écran 4 / 5</p>
+      <h1>Ton offre</h1>
+      <p class="sous-titre">La partie la plus importante du scan.</p>
+
+      <div class="champ">
+        <label for="q-promesse">Quelle est ta promesse actuelle ?</label>
+        <textarea id="q-promesse" placeholder="Ex : Je t'aide à vendre sur Threads"></textarea>
+      </div>
+
+      <div class="champ">
+        <label for="q-probleme">Quel problème ton offre résout-elle ?</label>
+        <textarea id="q-probleme"></textarea>
+      </div>
+
+      <div class="champ">
+        <label for="q-cout">Que se passe-t-il si ton prospect ne règle jamais ce problème ?</label>
+        <textarea id="q-cout"></textarea>
+      </div>
+
+      <div class="champ">
+        <label for="q-urgence">Pourquoi devrait-il agir maintenant ?</label>
+        <textarea id="q-urgence"></textarea>
+      </div>
+
+      <div class="champ">
+        <label for="q-diff">Pourquoi acheter chez toi plutôt qu'ailleurs ?</label>
+        <textarea id="q-diff"></textarea>
+      </div>
+
+      <div class="champ">
+        <label>Quelles sont les 3 objections principales que tes prospects ont avant d'acheter ?</label>
+        <input type="text" id="q-objection1" placeholder="Objection n°1" style="margin-bottom:10px;" />
+        <input type="text" id="q-objection2" placeholder="Objection n°2" style="margin-bottom:10px;" />
+        <input type="text" id="q-objection3" placeholder="Objection n°3" />
+      </div>
+
+      <div class="champ">
+        <label>Quelle preuve possèdes-tu ?</label>
+        <div class="options-pill" id="options-preuve">
+          <button type="button" data-valeur="témoignages">Témoignages</button>
+          <button type="button" data-valeur="résultats clients">Résultats clients</button>
+          <button type="button" data-valeur="expérience personnelle">Expérience personnelle</button>
+          <button type="button" data-valeur="études de cas">Études de cas</button>
+          <button type="button" data-valeur="démonstration">Démonstration</button>
+          <button type="button" data-valeur="audience">Audience</button>
+          <button type="button" data-valeur="expertise">Expertise</button>
+          <button type="button" data-valeur="aucune">Aucune</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="nav-boutons" id="nav-boutons" style="display:none;">
+      <button class="btn btn-secondaire" id="btn-precedent">← Précédent</button>
+      <button class="btn btn-primaire" id="btn-suivant">Suivant →</button>
+    </div>
+  </main>
+
+  <!-- RAPPORT -->
+  <main class="conteneur" id="rapport"></main>
+
+  <script src="engine.js"></script>
+  <script src="rapport.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
