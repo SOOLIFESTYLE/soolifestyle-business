@@ -31,7 +31,30 @@ body {
 .conteneur {
   max-width: 840px;
   margin: 0 auto;
-  padding: 0 20px 80px;
+  padding: 0 20px 96px;
+}
+
+/* ---------- Pied de marque (fixe, sur tous les écrans) ---------- */
+
+.pied-marque {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 15;
+  text-align: center;
+  font-size: 11px;
+  color: var(--gris);
+  letter-spacing: 0.02em;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: rgba(250,249,247,0.94);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid var(--gris-clair);
+}
+
+.pied-marque strong {
+  color: var(--noir);
+  font-weight: 700;
 }
 
 /* ---------- En-tête ---------- */
@@ -679,6 +702,17 @@ body {
   text-align: center;
 }
 
+.carte-partage .signature-partage {
+  text-align: center;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #777;
+  margin: 18px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #333;
+}
+
 .historique-liste { margin-top: 16px; }
 .historique-item {
   display: flex;
@@ -690,7 +724,7 @@ body {
 }
 
 @media print {
-  .entete, .progression, .actions-rapport, .nav-boutons, #wizard { display: none !important; }
+  .entete, .progression, .actions-rapport, .nav-boutons, #wizard, .pied-marque { display: none !important; }
   body { background: var(--blanc); }
   .carte, .carte-fuite-principale { break-inside: avoid; }
 }

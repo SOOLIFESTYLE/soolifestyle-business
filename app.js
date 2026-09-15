@@ -372,6 +372,7 @@ function afficherRapport(r) {
       <div class="ligne-mini"><span>💰 Offre</span><span>${Math.round(s.offre)}</span></div>
       <div class="ligne-mini"><span>🚀 Conversion</span><span>${Math.round(s.conversion)}</span></div>
       <p class="citation">Fuite principale : ${r.fuitePrincipale.libelle}<br>« ${citationPartage(r.fuitePrincipale.cle)} »</p>
+      <p class="signature-partage">par SOOLIFESTYLE</p>
     </div>`;
 
   // Historique
@@ -385,7 +386,7 @@ function afficherRapport(r) {
   // Pied de page + actions
   html += `
     <div class="pied-rapport">
-      <p style="color:var(--gris);font-size:13px;">THREADYPRENEURS CASH SCANNER™ — Diagnostic confidentiel généré pour ton activité.</p>
+      <p style="color:var(--gris);font-size:13px;">THREADYPRENEURS CASH SCANNER™ — Diagnostic confidentiel généré pour ton activité.<br>Un outil conçu par <strong style="color:var(--noir);">SOOLIFESTYLE</strong>.</p>
       <div class="actions-rapport">
         <button class="btn btn-secondaire" id="btn-imprimer">Exporter mon Cash Report™ (PDF)</button>
         <button class="btn btn-noir" id="btn-rescan">Je relance mon scan</button>
