@@ -385,7 +385,7 @@ function afficherRapport(r) {
     <p class="eyebrow">${r.prenom ? escapeHtml(r.prenom) + ", ton prochain mouvement" : "Ton prochain mouvement"}</p>
     <p class="texte-soo">${escapeHtml(r.fuite.prochain)}</p>
     <button class="btn" id="btn-atelier">Ouvrir l'atelier : ${escapeHtml(r.atelier.titre.toLowerCase())} →</button>
-    <p class="note-mouvement">5 minutes. Tu repars avec un texte à publier.</p>
+    <p class="note-mouvement">3 questions. Et tu repars avec le texte exact, écrit avec tes mots à toi.</p>
   </div>`;
 
   // Programme

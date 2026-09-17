@@ -162,6 +162,13 @@ html, body {
 
 .accueil .prix { display: block; margin-top: 18px; font-size: 13px; color: var(--gris); }
 
+.promesse-cta {
+  margin-top: 22px;
+  font-size: 15.5px;
+  color: var(--noir);
+  max-width: 42ch;
+}
+
 /* ---------- Formulaires ---------- */
 
 .champ { margin-bottom: 28px; }
