@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Le miroir — carrousel Instagram</title>
+<style>
+  /* Display : Playfair Display — Texte & habillage : Jost */
+  @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-500.ttf')  format('truetype'); font-weight:500; font-style:normal; }
+  @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-600.ttf')  format('truetype'); font-weight:600; font-style:normal; }
+  @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-500i.ttf') format('truetype'); font-weight:500; font-style:italic; }
+  @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-600i.ttf') format('truetype'); font-weight:600; font-style:italic; }
+  @font-face { font-family:'Sans'; src:url('fonts/jost-300.ttf') format('truetype'); font-weight:300; }
+  @font-face { font-family:'Sans'; src:url('fonts/jost-400.ttf') format('truetype'); font-weight:400; }
+  @font-face { font-family:'Sans'; src:url('fonts/jost-500.ttf') format('truetype'); font-weight:500; }
+
+  :root{
+    --red:#db0000;
+    --ink:#0b0b0b;
+    --paper:#ffffff;
+    --pad:100px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ background:#2a2a2a; display:flex; flex-direction:column; align-items:center; gap:40px; padding:40px; }
+
+  .slide{
+    position:relative;
+    width:1080px; height:1350px;
+    overflow:hidden;
+    background:var(--paper); color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .slide.dark{ background:var(--ink); color:var(--paper); }
+
+  /* ---------------- habillage constant ---------------- */
+  .topbar{
+    position:absolute; top:86px; left:var(--pad); right:var(--pad);
+    display:flex; align-items:baseline; justify-content:space-between;
+    font-family:'Sans', sans-serif;
+  }
+  .kicker{
+    font-size:21px; font-weight:500; letter-spacing:.26em;
+    text-transform:uppercase; color:var(--red);
+  }
+  .counter{
+    font-size:22px; font-weight:400; letter-spacing:.2em;
+    text-transform:uppercase; color:rgba(11,11,11,.40);
+  }
+  .dark .counter{ color:rgba(255,255,255,.40); }
+  .counter b{ font-weight:500; color:var(--red); }
+
+  .hairline{
+    position:absolute; top:134px; left:var(--pad); right:var(--pad);
+    height:1px; background:rgba(11,11,11,.13);
+  }
+  .dark .hairline{ background:rgba(255,255,255,.17); }
+
+  .mark{
+    position:absolute; bottom:80px; left:var(--pad);
+    font-family:'Sans', sans-serif; font-weight:300;
+    font-size:20px; letter-spacing:.3em; color:rgba(11,11,11,.36);
+  }
+  .dark .mark{ color:rgba(255,255,255,.36); }
+
+  .swipe{
+    position:absolute; bottom:80px; right:var(--pad);
+    font-family:'Sans', sans-serif; font-weight:400;
+    font-size:20px; letter-spacing:.3em; text-transform:uppercase; color:var(--red);
+  }
+
+  /* jauge de progression, bord bas */
+  .progress{ position:absolute; left:0; bottom:0; height:5px; background:var(--red); }
+
+  /* ---------------- contenu ---------------- */
+  .body{
+    position:absolute; left:var(--pad); right:var(--pad);
+    top:52%; transform:translateY(-50%);
+  }
+
+  .lead{
+    font-family:'Display', Georgia, serif;
+    font-weight:500; font-size:70px; line-height:1.2; letter-spacing:-.012em;
+  }
+  .lead.cover{ font-size:72px; }
+
+  .sub{
+    font-family:'Sans', sans-serif;
+    font-weight:300; font-size:43px; line-height:1.52;
+    color:rgba(11,11,11,.80);
+  }
+  .dark .sub{ color:rgba(255,255,255,.78); }
+  .sub + .sub{ margin-top:30px; }
+
+  .rule{ width:100px; height:2px; background:var(--red); margin:50px 0 46px; }
+
+  .red{ color:var(--red); }
+  .it{ font-style:italic; }
+
+  .outro{
+    font-family:'Display', Georgia, serif;
+    font-weight:500; font-style:italic; font-size:56px; line-height:1.26;
+    color:var(--red); margin-top:46px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 1 — COUVERTURE ============ -->
+<div class="slide dark" id="s1">
+  <div class="topbar">
+    <div class="kicker">Le miroir</div>
+    <div class="counter"><b>5</b> mécanismes</div>
+  </div>
+  <div class="hairline"></div>
+
+  <div class="body">
+    <div class="lead cover">Tu as arrêté ton scroll<br>sur ce post.</div>
+    <div class="rule"></div>
+    <div class="lead cover it red">Voilà exactement<br>pourquoi.</div>
+  </div>
+
+  <div class="mark">@soolifestyle</div>
+  <div class="swipe">swipe &rarr;</div>
+  <div class="progress" style="width:0"></div>
+</div>
+
+<!-- ============ 2 — MÉCANISME 1 ============ -->
+<div class="slide" id="s2">
+  <div class="topbar">
+    <div class="kicker">Le biais d’auto-référence</div>
+    <div class="counter"><b>1</b> / 5</div>
+  </div>
+  <div class="hairline"></div>
+
+  <div class="body">
+    <div class="lead">Cette phrase<br><span class="it red">parlait de toi.</span></div>
+    <div class="rule"></div>
+    <div class="sub">Ton cerveau traite en priorité ce qui te concerne.</div>
+    <div class="sub">Il s’arrête sans te demander ton avis.</div>
+  </div>
+
+  <div class="mark">@soolifestyle</div>
+  <div class="progress" style="width:216px"></div>
+</div>
+
+<!-- ============ 3 — MÉCANISME 2 ============ -->
+<div class="slide" id="s3">
+  <div class="topbar">
+    <div class="kicker">La boucle ouverte</div>
+    <div class="counter"><b>2</b> / 5</div>
+  </div>
+  <div class="hairline"></div>
+
+  <div class="body">
+    <div class="lead">Je viens d’annoncer<br>un nombre.</div>
+    <div class="rule"></div>
+    <div class="sub">Ton cerveau a ouvert un <span class="red">compteur</span>.<br>Un compteur ouvert veut se fermer.</div>
+    <div class="sub">Voilà pourquoi tu es encore là.</div>
+  </div>
+
+  <div class="mark">@soolifestyle</div>
+  <div class="progress" style="width:432px"></div>
+</div>
+
+<!-- ============ 4 — MÉCANISME 3 ============ -->
+<div class="slide" id="s4">
+  <div class="topbar">
+    <div class="kicker">L’engagement progressif</div>
+    <div class="counter"><b>3</b> / 5</div>
+  </div>
+  <div class="hairline"></div>
+
+  <div class="body">
+    <div class="lead">Tu as déjà swipé<br><span class="it red">trois fois.</span></div>
+    <div class="rule"></div>
+    <div class="sub">Trois gestes qui ne t’engageaient à rien.</div>
+    <div class="sub">T’arrêter là, ce serait admettre<br>qu’ils n’ont servi à rien.</div>
+  </div>
+
+  <div class="mark">@soolifestyle</div>
+  <div class="progress" style="width:648px"></div>
+</div>
+
+<!-- ============ 5 — MÉCANISME 4 ============ -->
+<div class="slide" id="s5">
+  <div class="topbar">
+    <div class="kicker">La tache aveugle</div>
+    <div class="counter"><b>4</b> / 5</div>
+  </div>
+  <div class="hairline"></div>
+
+  <div class="body">
+    <div class="lead">Tu te dis : moi,<br>je vois venir ces trucs.</div>
+    <div class="rule"></div>
+    <div class="sub"><span class="red">Tout le monde se le dit.</span></div>
+    <div class="sub">On les repère chez les autres. Jamais sur soi.</div>
+  </div>
+
+  <div class="mark">@soolifestyle</div>
+  <div class="progress" style="width:864px"></div>
+</div>
+
+<!-- ============ 6 — MÉCANISME 5 ============ -->
+<div class="slide" id="s6">
+  <div class="topbar">
+    <div class="kicker">La simple exposition</div>
+    <div class="counter"><b>5</b> / 5</div>
+  </div>
+  <div class="hairline"></div>
+
+  <div class="body">
+    <div class="lead">Le dernier agit<br>après ta lecture.</div>
+    <div class="rule"></div>
+    <div class="sub">Tu reverras ce compte demain.<br>Puis après-demain.<br>À la troisième, il paraîtra familier.</div>
+    <div class="sub">Et familier, ton cerveau traduit : <span class="red">fiable</span>.</div>
+  </div>
+
+  <div class="mark">@soolifestyle</div>
+  <div class="progress" style="width:1080px"></div>
+</div>
+
+<!-- ============ 7 — CTA ============ -->
+<div class="slide dark" id="s7">
+  <div class="topbar">
+    <div class="kicker">Le miroir</div>
+    <div class="counter"><b>5</b> / 5</div>
+  </div>
+  <div class="hairline"></div>
+
+  <div class="body">
+    <div class="lead">Ce post était<br>une démonstration.</div>
+    <div class="rule"></div>
+    <div class="sub">Tu es arrivé au bout, donc elle a marché.</div>
+    <div class="sub">Demain, une règle de plus.</div>
+    <div class="outro">Abonne-toi pour ne pas la rater.</div>
+  </div>
+
+  <div class="mark">@soolifestyle</div>
+  <div class="progress" style="width:1080px"></div>
+</div>
+
+</body>
+</html>
