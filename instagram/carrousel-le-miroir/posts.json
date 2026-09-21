@@ -1,0 +1,83 @@
+[
+  {
+    "id": "miroir",
+    "layout": "debord",
+    "size": 104,
+    "lines": ["Tu as arrêté", "ton scroll", "sur ce post."],
+    "hi": 1,
+    "ital": "Voilà exactement",
+    "why": "Pourquoi."
+  },
+  {
+    "id": "disparu",
+    "layout": "decalage",
+    "size": 104,
+    "lines": ["Il a dit oui.", "Puis il a", "disparu."],
+    "hi": 2,
+    "ital": "Ce n’est pas",
+    "why": "Un hasard."
+  },
+  {
+    "id": "relecture",
+    "layout": "compression",
+    "size": 100,
+    "lines": ["Tu relis son", "message depuis", "dix minutes."],
+    "hi": 2,
+    "ital": "Ton cerveau",
+    "why": "Travaille."
+  },
+  {
+    "id": "ecoute",
+    "layout": "inclinaison",
+    "size": 100,
+    "lines": ["Elle parle peu.", "Tout le monde", "l’écoute."],
+    "hi": 0,
+    "ital": "Il y a",
+    "why": "Une raison."
+  },
+  {
+    "id": "manoeuvre",
+    "layout": "desequilibre",
+    "size": 104,
+    "lines": ["Tu as dit oui", "en pensant", "non."],
+    "hi": 2,
+    "ital": "On t’a",
+    "why": "Manœuvré."
+  },
+  {
+    "id": "silence",
+    "layout": "bande",
+    "size": 104,
+    "lines": ["Le silence", "est la phrase", "la plus lue."],
+    "hi": 2,
+    "ital": "Et personne",
+    "why": "Ne l’entend."
+  },
+  {
+    "id": "ignore",
+    "layout": "debord",
+    "size": 92,
+    "lines": ["Il t’ignore.", "Tu le trouves", "plus intéressant."],
+    "hi": 2,
+    "ital": "Ça porte",
+    "why": "Un nom."
+  },
+  {
+    "id": "attirance",
+    "layout": "decalage",
+    "size": 92,
+    "lines": ["Tu ne choisis pas", "ce qui", "t’attire."],
+    "hi": 2,
+    "ital": "Quelqu’un",
+    "why": "L’a choisi."
+  },
+  {
+    "id": "faits",
+    "layout": "compression",
+    "size": 104,
+    "lines": ["On te ment", "avec des", "faits vrais."],
+    "hi": 2,
+    "ital": "C’est ça",
+    "why": "Le piège."
+  }
+]
