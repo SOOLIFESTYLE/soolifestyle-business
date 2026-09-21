@@ -94,16 +94,72 @@ qui comptent.
 
 ---
 
-## Fabriquer
+## L'intérieur du carrousel
 
-Ajoute une entrée dans `posts.json`, puis :
+Sept slides : une couverture, cinq mécanismes, un CTA.
 
-```bash
-node build-covers.js
+La couverture a six gabarits parce qu'elle doit arrêter le pouce.
+**L'intérieur n'en a qu'un.** Un lecteur qui swipe ne doit pas réapprendre
+la mise en page à chaque slide — il doit lire. La variation se joue entre
+carrousels, pas à l'intérieur d'un carrousel.
+
+### La slide-mécanisme (2 à 6)
+
+```
+— NOM DU MÉCANISME        Jost, tiret rouge, capitales espacées
+ACCROCHE EN CAPITALES     Playfair 74-78px, deux ou trois lignes,
+                          dont UNE surlignée en rouge
+▬                         filet rouge
+corps en Jost 300         39px, deux blocs de une à trois lignes
 ```
 
-Un PNG par entrée dans `export/couvertures/`, nommé `<id>-<gabarit>.png`.
-`covers.html` est régénéré à chaque passage — ne l'édite pas à la main, il est écrasé.
+Fer à gauche, bloc centré verticalement. Le surligneur est le fil rouge :
+il est sur la couverture, il est sur chaque mécanisme.
+
+Compteur `1/5` → `5/5` en haut à droite, chiffre courant en rouge.
+La jauge du bas avance de `i/7` à chaque slide.
+
+### La slide finale (7)
+
+**Fond noir profond `#080808`. Toujours.** C'est la seule slide sombre du
+carrousel — la rupture signale la fin autant que le texte.
+
+Pas de surligneur sur cette slide. Le bouton rouge est la seule masse
+rouge après le filet : sur un CTA, c'est lui qui doit gagner.
+Pas de `›››` non plus : il n'y a plus rien après.
+
+En haut à droite, la catégorie revient à la place du compteur.
+Le carrousel se referme comme il s'est ouvert.
+
+---
+
+## Fabriquer
+
+Un carrousel = un fichier dans `carrousels/`.
+
+```bash
+node build-carrousel.js le-miroir
+```
+
+Sept PNG dans `export/<id>/`, numérotés dans l'ordre de publication.
+
+Pour tester des couvertures en série sans écrire les carrousels entiers,
+`posts.json` + `node build-covers.js` sortent les vignettes dans
+`export/couvertures/`.
+
+### Où vit quoi
+
+| Fichier | Rôle |
+|---|---|
+| `da.js` | **les invariants.** Palette, typo, habillage, jauge. Un seul endroit. |
+| `layouts-couverture.js` | les six gabarits de tension de la couverture |
+| `build-carrousel.js` | la slide-mécanisme, la slide finale, le rendu |
+| `carrousels/*.json` | le texte d'un carrousel |
+| `posts.json` | des couvertures seules, pour tester le feed |
+
+Rien de graphique ne doit être écrit ailleurs que dans `da.js`.
+Si tu te surprends à coller une couleur en dur dans un gabarit, c'est que
+l'invariant manque — ajoute-le à `da.js`.
 
 ---
 

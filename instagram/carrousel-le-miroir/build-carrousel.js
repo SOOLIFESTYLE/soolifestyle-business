@@ -1,0 +1,79 @@
+// Rend un carrousel entier — couverture, mécanismes, CTA — depuis son JSON.
+// Usage : node build-carrousel.js [nom]        (défaut : le-miroir)
+const fs = require('fs');
+const path = require('path');
+const { chromium } = require('/opt/node22/lib/node_modules/playwright');
+const DA = require('./da');
+const COVERS = require('./layouts-couverture');
+
+const DIR = __dirname;
+const name = process.argv[2] || 'le-miroir';
+const c = JSON.parse(fs.readFileSync(path.join(DIR, 'carrousels', `${name}.json`), 'utf8'));
+const OUT = path.join(DIR, 'export', c.id);
+
+const TOTAL = 1 + c.slides.length + 1; // couverture + mécanismes + CTA
+const N = c.slides.length;
+
+/* ── la slide-mécanisme : une seule forme, répétée ──
+   étiquette rouge, accroche en capitales dont une ligne surlignée,
+   filet, corps en sans léger. Fer à gauche : le corps se lit vite. */
+const mechanism = (s, i) => `
+  <div class="sl" id="s${i + 2}">
+    <div class="wrap">
+      <div class="label"><em>&mdash;</em>${s.label}</div>
+      <div class="title" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
+      <div class="hr"></div>
+      ${s.body.map((p) => `<div class="body">${p.join('<br>')}</div>`).join('')}
+    </div>
+    ${DA.furniture({
+      tag: `<b>${i + 1}</b> / ${N}`,
+      fill: DA.fill(i + 2, TOTAL),
+    })}
+  </div>`;
+
+/* ── la slide finale : fond noir profond, et le seul bouton du carrousel ── */
+const outro = (o) => `
+  <div class="sl dark" id="s${TOTAL}">
+    <div class="wrap">
+      <div class="title" style="font-size:${o.size}px">${DA.chipLines(o.lines, o.hi)}</div>
+      <div class="hr"></div>
+      ${o.body.map((p) => `<div class="body">${p.join('<br>')}</div>`).join('')}
+      <div><span class="cta">${o.cta} <span>&rarr;</span></span></div>
+    </div>
+    ${DA.furniture({ tag: c.tag, fill: DA.TOKENS.w, next: false })}
+  </div>`;
+
+const cover = (cv) => `
+  <div class="sl" id="s1">
+    ${COVERS[cv.layout](cv)}
+    ${DA.furniture({ tag: c.tag, fill: DA.fill(1, TOTAL) })}
+  </div>`;
+
+const html = DA.page(
+  c.id,
+  [cover(c.cover), ...c.slides.map(mechanism), outro(c.outro)].join('\n')
+);
+
+(async () => {
+  fs.mkdirSync(OUT, { recursive: true });
+  const file = path.join(DIR, `_${c.id}.html`);
+  fs.writeFileSync(file, html);
+
+  const browser = await chromium.launch();
+  const tab = await browser.newPage({
+    viewport: { width: DA.TOKENS.w, height: DA.TOKENS.h },
+    deviceScaleFactor: 1,
+  });
+  await tab.goto('file://' + file);
+  await tab.evaluate(() => document.fonts.ready);
+  await tab.waitForTimeout(500);
+
+  for (let i = 1; i <= TOTAL; i++) {
+    const out = path.join(OUT, `${c.id}-${String(i).padStart(2, '0')}.png`);
+    await tab.locator('#s' + i).screenshot({ path: out });
+    console.log('ok ->', path.basename(out));
+  }
+
+  await browser.close();
+  fs.unlinkSync(file);
+})();

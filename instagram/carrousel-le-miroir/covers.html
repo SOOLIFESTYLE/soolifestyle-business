@@ -6,30 +6,40 @@
   @font-face { font-family:'Sans'; src:url('fonts/jost-400.ttf') format('truetype'); font-weight:400; }
   @font-face { font-family:'Sans'; src:url('fonts/jost-500.ttf') format('truetype'); font-weight:500; }
 
-  :root{ --red:#db0000; --ink:#0c0c0c; --paper:#f7f5f0; --pad:72px; }
+  :root{ --red:#db0000; --ink:#0c0c0c; --paper:#f7f5f0;
+         --black:#080808; --pad:72px; }
   *{ margin:0; padding:0; box-sizing:border-box; }
-  body{ background:#3a3a3a; display:flex; flex-direction:column; align-items:center; gap:44px; padding:44px; }
+  body{ background:#3a3a3a; display:flex; flex-direction:column;
+        align-items:center; gap:44px; padding:44px; }
 
-  .cv{ position:relative; width:1080px; height:1350px; overflow:hidden;
+  .sl{ position:relative; width:1080px; height:1350px; overflow:hidden;
        background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased; }
+  .sl.dark{ background:var(--black); color:var(--paper); }
 
+  /* ── habillage : les quatre coins, identiques partout ── */
   .m{ position:absolute; z-index:3; font-family:'Sans',sans-serif;
       font-size:19px; font-weight:400; letter-spacing:.3em; text-transform:uppercase; }
   .m-brand{ top:62px; left:var(--pad); font-weight:500; }
-  .m-tag  { top:62px; right:var(--pad); font-weight:300; color:rgba(12,12,12,.45); letter-spacing:.24em; }
+  .m-tag  { top:62px; right:var(--pad); font-weight:300;
+            color:rgba(12,12,12,.45); letter-spacing:.24em; }
+  .dark .m-tag{ color:rgba(247,245,240,.45); }
+  .m-tag b{ font-weight:500; color:var(--red); }
   .m-next { bottom:62px; right:var(--pad); color:var(--red); font-weight:500;
             font-size:24px; letter-spacing:.1em; }
   .m sup{ font-size:.55em; letter-spacing:0; vertical-align:.7em; }
 
   .bar{ position:absolute; z-index:3; left:0; bottom:0; height:6px; width:100%;
         background:rgba(12,12,12,.09); }
-  .bar i{ display:block; height:100%; width:154px; background:var(--red); }
+  .dark .bar{ background:rgba(247,245,240,.12); }
+  .bar i{ display:block; height:100%; background:var(--red); }
 
+  /* ── blocs ── */
   .wrap{ position:absolute; z-index:1; left:0; right:0; top:50%;
          transform:translateY(-50%); padding:0 var(--pad); }
   .wrap.mid{ text-align:center; }
   .wrap.low{ top:auto; bottom:150px; transform:none; }
 
+  /* ── typographie ── */
   .title{ font-family:'Display',Georgia,serif; font-weight:600; text-transform:uppercase;
           line-height:1.26; letter-spacing:-.008em; }
   .chip{ display:inline-block; padding:4px 26px 14px; background:var(--red); color:#fff; }
@@ -40,99 +50,141 @@
   .why{ font-family:'Display',Georgia,serif; font-weight:600; text-transform:uppercase;
         font-size:116px; line-height:1.02; letter-spacing:-.01em; color:var(--red);
         margin-top:10px; white-space:nowrap; }
+
+  /* ── intérieur du carrousel ── */
+  .label{ font-family:'Sans',sans-serif; font-weight:400; font-size:20px;
+          letter-spacing:.26em; text-transform:uppercase; margin-bottom:42px; }
+  .label em{ font-style:normal; color:var(--red); letter-spacing:0; margin-right:18px; }
+  .body{ font-family:'Sans',sans-serif; font-weight:300; font-size:39px; line-height:1.5;
+         color:rgba(12,12,12,.84); }
+  .dark .body{ color:rgba(247,245,240,.80); }
+  .body + .body{ margin-top:28px; }
+
+  .cta{ display:inline-flex; align-items:center; gap:22px; background:var(--red);
+        color:#fff; padding:26px 44px; margin-top:52px;
+        font-family:'Sans',sans-serif; font-weight:500; font-size:24px;
+        letter-spacing:.24em; text-transform:uppercase; }
+  .cta span{ font-size:26px; letter-spacing:0; }
 </style></head><body>
-<div class="cv" id="miroir">
+<div class="sl" id="miroir">
+  
     <div class="wrap mid">
       <div class="title" style="font-size:104px">Tu as arrêté<br><span class="chip" style="">ton scroll</span><br>sur ce post.</div>
       <div class="ital" style="margin-top:46px">Voilà exactement</div>
       <div class="why" style="font-size:228px; margin:-6px -400px 0; text-align:center">Pourquoi.</div>
     </div>
+  
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div></div>
-<div class="cv" id="disparu">
+  <div class="bar"><i style="width:154px"></i></div>
+</div>
+<div class="sl" id="disparu">
+  
     <div class="wrap">
       <div class="title" style="font-size:104px">Il a dit oui.<br>Puis il a<br><span class="chip" style="margin-left:-150px; padding-left:150px">disparu.</span></div>
       <div class="hr"></div>
       <div class="ital">Ce n’est pas</div>
       <div class="why">Un hasard.</div>
     </div>
+  
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div></div>
-<div class="cv" id="relecture">
+  <div class="bar"><i style="width:154px"></i></div>
+</div>
+<div class="sl" id="relecture">
+  
     <div class="wrap">
       <div class="title" style="font-size:108px; line-height:1.04">Tu relis son<br>message depuis<br><span class="chip" style="padding:0 22px 10px">dix minutes.</span></div>
       <div class="ital" style="margin-top:34px">Ton cerveau</div>
       <div class="why" style="font-size:138px; margin-top:-10px">Travaille.</div>
     </div>
+  
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div></div>
-<div class="cv" id="ecoute">
+  <div class="bar"><i style="width:154px"></i></div>
+</div>
+<div class="sl" id="ecoute">
+  
     <div class="wrap mid">
       <div class="title" style="font-size:100px"><span class="chip" style="transform:rotate(-2.6deg)">Elle parle peu.</span><br>Tout le monde<br>l’écoute.</div>
       <div class="hr"></div>
       <div class="ital">Il y a</div>
       <div class="why">Une raison.</div>
     </div>
+  
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div></div>
-<div class="cv" id="manoeuvre">
+  <div class="bar"><i style="width:154px"></i></div>
+</div>
+<div class="sl" id="manoeuvre">
+  
     <div class="wrap low">
       <div class="title" style="font-size:104px">Tu as dit oui<br>en pensant<br><span class="chip" style="">non.</span></div>
       <div class="ital" style="margin-top:38px">On t’a</div>
       <div class="why">Manœuvré.</div>
     </div>
+  
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div></div>
-<div class="cv" id="silence">
+  <div class="bar"><i style="width:154px"></i></div>
+</div>
+<div class="sl" id="silence">
+  
     <div class="wrap mid" style="padding:0">
       <div class="title" style="font-size:104px; padding:0 var(--pad)">Le silence</div><div class="title" style="font-size:104px; padding:0 var(--pad)">est la phrase</div><div class="title" style="font-size:104px; background:var(--red); color:#fff; padding:10px 0 20px; margin:14px 0">la plus lue.</div>
       <div class="hr"></div>
       <div class="ital">Et personne</div>
       <div class="why">Ne l’entend.</div>
     </div>
+  
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div></div>
-<div class="cv" id="ignore">
+  <div class="bar"><i style="width:154px"></i></div>
+</div>
+<div class="sl" id="ignore">
+  
     <div class="wrap mid">
       <div class="title" style="font-size:92px">Il t’ignore.<br>Tu le trouves<br><span class="chip" style="">plus intéressant.</span></div>
       <div class="ital" style="margin-top:46px">Ça porte</div>
       <div class="why" style="font-size:268px; margin:-6px -400px 0; text-align:center">Un nom.</div>
     </div>
+  
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div></div>
-<div class="cv" id="attirance">
+  <div class="bar"><i style="width:154px"></i></div>
+</div>
+<div class="sl" id="attirance">
+  
     <div class="wrap">
       <div class="title" style="font-size:92px">Tu ne choisis pas<br>ce qui<br><span class="chip" style="margin-left:-150px; padding-left:150px">t’attire.</span></div>
       <div class="hr"></div>
       <div class="ital">Quelqu’un</div>
       <div class="why">L’a choisi.</div>
     </div>
+  
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div></div>
-<div class="cv" id="faits">
+  <div class="bar"><i style="width:154px"></i></div>
+</div>
+<div class="sl" id="faits">
+  
     <div class="wrap">
       <div class="title" style="font-size:112px; line-height:1.04">On te ment<br>avec des<br><span class="chip" style="padding:0 22px 10px">faits vrais.</span></div>
       <div class="ital" style="margin-top:34px">C’est ça</div>
       <div class="why" style="font-size:138px; margin-top:-10px">Le piège.</div>
     </div>
+  
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div></div>
+  <div class="bar"><i style="width:154px"></i></div>
+</div>
 </body></html>

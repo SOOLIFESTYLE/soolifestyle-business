@@ -1,0 +1,77 @@
+{
+  "id": "le-miroir",
+  "tag": "Psychologie &middot; Influence",
+
+  "cover": {
+    "layout": "debord",
+    "size": 104,
+    "lines": ["Tu as arrêté", "ton scroll", "sur ce post."],
+    "hi": 1,
+    "ital": "Voilà exactement",
+    "why": "Pourquoi."
+  },
+
+  "slides": [
+    {
+      "label": "Le biais d’auto-référence",
+      "size": 78,
+      "lines": ["Cette phrase", "parlait de toi."],
+      "hi": 1,
+      "body": [
+        ["Ton cerveau traite en priorité", "ce qui te concerne."],
+        ["Il s’arrête sans te demander ton avis."]
+      ]
+    },
+    {
+      "label": "La boucle ouverte",
+      "size": 76,
+      "lines": ["Je viens d’annoncer", "un nombre."],
+      "hi": 1,
+      "body": [
+        ["Ton cerveau a ouvert un compteur.", "Un compteur ouvert veut se fermer."],
+        ["Voilà pourquoi tu es encore là."]
+      ]
+    },
+    {
+      "label": "L’engagement progressif",
+      "size": 78,
+      "lines": ["Tu as déjà swipé", "trois fois."],
+      "hi": 1,
+      "body": [
+        ["Trois gestes qui ne t’engageaient à rien."],
+        ["T’arrêter là, ce serait admettre", "qu’ils n’ont servi à rien."]
+      ]
+    },
+    {
+      "label": "La tache aveugle",
+      "size": 74,
+      "lines": ["Tu te dis :", "moi, je vois venir", "ces trucs."],
+      "hi": 2,
+      "body": [
+        ["Tout le monde se le dit."],
+        ["On les repère chez les autres.", "Jamais sur soi."]
+      ]
+    },
+    {
+      "label": "La simple exposition",
+      "size": 74,
+      "lines": ["Le dernier agit", "après ta lecture."],
+      "hi": 1,
+      "body": [
+        ["Tu reverras ce compte demain.", "Puis après-demain.", "À la troisième, il paraîtra familier."],
+        ["Et familier, ton cerveau traduit : fiable."]
+      ]
+    }
+  ],
+
+  "outro": {
+    "size": 78,
+    "lines": ["Ce post était", "une démonstration."],
+    "hi": -1,
+    "body": [
+      ["Tu es arrivé au bout,", "donc elle a marché."],
+      ["Demain, une règle de plus."]
+    ],
+    "cta": "Abonne-toi"
+  }
+}
