@@ -7,7 +7,7 @@ module.exports = {
   // tout est droit, sauf le surligneur
   inclinaison: (p) => `
     <div class="wrap mid">
-      <div class="title" style="font-size:${p.size}px">${DA.chipLines(p.lines, p.hi, 'transform:rotate(-2.6deg)')}</div>
+      <div class="title${p.case ? ' case' : ''}" style="font-size:${p.size}px">${DA.chipLines(p.lines, p.hi, 'transform:rotate(-2.6deg)')}</div>
       <div class="hr"></div>
       <div class="ital">${p.ital}</div>
       <div class="why">${p.why}</div>
@@ -16,7 +16,7 @@ module.exports = {
   // le mot de chute est trop grand pour la page, il sort par les deux côtés
   debord: (p) => `
     <div class="wrap mid">
-      <div class="title" style="font-size:${p.size}px">${DA.chipLines(p.lines, p.hi)}</div>
+      <div class="title${p.case ? ' case' : ''}" style="font-size:${p.size}px">${DA.chipLines(p.lines, p.hi)}</div>
       <div class="ital" style="margin-top:46px">${p.ital}</div>
       <div class="why" style="font-size:${DA.debordSize(p.why)}px; margin:-6px -400px 0; text-align:center">${p.why}</div>
     </div>`,
@@ -27,8 +27,8 @@ module.exports = {
       ${p.lines
         .map((l, i) =>
           i === p.hi
-            ? `<div class="title" style="font-size:${p.size}px; background:var(--red); color:#fff; padding:10px 0 20px; margin:14px 0">${l}</div>`
-            : `<div class="title" style="font-size:${p.size}px; padding:0 var(--pad)">${l}</div>`
+            ? `<div class="title${p.case ? ' case' : ''}" style="font-size:${p.size}px; background:var(--red); color:#fff; padding:10px 0 20px; margin:14px 0"><span class="chip" style="background:none; padding:0">${l}</span></div>`
+            : `<div class="title${p.case ? ' case' : ''}" style="font-size:${p.size}px; padding:0 var(--pad)">${l}</div>`
         )
         .join('')}
       <div class="hr"></div>
@@ -39,7 +39,7 @@ module.exports = {
   // fer à gauche, et le surligneur sort du cadre par la gauche
   decalage: (p) => `
     <div class="wrap">
-      <div class="title" style="font-size:${p.size}px">${DA.chipLines(p.lines, p.hi, 'margin-left:-150px; padding-left:150px')}</div>
+      <div class="title${p.case ? ' case' : ''}" style="font-size:${p.size}px">${DA.chipLines(p.lines, p.hi, 'margin-left:-150px; padding-left:150px')}</div>
       <div class="hr"></div>
       <div class="ital">${p.ital}</div>
       <div class="why">${p.why}</div>
@@ -48,7 +48,7 @@ module.exports = {
   // tout tombe en bas, les deux tiers du haut restent vides
   desequilibre: (p) => `
     <div class="wrap low">
-      <div class="title" style="font-size:${p.size}px">${DA.chipLines(p.lines, p.hi)}</div>
+      <div class="title${p.case ? ' case' : ''}" style="font-size:${p.size}px">${DA.chipLines(p.lines, p.hi)}</div>
       <div class="ital" style="margin-top:38px">${p.ital}</div>
       <div class="why">${p.why}</div>
     </div>`,
@@ -56,7 +56,7 @@ module.exports = {
   // interlignage écrasé, plus aucun filet, rien ne respire
   compression: (p) => `
     <div class="wrap">
-      <div class="title" style="font-size:${p.size + 8}px; line-height:1.04">${DA.chipLines(p.lines, p.hi, 'padding:0 22px 10px')}</div>
+      <div class="title${p.case ? ' case' : ''}" style="font-size:${p.size + 8}px; line-height:1.04">${DA.chipLines(p.lines, p.hi, 'padding:0 22px 10px')}</div>
       <div class="ital" style="margin-top:34px">${p.ital}</div>
       <div class="why" style="font-size:138px; margin-top:-10px">${p.why}</div>
     </div>`,
