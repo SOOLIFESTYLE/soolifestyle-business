@@ -2,82 +2,127 @@
   {
     "id": "miroir",
     "layout": "debord",
-    "size": 104,
-    "lines": ["Tu as arrêté", "ton scroll", "sur ce post."],
+    "size": 108,
+    "lines": [
+      "Tu as arrêté",
+      "ton scroll",
+      "sur ce post."
+    ],
     "hi": 1,
     "ital": "Voilà exactement",
-    "why": "Pourquoi."
+    "why": "Pourquoi.",
+    "case": true
   },
   {
     "id": "disparu",
     "layout": "decalage",
-    "size": 104,
-    "lines": ["Il a dit oui.", "Puis il a", "disparu."],
+    "size": 116,
+    "lines": [
+      "Il a dit oui.",
+      "Puis il a",
+      "disparu."
+    ],
     "hi": 2,
     "ital": "Ce n’est pas",
-    "why": "Un hasard."
+    "why": "Un hasard.",
+    "case": true
   },
   {
     "id": "relecture",
     "layout": "compression",
-    "size": 100,
-    "lines": ["Tu relis son", "message depuis", "dix minutes."],
+    "size": 112,
+    "lines": [
+      "Tu relis son",
+      "message depuis",
+      "dix minutes."
+    ],
     "hi": 2,
     "ital": "Ton cerveau",
-    "why": "Travaille."
+    "why": "Travaille.",
+    "case": true
   },
   {
     "id": "ecoute",
     "layout": "inclinaison",
-    "size": 100,
-    "lines": ["Elle parle peu.", "Tout le monde", "l’écoute."],
+    "size": 104,
+    "lines": [
+      "Elle parle peu.",
+      "Tout le monde",
+      "l’écoute."
+    ],
     "hi": 0,
     "ital": "Il y a",
-    "why": "Une raison."
+    "why": "Une raison.",
+    "case": true
   },
   {
     "id": "manoeuvre",
     "layout": "desequilibre",
-    "size": 104,
-    "lines": ["Tu as dit oui", "en pensant", "non."],
+    "size": 116,
+    "lines": [
+      "Tu as dit oui",
+      "en pensant",
+      "non."
+    ],
     "hi": 2,
     "ital": "On t’a",
-    "why": "Manœuvré."
+    "why": "Manœuvré.",
+    "case": true
   },
   {
     "id": "silence",
     "layout": "bande",
-    "size": 104,
-    "lines": ["Le silence", "est la phrase", "la plus lue."],
+    "size": 112,
+    "lines": [
+      "Le silence",
+      "est la phrase",
+      "la plus lue."
+    ],
     "hi": 2,
     "ital": "Et personne",
-    "why": "Ne l’entend."
+    "why": "Ne l’entend.",
+    "case": true
   },
   {
     "id": "ignore",
     "layout": "debord",
     "size": 92,
-    "lines": ["Il t’ignore.", "Tu le trouves", "plus intéressant."],
+    "lines": [
+      "Il t’ignore.",
+      "Tu le trouves",
+      "plus intéressant."
+    ],
     "hi": 2,
     "ital": "Ça porte",
-    "why": "Un nom."
+    "why": "Un nom.",
+    "case": true
   },
   {
     "id": "attirance",
     "layout": "decalage",
-    "size": 92,
-    "lines": ["Tu ne choisis pas", "ce qui", "t’attire."],
+    "size": 104,
+    "lines": [
+      "Tu ne choisis pas",
+      "ce qui",
+      "t’attire."
+    ],
     "hi": 2,
     "ital": "Quelqu’un",
-    "why": "L’a choisi."
+    "why": "L’a choisi.",
+    "case": true
   },
   {
     "id": "faits",
     "layout": "compression",
-    "size": 104,
-    "lines": ["On te ment", "avec des", "faits vrais."],
+    "size": 116,
+    "lines": [
+      "On te ment",
+      "avec des",
+      "faits vrais."
+    ],
     "hi": 2,
     "ital": "C’est ça",
-    "why": "Le piège."
+    "why": "Le piège.",
+    "case": true
   }
 ]

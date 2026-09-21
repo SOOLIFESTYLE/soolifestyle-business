@@ -36,6 +36,12 @@ un mot en capitales rouges, grand
 **La règle du rouge** : une seule masse rouge dans le titre, une seule dans la chute.
 Jamais trois. Le rouge marque ce qui pique, pas ce qui est important.
 
+**La règle de casse**, de la couverture au CTA :
+**la ligne qui pose est en minuscules, la ligne qui pique est en capitales.**
+Les capitales occupent toute la hauteur de capitale sur chaque lettre — à taille
+égale le bloc pèse presque deux fois plus. On les descend donc à **0,92 fois**
+la taille de base. Détail et contraintes de largeur plus bas.
+
 ---
 
 ## Ce qui tourne
@@ -60,8 +66,12 @@ Dans `posts.json`. Une entrée par carrousel.
 Elle porte le mot qui pique — le plus souvent la dernière, parfois la première
 quand c'est elle qui accroche.
 
-`size` : 104 pour trois lignes courtes, 92 à 100 si une ligne dépasse 15 signes.
-Au-delà de 17 signes, coupe autrement.
+`case` : `true` pour appliquer la règle de casse. Toujours, désormais.
+
+`size` : les minuscules ont une hauteur d'x basse, il leur faut du corps.
+104 à 116 sur une couverture, 88 à 112 à l'intérieur. La contrainte
+qui décide, c'est la largeur de la ligne surlignée — voir le tableau
+du contraste de casse.
 
 ### Les gabarits
 

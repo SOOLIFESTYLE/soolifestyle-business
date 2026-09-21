@@ -4,7 +4,8 @@
 
   "cover": {
     "layout": "debord",
-    "size": 104,
+    "case": true,
+    "size": 108,
     "lines": ["Tu as arrêté", "ton scroll", "sur ce post."],
     "hi": 1,
     "ital": "Voilà exactement",
