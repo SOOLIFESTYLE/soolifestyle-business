@@ -33,6 +33,12 @@
   /* décor : toujours derrière le texte */
   .art{ position:absolute; inset:0; z-index:0; pointer-events:none; }
 
+  /* jauge de progression, bord bas */
+  .bar{ position:absolute; z-index:2; left:0; bottom:0; height:6px; width:100%;
+        background:rgba(12,12,12,.10); }
+  .dark .bar{ background:rgba(244,242,238,.12); }
+  .bar i{ display:block; height:100%; background:var(--red); }
+
   /* ---------------- habillage constant ---------------- */
   .furn{
     position:absolute; z-index:2;
@@ -109,25 +115,6 @@
 
 <!-- ============ 1 — COUVERTURE ============ -->
 <div class="slide dark" id="s1">
-  <svg class="art" viewBox="0 0 1080 1350">
-    <defs>
-      <radialGradient id="g1" cx="76%" cy="62%" r="52%">
-        <stop offset="0%"  stop-color="#db0000" stop-opacity=".34"/>
-        <stop offset="55%" stop-color="#db0000" stop-opacity=".05"/>
-        <stop offset="100%" stop-color="#db0000" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-    <rect width="1080" height="1350" fill="url(#g1)"/>
-    <!-- le miroir : deux arcs symétriques + axe -->
-    <g fill="none" stroke="#f4f2ee" stroke-opacity=".16">
-      <path d="M822 560 a260 260 0 0 1 0 520"/>
-      <path d="M822 560 a260 260 0 0 0 0 520"/>
-      <path d="M822 610 a210 210 0 0 1 0 420"/>
-      <path d="M822 610 a210 210 0 0 0 0 420"/>
-    </g>
-    <line x1="822" y1="470" x2="822" y2="1170" stroke="#db0000" stroke-opacity=".55"/>
-    <circle cx="822" cy="820" r="7" fill="#db0000"/>
-  </svg>
 
   <div class="furn f-count">0<i>/5</i></div>
   <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
@@ -138,24 +125,13 @@
     <div class="head caps red" style="margin-top:34px">Voilà exactement<br>pourquoi.</div>
   </div>
 
+  <div class="bar"><i style="width:154px"></i></div>
   <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
   <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 2 — MÉCANISME 1 ============ -->
 <div class="slide" id="s2">
-  <svg class="art" viewBox="0 0 1080 1350">
-    <defs>
-      <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stop-color="#0c0c0c" stop-opacity=".13"/>
-        <stop offset="100%" stop-color="#0c0c0c" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <!-- trait de lumière oblique -->
-    <path d="M1080 0 L1080 620 L640 1350 L430 1350 Z" fill="url(#g2)"/>
-    <path d="M1080 120 L1080 430 L830 1350 L700 1350 Z" fill="#0c0c0c" fill-opacity=".045"/>
-    <line x1="1015" y1="470" x2="1015" y2="1170" stroke="#db0000" stroke-opacity=".5"/>
-  </svg>
 
   <div class="furn f-count">1<i>/5</i></div>
   <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
@@ -168,31 +144,13 @@
     <div class="txt">Il s’arrête sans te demander ton avis.</div>
   </div>
 
+  <div class="bar"><i style="width:309px"></i></div>
   <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
   <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 3 — MÉCANISME 2 ============ -->
 <div class="slide dark" id="s3">
-  <svg class="art" viewBox="0 0 1080 1350">
-    <defs>
-      <linearGradient id="g3" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%"   stop-color="#db0000" stop-opacity="0"/>
-        <stop offset="100%" stop-color="#db0000" stop-opacity=".55"/>
-      </linearGradient>
-      <linearGradient id="g3b" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stop-color="#db0000" stop-opacity="0"/>
-        <stop offset="22%"  stop-color="#db0000" stop-opacity=".85"/>
-        <stop offset="62%"  stop-color="#db0000" stop-opacity=".55"/>
-        <stop offset="100%" stop-color="#db0000" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <!-- la porte entrouverte : une fente de lumière, plein cadre -->
-    <rect x="690" y="0" width="300" height="1350" fill="#f4f2ee" fill-opacity=".03"/>
-    <rect x="690" y="0" width="180" height="1350" fill="url(#g3)" opacity=".16"/>
-    <rect x="966" y="0" width="13" height="1350" fill="url(#g3b)"/>
-    <rect x="979" y="0" width="101" height="1350" fill="url(#g3)" opacity=".26"/>
-  </svg>
 
   <div class="furn f-count">2<i>/5</i></div>
   <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
@@ -205,29 +163,13 @@
     <div class="txt">Voilà pourquoi tu es encore là.</div>
   </div>
 
+  <div class="bar"><i style="width:463px"></i></div>
   <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
   <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 4 — MÉCANISME 3 ============ -->
 <div class="slide" id="s4">
-  <svg class="art" viewBox="0 0 1080 1350">
-    <defs>
-      <radialGradient id="g4" cx="30%" cy="26%" r="86%">
-        <stop offset="0%"   stop-color="#5a5a5a"/>
-        <stop offset="42%"  stop-color="#1e1e1e"/>
-        <stop offset="100%" stop-color="#090909"/>
-      </radialGradient>
-      <linearGradient id="g4s" x1="1" y1="0" x2="0" y2="0">
-        <stop offset="0%"   stop-color="#0c0c0c" stop-opacity=".22"/>
-        <stop offset="100%" stop-color="#0c0c0c" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <!-- la sphère et son liseré rouge : elle a déjà basculé -->
-    <path d="M905 1131 L468 1163 L905 1140 Z" fill="url(#g4s)"/>
-    <circle cx="905" cy="975" r="158" fill="url(#g4)"/>
-    <path d="M905 817 a158 158 0 0 1 0 316" fill="none" stroke="#db0000" stroke-width="4"/>
-  </svg>
 
   <div class="furn f-count">3<i>/5</i></div>
   <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
@@ -240,23 +182,13 @@
     <div class="txt">T’arrêter là, ce serait admettre<br>qu’ils n’ont servi à rien.</div>
   </div>
 
+  <div class="bar"><i style="width:617px"></i></div>
   <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
   <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 5 — MÉCANISME 4 ============ -->
 <div class="slide dark" id="s5">
-  <svg class="art" viewBox="0 0 1080 1350">
-    <!-- la mire : on vise les autres, jamais le centre -->
-    <g fill="none" stroke="#f4f2ee" stroke-opacity=".17">
-      <circle cx="882" cy="880" r="228"/>
-      <circle cx="882" cy="880" r="148"/>
-      <line x1="882" y1="590" x2="882" y2="1170"/>
-      <line x1="628" y1="880" x2="1136" y2="880"/>
-    </g>
-    <circle cx="882" cy="880" r="228" fill="none" stroke="#db0000" stroke-opacity=".30" stroke-dasharray="4 14"/>
-    <circle cx="882" cy="880" r="9" fill="#db0000"/>
-  </svg>
 
   <div class="furn f-count">4<i>/5</i></div>
   <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
@@ -269,24 +201,13 @@
     <div class="txt">On les repère chez les autres.<br>Jamais sur soi.</div>
   </div>
 
+  <div class="bar"><i style="width:771px"></i></div>
   <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
   <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 6 — MÉCANISME 5 ============ -->
 <div class="slide" id="s6">
-  <svg class="art" viewBox="0 0 1080 1350">
-    <!-- la répétition : les mêmes verticales, de plus en plus proches -->
-    <g stroke="#0c0c0c" stroke-opacity=".17">
-      <line x1="1040" y1="440" x2="1040" y2="1210"/>
-      <line x1="1000" y1="462" x2="1000" y2="1188"/>
-      <line x1="956"  y1="486" x2="956"  y2="1164"/>
-      <line x1="908"  y1="512" x2="908"  y2="1138"/>
-      <line x1="856"  y1="540" x2="856"  y2="1110"/>
-      <line x1="800"  y1="570" x2="800"  y2="1080"/>
-    </g>
-    <line x1="740" y1="602" x2="740" y2="1048" stroke="#db0000" stroke-opacity=".8" stroke-width="3"/>
-  </svg>
 
   <div class="furn f-count">5<i>/5</i></div>
   <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
@@ -299,27 +220,13 @@
     <div class="txt">Et familier, ton cerveau traduit : <span class="red">fiable</span>.</div>
   </div>
 
+  <div class="bar"><i style="width:926px"></i></div>
   <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
   <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 7 — CTA ============ -->
 <div class="slide dark" id="s7">
-  <svg class="art" viewBox="0 0 1080 1350">
-    <defs>
-      <radialGradient id="g7" cx="50%" cy="50%" r="58%">
-        <stop offset="0%"   stop-color="#db0000" stop-opacity=".26"/>
-        <stop offset="60%"  stop-color="#db0000" stop-opacity=".04"/>
-        <stop offset="100%" stop-color="#db0000" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-    <rect width="1080" height="1350" fill="url(#g7)"/>
-    <g fill="none" stroke="#f4f2ee" stroke-opacity=".10">
-      <path d="M540 250 a300 300 0 0 1 0 850"/>
-      <path d="M540 250 a300 300 0 0 0 0 850"/>
-    </g>
-    <line x1="540" y1="180" x2="540" y2="1180" stroke="#db0000" stroke-opacity=".22"/>
-  </svg>
 
   <div class="furn f-count">5<i>/5</i></div>
   <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
@@ -334,6 +241,7 @@
     <div class="tail">Et apprends à voir ce que les autres<br>ne regardent pas.</div>
   </div>
 
+  <div class="bar"><i style="width:1080px"></i></div>
   <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
 </div>
 

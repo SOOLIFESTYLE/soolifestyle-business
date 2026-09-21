@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Le miroir — 6 pistes de couverture</title>
+<style>
+  @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-500.ttf')  format('truetype'); font-weight:500; font-style:normal; }
+  @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-600.ttf')  format('truetype'); font-weight:600; font-style:normal; }
+  @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-500i.ttf') format('truetype'); font-weight:500; font-style:italic; }
+  @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-600i.ttf') format('truetype'); font-weight:600; font-style:italic; }
+  @font-face { font-family:'Sans'; src:url('fonts/jost-300.ttf') format('truetype'); font-weight:300; }
+  @font-face { font-family:'Sans'; src:url('fonts/jost-400.ttf') format('truetype'); font-weight:400; }
+  @font-face { font-family:'Sans'; src:url('fonts/jost-500.ttf') format('truetype'); font-weight:500; }
+
+  :root{
+    --red:#db0000;
+    --black:#080808;   /* noir intense */
+    --white:#f7f5f0;   /* blanc profond, chaud */
+    --pad:80px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ background:#3a3a3a; display:flex; flex-direction:column; align-items:center; gap:44px; padding:44px; }
+
+  .cv{
+    position:relative; width:1080px; height:1350px; overflow:hidden;
+    background:var(--black); color:#f7f5f0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .cv.light{ background:var(--white); color:#0c0c0c; }
+
+  /* ---- habillage : micro-typo, rien d'autre ---- */
+  .m{
+    position:absolute; z-index:2; font-family:'Sans', sans-serif;
+    font-size:19px; font-weight:400; letter-spacing:.3em; text-transform:uppercase;
+  }
+  .m-brand{ top:66px; left:var(--pad); font-weight:500; }
+  .m-tag  { top:66px; right:var(--pad); font-weight:300; opacity:.5; letter-spacing:.24em; }
+  .m-serie{ bottom:66px; left:var(--pad); font-weight:300; opacity:.5; }
+  .m-next { bottom:62px; right:var(--pad); color:var(--red); font-weight:500;
+            font-size:24px; letter-spacing:.1em; }
+  .m sup{ font-size:.55em; letter-spacing:0; vertical-align:.7em; }
+
+  /* ---- jauge de progression ---- */
+  .bar{ position:absolute; z-index:2; left:0; bottom:0; height:6px; width:100%;
+        background:rgba(247,245,240,.12); }
+  .light .bar{ background:rgba(12,12,12,.10); }
+  .bar i{ display:block; height:100%; width:154px; background:var(--red); }
+
+  /* ---- contenu ---- */
+  .wrap{
+    position:absolute; z-index:1; left:var(--pad); right:var(--pad);
+    top:52%; transform:translateY(-50%);
+  }
+  .wrap.mid{ text-align:center; }
+
+  .lab{
+    font-family:'Sans', sans-serif; font-weight:500; font-size:21px;
+    letter-spacing:.3em; text-transform:uppercase; color:var(--red);
+    margin-bottom:46px;
+  }
+  .lab s{ text-decoration:none; letter-spacing:0; margin-right:16px; }
+
+  .giant{
+    font-family:'Display', Georgia, serif; font-weight:600;
+    text-transform:uppercase; font-size:96px; line-height:1.03; letter-spacing:.002em;
+  }
+
+  .mark{                       /* bloc surligné rouge */
+    display:inline-block; background:var(--red); color:#fff;
+    font-family:'Sans', sans-serif; font-weight:500; font-size:31px;
+    letter-spacing:.14em; text-transform:uppercase;
+    padding:20px 28px 18px; margin-top:52px;
+  }
+
+  .setup{
+    font-family:'Sans', sans-serif; font-weight:300; font-size:37px; line-height:1.45;
+    opacity:.78;
+  }
+
+  .huge{
+    font-family:'Display', Georgia, serif; font-weight:600;
+    text-transform:uppercase; font-size:142px; line-height:.98; letter-spacing:-.01em;
+  }
+  .mid-it{
+    font-family:'Display', Georgia, serif; font-weight:500; font-style:italic;
+    font-size:56px; line-height:1; margin:10px 0 6px;
+  }
+
+  .num{
+    font-family:'Display', Georgia, serif; font-weight:600;
+    font-size:330px; line-height:1; color:var(--red); letter-spacing:-.02em;
+  }
+  .unit{
+    font-family:'Sans', sans-serif; font-weight:400; font-size:32px;
+    letter-spacing:.44em; text-transform:uppercase; margin-top:48px;
+  }
+  .close{
+    font-family:'Display', Georgia, serif; font-weight:600;
+    text-transform:uppercase; font-size:58px; line-height:1.14;
+  }
+
+  .hr{ width:72px; height:3px; background:var(--red); margin:44px 0; }
+  .mid .hr{ margin:44px auto; }
+
+  .red{ color:var(--red); }
+</style>
+</head>
+<body>
+
+<!-- ══════════ A — NOIR · bloc surligné ══════════ -->
+<div class="cv" id="a1">
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap">
+    <div class="lab"><s>&mdash;</s>5 mécanismes</div>
+    <div class="giant">Tu as arrêté<br>ton scroll<br>sur ce post.</div>
+    <div class="mark">Voilà exactement pourquoi.</div>
+  </div>
+
+  <div class="m m-serie">Le miroir</div>
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════════ B — NOIR · hiérarchie inversée ══════════ -->
+<div class="cv" id="a2">
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap">
+    <div class="setup">Tu as arrêté ton scroll sur ce post.</div>
+    <div class="hr"></div>
+    <div class="huge">Voilà</div>
+    <div class="mid-it">exactement</div>
+    <div class="huge red">Pourquoi.</div>
+  </div>
+
+  <div class="m m-serie">Le miroir</div>
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════════ C — NOIR · chiffre ancre ══════════ -->
+<div class="cv" id="a3">
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap mid">
+    <div class="setup">Tu as arrêté ton scroll sur ce post.</div>
+    <div class="hr"></div>
+    <div class="num">5</div>
+    <div class="unit">mécanismes</div>
+    <div class="hr"></div>
+    <div class="close">Voilà exactement<br>pourquoi.</div>
+  </div>
+
+  <div class="m m-serie">Le miroir</div>
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════════ D — BLANC · bloc surligné ══════════ -->
+<div class="cv light" id="b1">
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap">
+    <div class="lab"><s>&mdash;</s>5 mécanismes</div>
+    <div class="giant">Tu as arrêté<br>ton scroll<br>sur ce post.</div>
+    <div class="mark">Voilà exactement pourquoi.</div>
+  </div>
+
+  <div class="m m-serie">Le miroir</div>
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════════ E — BLANC · hiérarchie inversée ══════════ -->
+<div class="cv light" id="b2">
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap">
+    <div class="setup">Tu as arrêté ton scroll sur ce post.</div>
+    <div class="hr"></div>
+    <div class="huge">Voilà</div>
+    <div class="mid-it">exactement</div>
+    <div class="huge red">Pourquoi.</div>
+  </div>
+
+  <div class="m m-serie">Le miroir</div>
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════════ F — BLANC · chiffre ancre ══════════ -->
+<div class="cv light" id="b3">
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap mid">
+    <div class="setup">Tu as arrêté ton scroll sur ce post.</div>
+    <div class="hr"></div>
+    <div class="num">5</div>
+    <div class="unit">mécanismes</div>
+    <div class="hr"></div>
+    <div class="close">Voilà exactement<br>pourquoi.</div>
+  </div>
+
+  <div class="m m-serie">Le miroir</div>
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+</body>
+</html>
