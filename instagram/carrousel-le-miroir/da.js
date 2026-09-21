@@ -75,6 +75,34 @@ const CSS = `${FONTS}
   .dark .body{ color:rgba(247,245,240,.80); }
   .body + .body{ margin-top:28px; }
 
+  /* ── la relance : on swipe vers un nom, pas vers du vide ── */
+  .m-relance{ bottom:58px; right:var(--pad); display:flex; align-items:baseline; gap:16px;
+              font-size:19px; letter-spacing:.26em; }
+  .m-relance i{ font-style:normal; color:rgba(12,12,12,.40); font-weight:300; }
+  .dark .m-relance i{ color:rgba(247,245,240,.40); }
+  .m-relance b{ font-weight:500; color:var(--red); }
+  .m-relance s{ text-decoration:none; color:var(--red); font-size:24px; letter-spacing:.1em; }
+
+  /* ── la claque : une ligne, énorme, rien autour ── */
+  .setup{ font-family:'Sans',sans-serif; font-weight:300; font-size:36px; line-height:1.4;
+          color:rgba(12,12,12,.60); margin-bottom:40px; }
+  .dark .setup{ color:rgba(247,245,240,.55); }
+  .huge{ font-family:'Display',Georgia,serif; font-weight:600; text-transform:uppercase;
+         line-height:1.2; letter-spacing:-.01em; }
+
+  /* ── la bascule : la phrase qui retourne, en capitales rouges ── */
+  .payoff{ font-family:'Display',Georgia,serif; font-weight:600; text-transform:uppercase;
+           font-size:56px; line-height:1.14; letter-spacing:-.008em;
+           color:var(--red); margin-top:44px; }
+
+  /* ── demain : la vraie raison de s'abonner ── */
+  .demain{ margin-top:48px; padding-left:28px; border-left:3px solid var(--red); }
+  .demain i{ display:block; font-style:normal; font-family:'Sans',sans-serif; font-weight:500;
+             font-size:19px; letter-spacing:.3em; text-transform:uppercase; color:var(--red);
+             margin-bottom:16px; }
+  .demain span{ font-family:'Display',Georgia,serif; font-weight:500; font-style:italic;
+                font-size:46px; line-height:1.24; }
+
   .cta{ display:inline-flex; align-items:center; gap:22px; background:var(--red);
         color:#fff; padding:26px 44px; margin-top:52px;
         font-family:'Sans',sans-serif; font-weight:500; font-size:24px;
@@ -93,11 +121,20 @@ const chipLines = (lines, hi, chipStyle = '') =>
     .join('<br>');
 
 // `tag` : ce qui s'affiche en haut à droite. `next` : la flèche, sauf en fin.
-const furniture = ({ tag, fill, next = true }) => `
+// `next` : true pour la flèche seule (couverture),
+// une chaîne pour annoncer ce qui vient — c'est ça qui fait swiper,
+// false pour la dernière slide, où il n'y a plus rien après.
+const furniture = ({ tag, fill, next = true }) => {
+  let bas = '';
+  if (typeof next === 'string')
+    bas = `<div class="m m-relance"><i>Suivant</i><b>${next}</b><s>&rsaquo;&rsaquo;&rsaquo;</s></div>`;
+  else if (next) bas = '<div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>';
+  return `
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">${tag}</div>
-  ${next ? '<div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>' : ''}
+  ${bas}
   <div class="bar"><i style="width:${fill}px"></i></div>`;
+};
 
 // La jauge : la part du carrousel déjà parcourue.
 const fill = (i, total) => Math.round((i / total) * TOKENS.w);

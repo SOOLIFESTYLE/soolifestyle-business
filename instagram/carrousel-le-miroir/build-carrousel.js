@@ -5,6 +5,7 @@ const path = require('path');
 const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const DA = require('./da');
 const COVERS = require('./layouts-couverture');
+const RYTHMES = require('./rythmes');
 
 const DIR = __dirname;
 const name = process.argv[2] || 'le-miroir';
@@ -14,30 +15,26 @@ const OUT = path.join(DIR, 'export', c.id);
 const TOTAL = 1 + c.slides.length + 1; // couverture + mécanismes + CTA
 const N = c.slides.length;
 
-/* ── la slide-mécanisme : une seule forme, répétée ──
-   étiquette rouge, accroche en capitales dont une ligne surlignée,
-   filet, corps en sans léger. Fer à gauche : le corps se lit vite. */
+/* ── une slide-mécanisme : son rythme, et la promesse de la suivante ── */
 const mechanism = (s, i) => `
   <div class="sl" id="s${i + 2}">
-    <div class="wrap">
-      <div class="label"><em>&mdash;</em>${s.label}</div>
-      <div class="title" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
-      <div class="hr"></div>
-      ${s.body.map((p) => `<div class="body">${p.join('<br>')}</div>`).join('')}
-    </div>
+    ${RYTHMES[s.rythme](s)}
     ${DA.furniture({
       tag: `<b>${i + 1}</b> / ${N}`,
       fill: DA.fill(i + 2, TOTAL),
+      next: s.next,
     })}
   </div>`;
 
-/* ── la slide finale : fond noir profond, et le seul bouton du carrousel ── */
+/* ── la slide finale : noir profond, et une raison de s'abonner
+      qui n'est pas « abonne-toi » mais ce qu'il y a demain ── */
 const outro = (o) => `
   <div class="sl dark" id="s${TOTAL}">
     <div class="wrap">
       <div class="title" style="font-size:${o.size}px">${DA.chipLines(o.lines, o.hi)}</div>
       <div class="hr"></div>
       ${o.body.map((p) => `<div class="body">${p.join('<br>')}</div>`).join('')}
+      <div class="demain"><i>${o.demain.label}</i><span>${o.demain.text}</span></div>
       <div><span class="cta">${o.cta} <span>&rarr;</span></span></div>
     </div>
     ${DA.furniture({ tag: c.tag, fill: DA.TOKENS.w, next: false })}

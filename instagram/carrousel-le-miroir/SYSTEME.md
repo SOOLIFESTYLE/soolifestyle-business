@@ -98,35 +98,62 @@ qui comptent.
 
 Sept slides : une couverture, cinq mécanismes, un CTA.
 
-La couverture a six gabarits parce qu'elle doit arrêter le pouce.
-**L'intérieur n'en a qu'un.** Un lecteur qui swipe ne doit pas réapprendre
-la mise en page à chaque slide — il doit lire. La variation se joue entre
-carrousels, pas à l'intérieur d'un carrousel.
+Le problème de l'intérieur n'est pas d'être lisible. **C'est d'être quitté.**
+Cinq slides construites pareil, c'est cinq fois la même charge de lecture :
+l'œil s'installe, puis décroche. Trois leviers tiennent le pouce.
 
-### La slide-mécanisme (2 à 6)
+### 1. Trois rythmes, alternés
+
+| Rythme | Ce qu'il fait | Charge de lecture |
+|---|---|---|
+| `pose` | on pose le mécanisme et on l'explique | normale |
+| `claque` | une phrase, énorme, presque rien autour | quasi nulle |
+| `bascule` | on explique, puis une phrase retourne tout en capitales rouges | normale, fin brutale |
+
+La `claque` est la respiration. Elle ne coûte rien à lire, donc le swipe
+suivant est gratuit. Place-la au milieu, jamais en deuxième ni en dernière.
+
+Alternance du carrousel « Le miroir » : pose · bascule · pose · **claque** · bascule.
+
+### 2. Chaque slide annonce la suivante
+
+En bas à droite, à la place de la flèche : `SUIVANT · LA BOUCLE OUVERTE ›››`.
+
+On ne swipe pas vers du vide, on swipe vers un nom. C'est une boucle ouverte
+par slide — le mécanisme même que le carrousel décrit.
+La dernière mécanique annonce `LA DÉMONSTRATION` : le CTA devient un rendez-vous,
+pas une interruption.
+
+### 3. L'accroche grossit
+
+74 px sur le premier mécanisme, 88 px sur le dernier. Le carrousel accélère
+sans le dire. Personne ne le remarque, tout le monde le sent.
+
+### La structure d'une slide-mécanisme
 
 ```
 — NOM DU MÉCANISME        Jost, tiret rouge, capitales espacées
-ACCROCHE EN CAPITALES     Playfair 74-78px, deux ou trois lignes,
-                          dont UNE surlignée en rouge
+ACCROCHE EN CAPITALES     Playfair, dont UNE ligne surlignée en rouge
 ▬                         filet rouge
-corps en Jost 300         39px, deux blocs de une à trois lignes
+corps en Jost 300         une à trois lignes courtes
+[LA BASCULE]              capitales rouges, seulement sur le rythme bascule
+                          SUIVANT · <le prochain> ›››
 ```
 
-Fer à gauche, bloc centré verticalement. Le surligneur est le fil rouge :
-il est sur la couverture, il est sur chaque mécanisme.
-
-Compteur `1/5` → `5/5` en haut à droite, chiffre courant en rouge.
-La jauge du bas avance de `i/7` à chaque slide.
+Compteur `1/5` → `5/5` en haut à droite. La jauge du bas avance de `i/7`.
 
 ### La slide finale (7)
 
-**Fond noir profond `#080808`. Toujours.** C'est la seule slide sombre du
-carrousel — la rupture signale la fin autant que le texte.
+**Fond noir profond `#080808`. Toujours.** Seule slide sombre du carrousel :
+la rupture signale la fin autant que le texte.
 
-Pas de surligneur sur cette slide. Le bouton rouge est la seule masse
-rouge après le filet : sur un CTA, c'est lui qui doit gagner.
-Pas de `›››` non plus : il n'y a plus rien après.
+Pas de surligneur — le bouton rouge doit être la seule masse rouge.
+Pas de flèche — il n'y a plus rien après.
+
+Et surtout : **un bloc `DEMAIN`** qui annonce le sujet du prochain carrousel,
+en italique, derrière un filet rouge vertical. C'est lui qui fait l'abonnement,
+pas le bouton. « Abonne-toi » demande un service ; « demain, pourquoi tu dis oui
+en pensant non » donne une raison.
 
 En haut à droite, la catégorie revient à la place du compteur.
 Le carrousel se referme comme il s'est ouvert.
@@ -153,7 +180,8 @@ Pour tester des couvertures en série sans écrire les carrousels entiers,
 |---|---|
 | `da.js` | **les invariants.** Palette, typo, habillage, jauge. Un seul endroit. |
 | `layouts-couverture.js` | les six gabarits de tension de la couverture |
-| `build-carrousel.js` | la slide-mécanisme, la slide finale, le rendu |
+| `rythmes.js` | les trois rythmes de l'intérieur |
+| `build-carrousel.js` | la slide finale et le rendu |
 | `carrousels/*.json` | le texte d'un carrousel |
 | `posts.json` | des couvertures seules, pour tester le feed |
 

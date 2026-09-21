@@ -13,6 +13,7 @@
 
   "slides": [
     {
+      "rythme": "pose",
       "label": "Le biais d’auto-référence",
       "size": 78,
       "lines": ["Cette phrase", "parlait de toi."],
@@ -20,58 +21,68 @@
       "body": [
         ["Ton cerveau traite en priorité", "ce qui te concerne."],
         ["Il s’arrête sans te demander ton avis."]
-      ]
+      ],
+      "next": "La boucle ouverte"
     },
     {
+      "rythme": "bascule",
       "label": "La boucle ouverte",
-      "size": 76,
+      "size": 80,
       "lines": ["Je viens d’annoncer", "un nombre."],
       "hi": 1,
-      "body": [
-        ["Ton cerveau a ouvert un compteur.", "Un compteur ouvert veut se fermer."],
-        ["Voilà pourquoi tu es encore là."]
-      ]
+      "body": [["Ton cerveau a ouvert un compteur.", "Un compteur ouvert veut se fermer."]],
+      "payoff": ["Voilà pourquoi", "tu es encore là."],
+      "next": "L’engagement progressif"
     },
     {
+      "rythme": "pose",
       "label": "L’engagement progressif",
-      "size": 78,
+      "size": 84,
       "lines": ["Tu as déjà swipé", "trois fois."],
       "hi": 1,
       "body": [
         ["Trois gestes qui ne t’engageaient à rien."],
         ["T’arrêter là, ce serait admettre", "qu’ils n’ont servi à rien."]
-      ]
+      ],
+      "next": "La tache aveugle"
     },
     {
+      "rythme": "claque",
       "label": "La tache aveugle",
-      "size": 74,
-      "lines": ["Tu te dis :", "moi, je vois venir", "ces trucs."],
-      "hi": 2,
-      "body": [
-        ["Tout le monde se le dit."],
-        ["On les repère chez les autres.", "Jamais sur soi."]
-      ]
+      "size": 104,
+      "setup": "Tu te dis : moi, je vois venir ces trucs.",
+      "lines": ["Tout le monde", "se le dit."],
+      "hi": 1,
+      "close": ["On les repère chez les autres.", "Jamais sur soi."],
+      "next": "La simple exposition"
     },
     {
+      "rythme": "bascule",
       "label": "La simple exposition",
-      "size": 74,
+      "size": 88,
       "lines": ["Le dernier agit", "après ta lecture."],
       "hi": 1,
       "body": [
-        ["Tu reverras ce compte demain.", "Puis après-demain.", "À la troisième, il paraîtra familier."],
-        ["Et familier, ton cerveau traduit : fiable."]
-      ]
+        [
+          "Tu reverras ce compte demain.",
+          "Puis après-demain.",
+          "À la troisième, il paraîtra familier."
+        ]
+      ],
+      "payoff": ["Ton cerveau traduit :", "fiable."],
+      "next": "La démonstration"
     }
   ],
 
   "outro": {
-    "size": 78,
+    "size": 82,
     "lines": ["Ce post était", "une démonstration."],
     "hi": -1,
-    "body": [
-      ["Tu es arrivé au bout,", "donc elle a marché."],
-      ["Demain, une règle de plus."]
-    ],
+    "body": [["Tu es arrivé au bout,", "donc elle a marché."]],
+    "demain": {
+      "label": "Demain",
+      "text": "Pourquoi tu dis oui<br>en pensant non."
+    },
     "cta": "Abonne-toi"
   }
 }
