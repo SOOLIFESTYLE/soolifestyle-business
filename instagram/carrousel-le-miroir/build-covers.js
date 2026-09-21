@@ -7,10 +7,8 @@ const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const DIR = __dirname;
 const OUT = path.join(DIR, 'export', 'couvertures');
 const IDS = [
-  ['v1', 'cadre-surlignage-rouge'],
-  ['v2', 'cadre-surlignage-noir'],
-  ['v3', 'cadre-surlignage-rouge-pourquoi'],
-  ['v4', 'cadre-surlignage-noir-pourquoi'],
+  ['va', 'cadre-rentre'],
+  ['vb', 'sans-cadre'],
 ];
 
 (async () => {

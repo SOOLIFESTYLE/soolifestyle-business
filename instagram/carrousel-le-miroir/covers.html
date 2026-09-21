@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>Le miroir — couverture, cadre + surlignage</title>
+<title>Le miroir — couverture v3, cadre rentré ou sans cadre</title>
 <style>
   @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-500.ttf')  format('truetype'); font-weight:500; font-style:normal; }
   @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-600.ttf')  format('truetype'); font-weight:600; font-style:normal; }
@@ -28,8 +28,8 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  /* cadre rouge — dégagé de la jauge en bas */
-  .frame{ position:absolute; z-index:0; inset:44px 44px 68px; border:3px solid var(--red); }
+  /* cadre rentré : tient entièrement dans le carré central (y 135 → 1215) */
+  .frame{ position:absolute; z-index:0; inset:152px 58px 150px; border:3px solid var(--red); }
 
   /* ---- habillage ---- */
   .m{
@@ -55,21 +55,12 @@
 
   .title{
     font-family:'Display', Georgia, serif; font-weight:600;
-    text-transform:uppercase; line-height:1.26; letter-spacing:-.008em;
+    text-transform:uppercase; font-size:100px; line-height:1.26; letter-spacing:-.008em;
   }
-  .chip{ display:inline-block; padding:4px 26px 14px; }
-  .chip.r{ background:var(--red); color:#fff; }
-  .chip.k{ background:var(--ink); color:var(--paper); }
+  .chip{ display:inline-block; padding:4px 26px 14px; background:var(--red); color:#fff; }
 
   .hr{ width:84px; height:3px; background:var(--red); margin:44px auto; }
 
-  /* chute — police du 4 : italique rouge, une seule ligne */
-  .end4{
-    font-family:'Display', Georgia, serif; font-weight:500; font-style:italic;
-    font-size:60px; line-height:1.1; color:var(--red);
-  }
-
-  /* chute — police du 5 : italique noir + POURQUOI en capitales rouges */
   .end5a{
     font-family:'Display', Georgia, serif; font-weight:500; font-style:italic;
     font-size:54px; line-height:1.1;
@@ -83,51 +74,15 @@
 </head>
 <body>
 
-<!-- ══════ 1 — surlignage ROUGE · chute italique (police du 4) ══════ -->
-<div class="cv" id="v1">
+<!-- ══════ A — cadre rentré dans le carré central ══════ -->
+<div class="cv" id="va">
   <div class="frame"></div>
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
 
   <div class="wrap">
-    <div class="title" style="font-size:104px">
-      Tu as arrêté<br><span class="chip r">ton scroll</span><br>sur ce post.
-    </div>
-    <div class="hr"></div>
-    <div class="end4">Voilà exactement pourquoi.</div>
-  </div>
-
-  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div>
-</div>
-
-<!-- ══════ 2 — surlignage NOIR · chute italique (police du 4) ══════ -->
-<div class="cv" id="v2">
-  <div class="frame"></div>
-  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
-  <div class="m m-tag">Psychologie &middot; Influence</div>
-
-  <div class="wrap">
-    <div class="title" style="font-size:104px">
-      Tu as arrêté<br><span class="chip k">ton scroll</span><br>sur ce post.
-    </div>
-    <div class="hr"></div>
-    <div class="end4">Voilà exactement pourquoi.</div>
-  </div>
-
-  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div>
-</div>
-
-<!-- ══════ 3 — surlignage ROUGE · chute POURQUOI (police du 5) ══════ -->
-<div class="cv" id="v3">
-  <div class="frame"></div>
-  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
-  <div class="m m-tag">Psychologie &middot; Influence</div>
-
-  <div class="wrap">
-    <div class="title" style="font-size:100px">
-      Tu as arrêté<br><span class="chip r">ton scroll</span><br>sur ce post.
+    <div class="title">
+      Tu as arrêté<br><span class="chip">ton scroll</span><br>sur ce post.
     </div>
     <div class="hr"></div>
     <div class="end5a">Voilà exactement</div>
@@ -138,15 +93,14 @@
   <div class="bar"><i></i></div>
 </div>
 
-<!-- ══════ 4 — surlignage NOIR · chute POURQUOI (police du 5) ══════ -->
-<div class="cv" id="v4">
-  <div class="frame"></div>
+<!-- ══════ B — sans cadre ══════ -->
+<div class="cv" id="vb">
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
 
   <div class="wrap">
-    <div class="title" style="font-size:100px">
-      Tu as arrêté<br><span class="chip k">ton scroll</span><br>sur ce post.
+    <div class="title">
+      Tu as arrêté<br><span class="chip">ton scroll</span><br>sur ce post.
     </div>
     <div class="hr"></div>
     <div class="end5a">Voilà exactement</div>
