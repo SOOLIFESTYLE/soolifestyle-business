@@ -15,7 +15,7 @@
     {
       "rythme": "pose",
       "label": "Le biais d’auto-référence",
-      "size": 78,
+      "size": 88,
       "lines": ["Cette phrase", "parlait de toi."],
       "hi": 1,
       "body": [
@@ -27,7 +27,7 @@
     {
       "rythme": "bascule",
       "label": "La boucle ouverte",
-      "size": 80,
+      "size": 92,
       "lines": ["Je viens d’annoncer", "un nombre."],
       "hi": 1,
       "body": [["Ton cerveau a ouvert un compteur.", "Un compteur ouvert veut se fermer."]],
@@ -37,7 +37,7 @@
     {
       "rythme": "pose",
       "label": "L’engagement progressif",
-      "size": 84,
+      "size": 96,
       "lines": ["Tu as déjà swipé", "trois fois."],
       "hi": 1,
       "body": [
@@ -49,7 +49,7 @@
     {
       "rythme": "claque",
       "label": "La tache aveugle",
-      "size": 104,
+      "size": 112,
       "setup": "Tu te dis : moi, je vois venir ces trucs.",
       "lines": ["Tout le monde", "se le dit."],
       "hi": 1,
@@ -59,7 +59,7 @@
     {
       "rythme": "bascule",
       "label": "La simple exposition",
-      "size": 88,
+      "size": 96,
       "lines": ["Le dernier agit", "après ta lecture."],
       "hi": 1,
       "body": [
@@ -75,10 +75,10 @@
   ],
 
   "outro": {
-    "size": 74,
+    "size": 88,
     "lines": ["Ce post était", "une démonstration."],
     "hi": -1,
-    "low": 1,
+    "caps": 1,
     "body": [["Tu es arrivé au bout,", "donc elle a marché."]],
     "payoff": ["Demain,", "une règle de plus."],
     "action": ["Enregistre et abonne-toi <span class=\"at\">@soolifestyle</span>", "pour ne pas la rater."]

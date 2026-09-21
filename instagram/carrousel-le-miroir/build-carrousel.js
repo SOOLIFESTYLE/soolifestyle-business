@@ -31,7 +31,7 @@ const mechanism = (s, i) => `
 const outro = (o) => `
   <div class="sl dark" id="s${TOTAL}">
     <div class="wrap bas">
-      <div class="title case" style="font-size:${o.size}px">${DA.chipLines(o.lines, o.hi, '', o.low)}</div>
+      <div class="title case" style="font-size:${o.size}px">${DA.chipLines(o.lines, o.hi, '', o.caps)}</div>
       <div class="hr"></div>
       ${o.body.map((p) => `<div class="body">${p.join('<br>')}</div>`).join('')}
       <div class="payoff">${o.payoff.join('<br>')}</div>

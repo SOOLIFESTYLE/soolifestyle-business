@@ -126,24 +126,35 @@ pas une interruption.
 
 ### 3. Le contraste de casse
 
-Tout en capitales, c'est un seul poids : rien ne ressort.
+Tout dans la même casse, c'est un seul poids : rien ne ressort.
 
-**La ligne qui pose reste en capitales. La ligne qui pique passe en
-minuscules**, à 1,34 fois la taille — les minuscules ont une hauteur d'x
-plus basse, il faut les grossir pour qu'elles pèsent autant.
+**La ligne qui pose est en minuscules. La ligne qui pique est en capitales.**
 
 ```
-CETTE PHRASE          capitales, 78 px — froid, factuel
-parlait de toi.       minuscules, 104 px, surlignées — intime, ça pique
+Le dernier agit           minuscules, 96 px — ça raconte
+APRÈS TA LECTURE.         capitales, 0,92× — surlignées, ça claque
 ```
+
+Les capitales occupent toute la hauteur de capitale sur chaque lettre :
+à taille égale, le bloc pèse presque deux fois plus que des minuscules.
+On les descend donc à **0,92 fois** la taille de base — elles dominent
+quand même, et sans écraser la ligne du dessus.
 
 Même police, même ligne, deux textures. C'est le contraste le moins cher
-et le plus efficace du système : il ne coûte ni couleur, ni élément,
-ni place.
+du système : il ne coûte ni couleur, ni élément, ni place.
 
-La bascule suit la même logique : au lieu de crier en capitales rouges,
-elle chuchote en **minuscules italiques rouges**. Après une explication,
-un murmure porte plus qu'un cri.
+La bascule suit la même règle : elle pique, donc **capitales rouges**.
+
+**Attention à la largeur.** En capitales, Playfair avance d'environ
+0,58 em par signe. La ligne surlignée ne doit pas dépasser :
+
+| Taille de base | Signes max sur la ligne surlignée |
+|---|---|
+| 88 px | 19 |
+| 96 px | 17 |
+| 112 px | 15 |
+
+Au-delà, elle passe à la ligne et le surligneur devient un pavé.
 
 ### 4. Un horizon fixe
 
@@ -159,11 +170,11 @@ sans le dire. Personne ne le remarque, tout le monde le sent.
 
 ```
 — NOM DU MÉCANISME        Jost, tiret rouge, capitales espacées
-LA LIGNE QUI POSE         Playfair capitales
-la ligne qui pique        Playfair minuscules, 1,34×, surlignée en rouge
+La ligne qui pose         Playfair minuscules
+LA LIGNE QUI PIQUE        Playfair capitales, 0,92×, surlignée en rouge
 ▬                         filet rouge
 corps en Jost 300         une à trois lignes courtes
-la bascule                minuscules italiques rouges, rythme bascule seul
+LA BASCULE                capitales rouges, rythme bascule seul
                           SUIVANT · <le prochain> ›››
 ```
 

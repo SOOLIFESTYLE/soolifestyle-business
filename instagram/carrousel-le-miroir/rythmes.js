@@ -39,7 +39,7 @@ const R = {
       <div class="title case" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
       <div class="hr"></div>
       ${body(s)}
-      <div class="payoff murmure">${s.payoff.join('<br>')}</div>
+      <div class="payoff">${s.payoff.join('<br>')}</div>
     </div>`,
 };
 

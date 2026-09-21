@@ -94,18 +94,20 @@ const CSS = `${FONTS}
   .payoff{ font-family:'Display',Georgia,serif; font-weight:600; text-transform:uppercase;
            font-size:56px; line-height:1.14; letter-spacing:-.008em;
            color:var(--red); margin-top:44px; }
-  /* sur un mécanisme, la bascule chuchote : minuscules italiques */
-  .payoff.murmure{ text-transform:none; font-weight:500; font-style:italic;
-                   font-size:68px; line-height:1.1; letter-spacing:-.012em; }
+  /* la bascule pique, donc capitales — comme la ligne surlignée */
 
   /* ── le contraste de casse ──
         Tout en capitales, c'est un seul poids : rien ne ressort.
-        La ligne qui pose reste en capitales ; la ligne qui pique
-        passe en minuscules, plus grande pour compenser la hauteur d'x.
+        La ligne qui POSE passe en minuscules — grande, parce que la
+        hauteur d'x est basse. La ligne qui PIQUE passe en capitales :
+        chaque lettre occupe toute la hauteur, le bloc pèse deux fois
+        plus à taille égale. On la descend donc à 0,92.
         Même mot, même police, deux textures. ── */
-  .case .chip, .case .bas{ text-transform:none; font-size:1.34em; line-height:.92;
-                           display:inline-block; letter-spacing:-.018em; }
-  .case .chip{ padding:12px 24px 20px; }
+  .case{ text-transform:none; }
+  .case .chip, .case .haut{ text-transform:uppercase; font-size:.92em;
+                            display:inline-block; line-height:1;
+                            letter-spacing:.002em; }
+  .case .chip{ padding:10px 24px 16px; }
 
   /* ── l'horizon : le bloc ne flotte plus, il pose ── */
   .wrap.bas{ top:auto; bottom:196px; transform:none; }
@@ -120,12 +122,12 @@ const debordSize = (mot) => Math.min(268, Math.round(1230 / (0.6 * mot.length)))
 
 // La ligne surlignée. C'est la signature : elle est sur la couverture
 // ET sur chaque slide intérieure.
-// `hi` : la ligne surlignée. `low` : une ligne en minuscules sans surligneur.
-const chipLines = (lines, hi, chipStyle = '', low = -1) =>
+// `hi` : la ligne surlignée. `caps` : une ligne en capitales sans surligneur.
+const chipLines = (lines, hi, chipStyle = '', caps = -1) =>
   lines
     .map((l, i) => {
       if (i === hi) return `<span class="chip" style="${chipStyle}">${l}</span>`;
-      if (i === low) return `<span class="bas">${l}</span>`;
+      if (i === caps) return `<span class="haut">${l}</span>`;
       return l;
     })
     .join('<br>');
