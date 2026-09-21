@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>Le miroir — couverture v3, cadre rentré ou sans cadre</title>
+<title>Le miroir — couverture, six tensions</title>
 <style>
   @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-500.ttf')  format('truetype'); font-weight:500; font-style:normal; }
   @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-600.ttf')  format('truetype'); font-weight:600; font-style:normal; }
@@ -28,9 +28,6 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  /* cadre rentré : tient entièrement dans le carré central (y 135 → 1215) */
-  .frame{ position:absolute; z-index:0; inset:152px 58px 150px; border:3px solid var(--red); }
-
   /* ---- habillage ---- */
   .m{
     position:absolute; z-index:3; font-family:'Sans', sans-serif;
@@ -46,65 +43,146 @@
         background:rgba(12,12,12,.09); }
   .bar i{ display:block; height:100%; width:154px; background:var(--red); }
 
-  /* ---- bloc titre, centré ---- */
+  /* ---- blocs ---- */
   .wrap{
     position:absolute; z-index:1; left:0; right:0;
     top:50%; transform:translateY(-50%);
-    padding:0 var(--pad); text-align:center;
+    padding:0 var(--pad);
   }
+  .wrap.mid{ text-align:center; }
+  .wrap.low{ top:auto; bottom:150px; transform:none; }
 
   .title{
     font-family:'Display', Georgia, serif; font-weight:600;
-    text-transform:uppercase; font-size:100px; line-height:1.26; letter-spacing:-.008em;
+    text-transform:uppercase; font-size:104px; line-height:1.26; letter-spacing:-.008em;
   }
   .chip{ display:inline-block; padding:4px 26px 14px; background:var(--red); color:#fff; }
 
-  .hr{ width:84px; height:3px; background:var(--red); margin:44px auto; }
+  .hr{ width:84px; height:3px; background:var(--red); margin:44px 0; }
+  .mid .hr{ margin:44px auto; }
 
-  .end5a{
+  .ital{
     font-family:'Display', Georgia, serif; font-weight:500; font-style:italic;
     font-size:54px; line-height:1.1;
   }
-  .end5b{
+  .why{
     font-family:'Display', Georgia, serif; font-weight:600;
     text-transform:uppercase; font-size:116px; line-height:1.02;
-    letter-spacing:-.01em; color:var(--red); margin-top:10px;
+    letter-spacing:-.01em; color:var(--red); margin-top:10px; white-space:nowrap;
   }
 </style>
 </head>
 <body>
 
-<!-- ══════ A — cadre rentré dans le carré central ══════ -->
-<div class="cv" id="va">
-  <div class="frame"></div>
+<!-- ══════ 1 — L'INCLINAISON ══════
+     tout est droit, sauf le surligneur. une seule faute dans un système parfait -->
+<div class="cv" id="t1">
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
 
-  <div class="wrap">
+  <div class="wrap mid">
     <div class="title">
-      Tu as arrêté<br><span class="chip">ton scroll</span><br>sur ce post.
+      Tu as arrêté<br>
+      <span class="chip" style="transform:rotate(-2.6deg)">ton scroll</span><br>
+      sur ce post.
     </div>
     <div class="hr"></div>
-    <div class="end5a">Voilà exactement</div>
-    <div class="end5b">Pourquoi.</div>
+    <div class="ital">Voilà exactement</div>
+    <div class="why">Pourquoi.</div>
   </div>
 
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
   <div class="bar"><i></i></div>
 </div>
 
-<!-- ══════ B — sans cadre ══════ -->
-<div class="cv" id="vb">
+<!-- ══════ 2 — LE DÉBORD ══════
+     le mot est trop grand pour la page. il sort par les deux côtés -->
+<div class="cv" id="t2">
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap mid">
+    <div class="title">
+      Tu as arrêté<br><span class="chip">ton scroll</span><br>sur ce post.
+    </div>
+    <div class="ital" style="margin-top:46px">Voilà exactement</div>
+    <div class="why" style="font-size:218px; margin:-6px -320px 0; text-align:center">Pourquoi.</div>
+  </div>
+
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════ 3 — LA BANDE TRAVERSANTE ══════
+     le surligneur ignore les marges et coupe la page en deux -->
+<div class="cv" id="t3">
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap mid" style="padding:0">
+    <div class="title" style="padding:0 var(--pad)">Tu as arrêté</div>
+    <div class="title" style="background:var(--red); color:#fff; padding:10px 0 20px; margin:14px 0">ton scroll</div>
+    <div class="title" style="padding:0 var(--pad)">sur ce post.</div>
+    <div class="hr"></div>
+    <div class="ital">Voilà exactement</div>
+    <div class="why">Pourquoi.</div>
+  </div>
+
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════ 4 — LE DÉCALAGE ══════
+     fer à gauche, et le surligneur sort du cadre par la gauche -->
+<div class="cv" id="t4">
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
 
   <div class="wrap">
     <div class="title">
-      Tu as arrêté<br><span class="chip">ton scroll</span><br>sur ce post.
+      Tu as arrêté<br>
+      <span class="chip" style="margin-left:-150px; padding-left:150px">ton scroll</span><br>
+      sur ce post.
     </div>
     <div class="hr"></div>
-    <div class="end5a">Voilà exactement</div>
-    <div class="end5b">Pourquoi.</div>
+    <div class="ital">Voilà exactement</div>
+    <div class="why">Pourquoi.</div>
+  </div>
+
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════ 5 — LE DÉSÉQUILIBRE ══════
+     tout tombe en bas. les deux tiers du haut sont vides -->
+<div class="cv" id="t5">
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap low">
+    <div class="title">
+      Tu as arrêté<br><span class="chip">ton scroll</span><br>sur ce post.
+    </div>
+    <div class="ital" style="margin-top:38px">Voilà exactement</div>
+    <div class="why">Pourquoi.</div>
+  </div>
+
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════ 6 — LA COMPRESSION ══════
+     interlignage écrasé, plus aucun filet, les lignes se touchent presque -->
+<div class="cv" id="t6">
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap">
+    <div class="title" style="font-size:112px; line-height:1.04">
+      Tu as arrêté<br><span class="chip" style="padding:0 22px 10px">ton scroll</span><br>sur ce post.
+    </div>
+    <div class="ital" style="margin-top:34px">Voilà exactement</div>
+    <div class="why" style="font-size:138px; margin-top:-10px">Pourquoi.</div>
   </div>
 
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>

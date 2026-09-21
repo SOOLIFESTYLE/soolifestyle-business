@@ -7,8 +7,12 @@ const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const DIR = __dirname;
 const OUT = path.join(DIR, 'export', 'couvertures');
 const IDS = [
-  ['va', 'cadre-rentre'],
-  ['vb', 'sans-cadre'],
+  ['t1', 'inclinaison'],
+  ['t2', 'debord'],
+  ['t3', 'bande-traversante'],
+  ['t4', 'decalage'],
+  ['t5', 'desequilibre'],
+  ['t6', 'compression'],
 ];
 
 (async () => {
