@@ -124,7 +124,17 @@ par slide — le mécanisme même que le carrousel décrit.
 La dernière mécanique annonce `LA DÉMONSTRATION` : le CTA devient un rendez-vous,
 pas une interruption.
 
-### 3. L'accroche grossit
+### 3. Un horizon fixe et un chiffre fantôme
+
+Le bloc ne flotte plus au milieu : il **pose** sur une ligne d'horizon
+identique d'une slide à l'autre. Quand on swipe, le texte ne saute pas.
+
+Et le haut, qui était vide, porte le numéro du mécanisme en filet rouge,
+coupé par le bord droit. `01` → `05`. Il dit où on en est sans rien
+prendre à la lecture, et il donne à l'intérieur un ancrage à lui —
+la couverture a le débord, l'intérieur a le chiffre.
+
+### 4. L'accroche grossit
 
 74 px sur le premier mécanisme, 88 px sur le dernier. Le carrousel accélère
 sans le dire. Personne ne le remarque, tout le monde le sent.
@@ -147,13 +157,14 @@ Compteur `1/5` → `5/5` en haut à droite. La jauge du bas avance de `i/7`.
 **Fond noir profond `#080808`. Toujours.** Seule slide sombre du carrousel :
 la rupture signale la fin autant que le texte.
 
-Pas de surligneur — le bouton rouge doit être la seule masse rouge.
-Pas de flèche — il n'y a plus rien après.
+Pas de surligneur sur le titre. Pas de flèche — il n'y a plus rien après.
+Pas de bouton non plus : le CTA demande deux gestes, enregistrer et
+s'abonner, et un bouton n'en porte qu'un.
 
-Et surtout : **un bloc `DEMAIN`** qui annonce le sujet du prochain carrousel,
-en italique, derrière un filet rouge vertical. C'est lui qui fait l'abonnement,
-pas le bouton. « Abonne-toi » demande un service ; « demain, pourquoi tu dis oui
-en pensant non » donne une raison.
+La promesse passe en capitales rouges — `DEMAIN, UNE RÈGLE DE PLUS.` —
+et l'action suit en dessous, avec `@soolifestyle` surligné.
+Le compte est la seule masse rouge de la ligne : l'œil tombe dessus,
+c'est lui qu'on va chercher.
 
 En haut à droite, la catégorie revient à la place du compteur.
 Le carrousel se referme comme il s'est ouvert.

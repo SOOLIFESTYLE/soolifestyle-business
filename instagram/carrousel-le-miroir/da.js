@@ -95,19 +95,20 @@ const CSS = `${FONTS}
            font-size:56px; line-height:1.14; letter-spacing:-.008em;
            color:var(--red); margin-top:44px; }
 
-  /* ── demain : la vraie raison de s'abonner ── */
-  .demain{ margin-top:48px; padding-left:28px; border-left:3px solid var(--red); }
-  .demain i{ display:block; font-style:normal; font-family:'Sans',sans-serif; font-weight:500;
-             font-size:19px; letter-spacing:.3em; text-transform:uppercase; color:var(--red);
-             margin-bottom:16px; }
-  .demain span{ font-family:'Display',Georgia,serif; font-weight:500; font-style:italic;
-                font-size:46px; line-height:1.24; }
+  /* ── le chiffre fantôme : l'ancrage de l'intérieur.
+        En filet, coupé par le bord droit. Il dit où on en est
+        sans rien prendre à la lecture. ── */
+  .ghost{ position:absolute; z-index:0; right:-58px; top:86px;
+          font-family:'Display',Georgia,serif; font-weight:600; font-size:404px;
+          line-height:.78; letter-spacing:-.04em;
+          color:transparent; -webkit-text-stroke:2px var(--red); opacity:.30; }
 
-  .cta{ display:inline-flex; align-items:center; gap:22px; background:var(--red);
-        color:#fff; padding:26px 44px; margin-top:52px;
-        font-family:'Sans',sans-serif; font-weight:500; font-size:24px;
-        letter-spacing:.24em; text-transform:uppercase; }
-  .cta span{ font-size:26px; letter-spacing:0; }
+  /* ── l'horizon : le bloc ne flotte plus, il pose ── */
+  .wrap.bas{ top:auto; bottom:196px; transform:none; }
+
+  /* ── le compte : l'arobase surligné, pas un bouton ── */
+  .at{ display:inline-block; background:var(--red); color:#fff;
+       padding:2px 14px 6px; margin:0 4px; }
 `;
 
 // Playfair capitales : une lettre avance d'environ 0,60 em.

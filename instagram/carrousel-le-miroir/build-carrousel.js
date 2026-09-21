@@ -18,7 +18,7 @@ const N = c.slides.length;
 /* ── une slide-mécanisme : son rythme, et la promesse de la suivante ── */
 const mechanism = (s, i) => `
   <div class="sl" id="s${i + 2}">
-    ${RYTHMES[s.rythme](s)}
+    ${RYTHMES[s.rythme](s, i + 1)}
     ${DA.furniture({
       tag: `<b>${i + 1}</b> / ${N}`,
       fill: DA.fill(i + 2, TOTAL),
@@ -30,12 +30,12 @@ const mechanism = (s, i) => `
       qui n'est pas « abonne-toi » mais ce qu'il y a demain ── */
 const outro = (o) => `
   <div class="sl dark" id="s${TOTAL}">
-    <div class="wrap">
+    <div class="wrap bas">
       <div class="title" style="font-size:${o.size}px">${DA.chipLines(o.lines, o.hi)}</div>
       <div class="hr"></div>
       ${o.body.map((p) => `<div class="body">${p.join('<br>')}</div>`).join('')}
-      <div class="demain"><i>${o.demain.label}</i><span>${o.demain.text}</span></div>
-      <div><span class="cta">${o.cta} <span>&rarr;</span></span></div>
+      <div class="payoff">${o.payoff.join('<br>')}</div>
+      <div class="body" style="margin-top:40px">${o.action.join('<br>')}</div>
     </div>
     ${DA.furniture({ tag: c.tag, fill: DA.TOKENS.w, next: false })}
   </div>`;
