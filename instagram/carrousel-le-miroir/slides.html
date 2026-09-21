@@ -15,91 +15,93 @@
 
   :root{
     --red:#db0000;
-    --ink:#0b0b0b;
-    --paper:#ffffff;
-    --pad:100px;
+    --ink:#0c0c0c;      /* fonds sombres */
+    --ivory:#edebe6;    /* fonds clairs, blanc chaud */
+    --pad:88px;
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
-  body{ background:#2a2a2a; display:flex; flex-direction:column; align-items:center; gap:40px; padding:40px; }
+  body{ background:#3a3a3a; display:flex; flex-direction:column; align-items:center; gap:40px; padding:40px; }
 
   .slide{
-    position:relative;
-    width:1080px; height:1350px;
-    overflow:hidden;
-    background:var(--paper); color:var(--ink);
+    position:relative; width:1080px; height:1350px; overflow:hidden;
+    background:var(--ivory); color:#0c0c0c;
     -webkit-font-smoothing:antialiased;
   }
-  .slide.dark{ background:var(--ink); color:var(--paper); }
+  .slide.dark{ background:var(--ink); color:#f4f2ee; }
+
+  /* décor : toujours derrière le texte */
+  .art{ position:absolute; inset:0; z-index:0; pointer-events:none; }
 
   /* ---------------- habillage constant ---------------- */
-  .topbar{
-    position:absolute; top:86px; left:var(--pad); right:var(--pad);
-    display:flex; align-items:baseline; justify-content:space-between;
-    font-family:'Sans', sans-serif;
-  }
-  .kicker{
-    font-size:21px; font-weight:500; letter-spacing:.26em;
-    text-transform:uppercase; color:var(--red);
-  }
-  .counter{
-    font-size:22px; font-weight:400; letter-spacing:.2em;
-    text-transform:uppercase; color:rgba(11,11,11,.40);
-  }
-  .dark .counter{ color:rgba(255,255,255,.40); }
-  .counter b{ font-weight:500; color:var(--red); }
-
-  .hairline{
-    position:absolute; top:134px; left:var(--pad); right:var(--pad);
-    height:1px; background:rgba(11,11,11,.13);
-  }
-  .dark .hairline{ background:rgba(255,255,255,.17); }
-
-  .mark{
-    position:absolute; bottom:80px; left:var(--pad);
-    font-family:'Sans', sans-serif; font-weight:300;
-    font-size:20px; letter-spacing:.3em; color:rgba(11,11,11,.36);
-  }
-  .dark .mark{ color:rgba(255,255,255,.36); }
-
-  .swipe{
-    position:absolute; bottom:80px; right:var(--pad);
+  .furn{
+    position:absolute; z-index:2;
     font-family:'Sans', sans-serif; font-weight:400;
-    font-size:20px; letter-spacing:.3em; text-transform:uppercase; color:var(--red);
+    font-size:19px; letter-spacing:.24em; text-transform:uppercase;
   }
+  .f-count{ top:70px;  left:var(--pad);  letter-spacing:.14em; }
+  .f-brand{ top:70px;  right:var(--pad); font-weight:500; letter-spacing:.3em; }
+  .f-serie{ bottom:70px; left:var(--pad); font-weight:300; letter-spacing:.3em; opacity:.62; }
+  .f-arrow{ bottom:64px; right:var(--pad); font-size:30px; letter-spacing:0; opacity:.72; }
 
-  /* jauge de progression, bord bas */
-  .progress{ position:absolute; left:0; bottom:0; height:5px; background:var(--red); }
+  .f-count i{ font-style:normal; opacity:.42; }
+  .f-brand sup{ font-size:.55em; letter-spacing:0; vertical-align:.7em; }
+  .f-serie sup{ font-size:.55em; letter-spacing:0; vertical-align:.7em; }
 
   /* ---------------- contenu ---------------- */
   .body{
-    position:absolute; left:var(--pad); right:var(--pad);
-    top:52%; transform:translateY(-50%);
+    position:absolute; z-index:1; left:var(--pad); top:50%; transform:translateY(-50%);
+    width:768px;
+  }
+  .body.wide{ width:904px; }
+  .body.center{ left:var(--pad); right:var(--pad); width:auto; text-align:center; }
+
+  /* étiquette mécanisme : tiret rouge + nom */
+  .label{
+    font-family:'Sans', sans-serif; font-weight:400; font-size:20px;
+    letter-spacing:.24em; text-transform:uppercase; margin-bottom:40px;
+  }
+  .label em{ font-style:normal; color:var(--red); letter-spacing:0; margin-right:18px; }
+
+  .head{
+    font-family:'Display', Georgia, serif; font-weight:500;
+    font-size:64px; line-height:1.16; letter-spacing:-.012em;
+  }
+  .head.caps{
+    text-transform:uppercase; font-size:60px; line-height:1.14; letter-spacing:.005em;
   }
 
-  .lead{
-    font-family:'Display', Georgia, serif;
-    font-weight:500; font-size:70px; line-height:1.2; letter-spacing:-.012em;
-  }
-  .lead.cover{ font-size:72px; }
+  .rule{ width:72px; height:3px; background:var(--red); margin:44px 0; }
+  .body.center .rule{ margin:44px auto; }
 
-  .sub{
-    font-family:'Sans', sans-serif;
-    font-weight:300; font-size:43px; line-height:1.52;
-    color:rgba(11,11,11,.80);
+  .txt{
+    font-family:'Sans', sans-serif; font-weight:300;
+    font-size:39px; line-height:1.5;
   }
-  .dark .sub{ color:rgba(255,255,255,.78); }
-  .sub + .sub{ margin-top:30px; }
-
-  .rule{ width:100px; height:2px; background:var(--red); margin:50px 0 46px; }
+  .txt + .txt{ margin-top:28px; }
+  .slide .txt{ color:rgba(12,12,12,.84); }
+  .slide.dark .txt{ color:rgba(244,242,238,.80); }
 
   .red{ color:var(--red); }
   .it{ font-style:italic; }
 
-  .outro{
-    font-family:'Display', Georgia, serif;
-    font-weight:500; font-style:italic; font-size:56px; line-height:1.26;
-    color:var(--red); margin-top:46px;
+  .kick{
+    font-family:'Sans', sans-serif; font-weight:400; font-size:23px;
+    letter-spacing:.34em; text-transform:uppercase; margin-bottom:30px; opacity:.72;
+  }
+
+  .cta{
+    display:inline-flex; align-items:center; gap:22px;
+    background:var(--red); color:#fff; text-decoration:none;
+    padding:26px 44px; margin-top:52px;
+    font-family:'Sans', sans-serif; font-weight:500; font-size:24px;
+    letter-spacing:.24em; text-transform:uppercase;
+  }
+  .cta span{ font-size:26px; letter-spacing:0; }
+
+  .tail{
+    font-family:'Sans', sans-serif; font-weight:300; font-size:31px;
+    line-height:1.45; margin-top:46px; color:rgba(244,242,238,.55);
   }
 </style>
 </head>
@@ -107,136 +109,232 @@
 
 <!-- ============ 1 — COUVERTURE ============ -->
 <div class="slide dark" id="s1">
-  <div class="topbar">
-    <div class="kicker">Le miroir</div>
-    <div class="counter"><b>5</b> mécanismes</div>
-  </div>
-  <div class="hairline"></div>
+  <svg class="art" viewBox="0 0 1080 1350">
+    <defs>
+      <radialGradient id="g1" cx="76%" cy="62%" r="52%">
+        <stop offset="0%"  stop-color="#db0000" stop-opacity=".34"/>
+        <stop offset="55%" stop-color="#db0000" stop-opacity=".05"/>
+        <stop offset="100%" stop-color="#db0000" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1080" height="1350" fill="url(#g1)"/>
+    <!-- le miroir : deux arcs symétriques + axe -->
+    <g fill="none" stroke="#f4f2ee" stroke-opacity=".16">
+      <path d="M822 560 a260 260 0 0 1 0 520"/>
+      <path d="M822 560 a260 260 0 0 0 0 520"/>
+      <path d="M822 610 a210 210 0 0 1 0 420"/>
+      <path d="M822 610 a210 210 0 0 0 0 420"/>
+    </g>
+    <line x1="822" y1="470" x2="822" y2="1170" stroke="#db0000" stroke-opacity=".55"/>
+    <circle cx="822" cy="820" r="7" fill="#db0000"/>
+  </svg>
 
-  <div class="body">
-    <div class="lead cover">Tu as arrêté ton scroll<br>sur ce post.</div>
-    <div class="rule"></div>
-    <div class="lead cover it red">Voilà exactement<br>pourquoi.</div>
+  <div class="furn f-count">0<i>/5</i></div>
+  <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
+
+  <div class="body wide">
+    <div class="rule" style="margin:0 0 46px"></div>
+    <div class="head caps">Tu as arrêté ton scroll<br>sur ce post.</div>
+    <div class="head caps red" style="margin-top:34px">Voilà exactement<br>pourquoi.</div>
   </div>
 
-  <div class="mark">@soolifestyle</div>
-  <div class="swipe">swipe &rarr;</div>
-  <div class="progress" style="width:0"></div>
+  <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
+  <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 2 — MÉCANISME 1 ============ -->
 <div class="slide" id="s2">
-  <div class="topbar">
-    <div class="kicker">Le biais d’auto-référence</div>
-    <div class="counter"><b>1</b> / 5</div>
-  </div>
-  <div class="hairline"></div>
+  <svg class="art" viewBox="0 0 1080 1350">
+    <defs>
+      <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#0c0c0c" stop-opacity=".13"/>
+        <stop offset="100%" stop-color="#0c0c0c" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- trait de lumière oblique -->
+    <path d="M1080 0 L1080 620 L640 1350 L430 1350 Z" fill="url(#g2)"/>
+    <path d="M1080 120 L1080 430 L830 1350 L700 1350 Z" fill="#0c0c0c" fill-opacity=".045"/>
+    <line x1="1015" y1="470" x2="1015" y2="1170" stroke="#db0000" stroke-opacity=".5"/>
+  </svg>
+
+  <div class="furn f-count">1<i>/5</i></div>
+  <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
 
   <div class="body">
-    <div class="lead">Cette phrase<br><span class="it red">parlait de toi.</span></div>
+    <div class="label"><em>&mdash;</em>Le biais d’auto-référence</div>
+    <div class="head">Cette phrase<br><span class="it red">parlait de toi.</span></div>
     <div class="rule"></div>
-    <div class="sub">Ton cerveau traite en priorité ce qui te concerne.</div>
-    <div class="sub">Il s’arrête sans te demander ton avis.</div>
+    <div class="txt">Ton cerveau traite en priorité<br>ce qui te concerne.</div>
+    <div class="txt">Il s’arrête sans te demander ton avis.</div>
   </div>
 
-  <div class="mark">@soolifestyle</div>
-  <div class="progress" style="width:216px"></div>
+  <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
+  <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 3 — MÉCANISME 2 ============ -->
-<div class="slide" id="s3">
-  <div class="topbar">
-    <div class="kicker">La boucle ouverte</div>
-    <div class="counter"><b>2</b> / 5</div>
-  </div>
-  <div class="hairline"></div>
+<div class="slide dark" id="s3">
+  <svg class="art" viewBox="0 0 1080 1350">
+    <defs>
+      <linearGradient id="g3" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#db0000" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#db0000" stop-opacity=".55"/>
+      </linearGradient>
+      <linearGradient id="g3b" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#db0000" stop-opacity="0"/>
+        <stop offset="22%"  stop-color="#db0000" stop-opacity=".85"/>
+        <stop offset="62%"  stop-color="#db0000" stop-opacity=".55"/>
+        <stop offset="100%" stop-color="#db0000" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- la porte entrouverte : une fente de lumière, plein cadre -->
+    <rect x="690" y="0" width="300" height="1350" fill="#f4f2ee" fill-opacity=".03"/>
+    <rect x="690" y="0" width="180" height="1350" fill="url(#g3)" opacity=".16"/>
+    <rect x="966" y="0" width="13" height="1350" fill="url(#g3b)"/>
+    <rect x="979" y="0" width="101" height="1350" fill="url(#g3)" opacity=".26"/>
+  </svg>
+
+  <div class="furn f-count">2<i>/5</i></div>
+  <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
 
   <div class="body">
-    <div class="lead">Je viens d’annoncer<br>un nombre.</div>
+    <div class="label"><em>&mdash;</em>La boucle ouverte</div>
+    <div class="head">Je viens d’annoncer<br><span class="it red">un nombre.</span></div>
     <div class="rule"></div>
-    <div class="sub">Ton cerveau a ouvert un <span class="red">compteur</span>.<br>Un compteur ouvert veut se fermer.</div>
-    <div class="sub">Voilà pourquoi tu es encore là.</div>
+    <div class="txt">Ton cerveau a ouvert un compteur.<br>Un compteur ouvert veut se fermer.</div>
+    <div class="txt">Voilà pourquoi tu es encore là.</div>
   </div>
 
-  <div class="mark">@soolifestyle</div>
-  <div class="progress" style="width:432px"></div>
+  <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
+  <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 4 — MÉCANISME 3 ============ -->
 <div class="slide" id="s4">
-  <div class="topbar">
-    <div class="kicker">L’engagement progressif</div>
-    <div class="counter"><b>3</b> / 5</div>
-  </div>
-  <div class="hairline"></div>
+  <svg class="art" viewBox="0 0 1080 1350">
+    <defs>
+      <radialGradient id="g4" cx="30%" cy="26%" r="86%">
+        <stop offset="0%"   stop-color="#5a5a5a"/>
+        <stop offset="42%"  stop-color="#1e1e1e"/>
+        <stop offset="100%" stop-color="#090909"/>
+      </radialGradient>
+      <linearGradient id="g4s" x1="1" y1="0" x2="0" y2="0">
+        <stop offset="0%"   stop-color="#0c0c0c" stop-opacity=".22"/>
+        <stop offset="100%" stop-color="#0c0c0c" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- la sphère et son liseré rouge : elle a déjà basculé -->
+    <path d="M905 1131 L468 1163 L905 1140 Z" fill="url(#g4s)"/>
+    <circle cx="905" cy="975" r="158" fill="url(#g4)"/>
+    <path d="M905 817 a158 158 0 0 1 0 316" fill="none" stroke="#db0000" stroke-width="4"/>
+  </svg>
+
+  <div class="furn f-count">3<i>/5</i></div>
+  <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
 
   <div class="body">
-    <div class="lead">Tu as déjà swipé<br><span class="it red">trois fois.</span></div>
+    <div class="label"><em>&mdash;</em>L’engagement progressif</div>
+    <div class="head">Tu as déjà swipé<br><span class="it red">trois fois.</span></div>
     <div class="rule"></div>
-    <div class="sub">Trois gestes qui ne t’engageaient à rien.</div>
-    <div class="sub">T’arrêter là, ce serait admettre<br>qu’ils n’ont servi à rien.</div>
+    <div class="txt">Trois gestes qui ne t’engageaient à rien.</div>
+    <div class="txt">T’arrêter là, ce serait admettre<br>qu’ils n’ont servi à rien.</div>
   </div>
 
-  <div class="mark">@soolifestyle</div>
-  <div class="progress" style="width:648px"></div>
+  <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
+  <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 5 — MÉCANISME 4 ============ -->
-<div class="slide" id="s5">
-  <div class="topbar">
-    <div class="kicker">La tache aveugle</div>
-    <div class="counter"><b>4</b> / 5</div>
-  </div>
-  <div class="hairline"></div>
+<div class="slide dark" id="s5">
+  <svg class="art" viewBox="0 0 1080 1350">
+    <!-- la mire : on vise les autres, jamais le centre -->
+    <g fill="none" stroke="#f4f2ee" stroke-opacity=".17">
+      <circle cx="882" cy="880" r="228"/>
+      <circle cx="882" cy="880" r="148"/>
+      <line x1="882" y1="590" x2="882" y2="1170"/>
+      <line x1="628" y1="880" x2="1136" y2="880"/>
+    </g>
+    <circle cx="882" cy="880" r="228" fill="none" stroke="#db0000" stroke-opacity=".30" stroke-dasharray="4 14"/>
+    <circle cx="882" cy="880" r="9" fill="#db0000"/>
+  </svg>
+
+  <div class="furn f-count">4<i>/5</i></div>
+  <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
 
   <div class="body">
-    <div class="lead">Tu te dis : moi,<br>je vois venir ces trucs.</div>
+    <div class="label"><em>&mdash;</em>La tache aveugle</div>
+    <div class="head">Tu te dis : moi,<br><span class="it red">je vois venir ces trucs.</span></div>
     <div class="rule"></div>
-    <div class="sub"><span class="red">Tout le monde se le dit.</span></div>
-    <div class="sub">On les repère chez les autres. Jamais sur soi.</div>
+    <div class="txt">Tout le monde se le dit.</div>
+    <div class="txt">On les repère chez les autres.<br>Jamais sur soi.</div>
   </div>
 
-  <div class="mark">@soolifestyle</div>
-  <div class="progress" style="width:864px"></div>
+  <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
+  <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 6 — MÉCANISME 5 ============ -->
 <div class="slide" id="s6">
-  <div class="topbar">
-    <div class="kicker">La simple exposition</div>
-    <div class="counter"><b>5</b> / 5</div>
-  </div>
-  <div class="hairline"></div>
+  <svg class="art" viewBox="0 0 1080 1350">
+    <!-- la répétition : les mêmes verticales, de plus en plus proches -->
+    <g stroke="#0c0c0c" stroke-opacity=".17">
+      <line x1="1040" y1="440" x2="1040" y2="1210"/>
+      <line x1="1000" y1="462" x2="1000" y2="1188"/>
+      <line x1="956"  y1="486" x2="956"  y2="1164"/>
+      <line x1="908"  y1="512" x2="908"  y2="1138"/>
+      <line x1="856"  y1="540" x2="856"  y2="1110"/>
+      <line x1="800"  y1="570" x2="800"  y2="1080"/>
+    </g>
+    <line x1="740" y1="602" x2="740" y2="1048" stroke="#db0000" stroke-opacity=".8" stroke-width="3"/>
+  </svg>
+
+  <div class="furn f-count">5<i>/5</i></div>
+  <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
 
   <div class="body">
-    <div class="lead">Le dernier agit<br>après ta lecture.</div>
+    <div class="label"><em>&mdash;</em>La simple exposition</div>
+    <div class="head">Le dernier agit<br><span class="it red">après ta lecture.</span></div>
     <div class="rule"></div>
-    <div class="sub">Tu reverras ce compte demain.<br>Puis après-demain.<br>À la troisième, il paraîtra familier.</div>
-    <div class="sub">Et familier, ton cerveau traduit : <span class="red">fiable</span>.</div>
+    <div class="txt">Tu reverras ce compte demain.<br>Puis après-demain.<br>À la troisième, il paraîtra familier.</div>
+    <div class="txt">Et familier, ton cerveau traduit : <span class="red">fiable</span>.</div>
   </div>
 
-  <div class="mark">@soolifestyle</div>
-  <div class="progress" style="width:1080px"></div>
+  <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
+  <div class="furn f-arrow">&rarr;</div>
 </div>
 
 <!-- ============ 7 — CTA ============ -->
 <div class="slide dark" id="s7">
-  <div class="topbar">
-    <div class="kicker">Le miroir</div>
-    <div class="counter"><b>5</b> / 5</div>
-  </div>
-  <div class="hairline"></div>
+  <svg class="art" viewBox="0 0 1080 1350">
+    <defs>
+      <radialGradient id="g7" cx="50%" cy="50%" r="58%">
+        <stop offset="0%"   stop-color="#db0000" stop-opacity=".26"/>
+        <stop offset="60%"  stop-color="#db0000" stop-opacity=".04"/>
+        <stop offset="100%" stop-color="#db0000" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1080" height="1350" fill="url(#g7)"/>
+    <g fill="none" stroke="#f4f2ee" stroke-opacity=".10">
+      <path d="M540 250 a300 300 0 0 1 0 850"/>
+      <path d="M540 250 a300 300 0 0 0 0 850"/>
+    </g>
+    <line x1="540" y1="180" x2="540" y2="1180" stroke="#db0000" stroke-opacity=".22"/>
+  </svg>
 
-  <div class="body">
-    <div class="lead">Ce post était<br>une démonstration.</div>
+  <div class="furn f-count">5<i>/5</i></div>
+  <div class="furn f-brand">Soolifestyle<sup>&#8482;</sup></div>
+
+  <div class="body center">
+    <div class="kick">Ce post était</div>
+    <div class="head caps">Une <span class="red">démonstration</span>.</div>
     <div class="rule"></div>
-    <div class="sub">Tu es arrivé au bout, donc elle a marché.</div>
-    <div class="sub">Demain, une règle de plus.</div>
-    <div class="outro">Abonne-toi pour ne pas la rater.</div>
+    <div class="txt">Tu es arrivé au bout,<br>donc elle a marché.</div>
+    <div class="txt">Demain, une règle de plus.</div>
+    <a class="cta">Abonne-toi <span>&rarr;</span></a>
+    <div class="tail">Et apprends à voir ce que les autres<br>ne regardent pas.</div>
   </div>
 
-  <div class="mark">@soolifestyle</div>
-  <div class="progress" style="width:1080px"></div>
+  <div class="furn f-serie">Le miroir<sup>&#8482;</sup></div>
 </div>
 
 </body>

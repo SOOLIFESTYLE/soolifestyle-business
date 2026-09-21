@@ -25,7 +25,7 @@ Le 4 est celui que personne ne s'attribue jamais. 🫣
 
 | # | Compteur | Mécanisme | Texte |
 |---|---|---|---|
-| 1 | 5 mécanismes | Le miroir | Tu as arrêté ton scroll sur ce post. / Voilà exactement pourquoi. |
+| 1 | 0 / 5 | Le miroir | Tu as arrêté ton scroll sur ce post. / Voilà exactement pourquoi. |
 | 2 | 1 / 5 | Le biais d'auto-référence | Cette phrase parlait de toi. / Ton cerveau traite en priorité ce qui te concerne. / Il s'arrête sans te demander ton avis. |
 | 3 | 2 / 5 | La boucle ouverte | Je viens d'annoncer un nombre. / Ton cerveau a ouvert un compteur. Un compteur ouvert veut se fermer. / Voilà pourquoi tu es encore là. |
 | 4 | 3 / 5 | L'engagement progressif | Tu as déjà swipé trois fois. / Trois gestes qui ne t'engageaient à rien. / T'arrêter là, ce serait admettre qu'ils n'ont servi à rien. |
