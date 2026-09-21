@@ -94,14 +94,18 @@ const CSS = `${FONTS}
   .payoff{ font-family:'Display',Georgia,serif; font-weight:600; text-transform:uppercase;
            font-size:56px; line-height:1.14; letter-spacing:-.008em;
            color:var(--red); margin-top:44px; }
+  /* sur un mécanisme, la bascule chuchote : minuscules italiques */
+  .payoff.murmure{ text-transform:none; font-weight:500; font-style:italic;
+                   font-size:68px; line-height:1.1; letter-spacing:-.012em; }
 
-  /* ── le chiffre fantôme : l'ancrage de l'intérieur.
-        En filet, coupé par le bord droit. Il dit où on en est
-        sans rien prendre à la lecture. ── */
-  .ghost{ position:absolute; z-index:0; right:-58px; top:86px;
-          font-family:'Display',Georgia,serif; font-weight:600; font-size:404px;
-          line-height:.78; letter-spacing:-.04em;
-          color:transparent; -webkit-text-stroke:2px var(--red); opacity:.30; }
+  /* ── le contraste de casse ──
+        Tout en capitales, c'est un seul poids : rien ne ressort.
+        La ligne qui pose reste en capitales ; la ligne qui pique
+        passe en minuscules, plus grande pour compenser la hauteur d'x.
+        Même mot, même police, deux textures. ── */
+  .case .chip, .case .bas{ text-transform:none; font-size:1.34em; line-height:.92;
+                           display:inline-block; letter-spacing:-.018em; }
+  .case .chip{ padding:12px 24px 20px; }
 
   /* ── l'horizon : le bloc ne flotte plus, il pose ── */
   .wrap.bas{ top:auto; bottom:196px; transform:none; }
@@ -116,9 +120,14 @@ const debordSize = (mot) => Math.min(268, Math.round(1230 / (0.6 * mot.length)))
 
 // La ligne surlignée. C'est la signature : elle est sur la couverture
 // ET sur chaque slide intérieure.
-const chipLines = (lines, hi, chipStyle = '') =>
+// `hi` : la ligne surlignée. `low` : une ligne en minuscules sans surligneur.
+const chipLines = (lines, hi, chipStyle = '', low = -1) =>
   lines
-    .map((l, i) => (i === hi ? `<span class="chip" style="${chipStyle}">${l}</span>` : l))
+    .map((l, i) => {
+      if (i === hi) return `<span class="chip" style="${chipStyle}">${l}</span>`;
+      if (i === low) return `<span class="bas">${l}</span>`;
+      return l;
+    })
     .join('<br>');
 
 // `tag` : ce qui s'affiche en haut à droite. `next` : la flèche, sauf en fin.

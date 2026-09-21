@@ -10,7 +10,6 @@
 const DA = require('./da');
 
 const label = (s) => `<div class="label"><em>&mdash;</em>${s.label}</div>`;
-const ghost = (n) => `<div class="ghost">${String(n).padStart(2, '0')}</div>`;
 const body = (s) =>
   (s.body || []).map((p) => `<div class="body">${p.join('<br>')}</div>`).join('');
 
@@ -19,7 +18,7 @@ const R = {
   pose: (s) => `
     <div class="wrap bas">
       ${label(s)}
-      <div class="title" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
+      <div class="title case" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
       <div class="hr"></div>
       ${body(s)}
     </div>`,
@@ -29,7 +28,7 @@ const R = {
     <div class="wrap bas">
       ${label(s)}
       <div class="setup">${s.setup}</div>
-      <div class="huge" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
+      <div class="huge case" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
       ${s.close ? `<div class="body" style="margin-top:44px">${s.close.join('<br>')}</div>` : ''}
     </div>`,
 
@@ -37,14 +36,11 @@ const R = {
   bascule: (s) => `
     <div class="wrap bas">
       ${label(s)}
-      <div class="title" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
+      <div class="title case" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
       <div class="hr"></div>
       ${body(s)}
-      <div class="payoff">${s.payoff.join('<br>')}</div>
+      <div class="payoff murmure">${s.payoff.join('<br>')}</div>
     </div>`,
 };
 
-// Chaque rythme reçoit son numéro : le chiffre fantôme se pose derrière.
-module.exports = Object.fromEntries(
-  Object.entries(R).map(([nom, f]) => [nom, (s, n) => ghost(n) + f(s)])
-);
+module.exports = R;

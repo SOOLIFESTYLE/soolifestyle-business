@@ -75,9 +75,10 @@
   ],
 
   "outro": {
-    "size": 82,
+    "size": 74,
     "lines": ["Ce post était", "une démonstration."],
     "hi": -1,
+    "low": 1,
     "body": [["Tu es arrivé au bout,", "donc elle a marché."]],
     "payoff": ["Demain,", "une règle de plus."],
     "action": ["Enregistre et abonne-toi <span class=\"at\">@soolifestyle</span>", "pour ne pas la rater."]

@@ -124,17 +124,33 @@ par slide — le mécanisme même que le carrousel décrit.
 La dernière mécanique annonce `LA DÉMONSTRATION` : le CTA devient un rendez-vous,
 pas une interruption.
 
-### 3. Un horizon fixe et un chiffre fantôme
+### 3. Le contraste de casse
 
-Le bloc ne flotte plus au milieu : il **pose** sur une ligne d'horizon
-identique d'une slide à l'autre. Quand on swipe, le texte ne saute pas.
+Tout en capitales, c'est un seul poids : rien ne ressort.
 
-Et le haut, qui était vide, porte le numéro du mécanisme en filet rouge,
-coupé par le bord droit. `01` → `05`. Il dit où on en est sans rien
-prendre à la lecture, et il donne à l'intérieur un ancrage à lui —
-la couverture a le débord, l'intérieur a le chiffre.
+**La ligne qui pose reste en capitales. La ligne qui pique passe en
+minuscules**, à 1,34 fois la taille — les minuscules ont une hauteur d'x
+plus basse, il faut les grossir pour qu'elles pèsent autant.
 
-### 4. L'accroche grossit
+```
+CETTE PHRASE          capitales, 78 px — froid, factuel
+parlait de toi.       minuscules, 104 px, surlignées — intime, ça pique
+```
+
+Même police, même ligne, deux textures. C'est le contraste le moins cher
+et le plus efficace du système : il ne coûte ni couleur, ni élément,
+ni place.
+
+La bascule suit la même logique : au lieu de crier en capitales rouges,
+elle chuchote en **minuscules italiques rouges**. Après une explication,
+un murmure porte plus qu'un cri.
+
+### 4. Un horizon fixe
+
+Le bloc ne flotte plus au milieu : il **pose** sur une ligne identique
+d'une slide à l'autre. Quand on swipe, le texte ne saute pas.
+
+### 5. L'accroche grossit
 
 74 px sur le premier mécanisme, 88 px sur le dernier. Le carrousel accélère
 sans le dire. Personne ne le remarque, tout le monde le sent.
@@ -143,10 +159,11 @@ sans le dire. Personne ne le remarque, tout le monde le sent.
 
 ```
 — NOM DU MÉCANISME        Jost, tiret rouge, capitales espacées
-ACCROCHE EN CAPITALES     Playfair, dont UNE ligne surlignée en rouge
+LA LIGNE QUI POSE         Playfair capitales
+la ligne qui pique        Playfair minuscules, 1,34×, surlignée en rouge
 ▬                         filet rouge
 corps en Jost 300         une à trois lignes courtes
-[LA BASCULE]              capitales rouges, seulement sur le rythme bascule
+la bascule                minuscules italiques rouges, rythme bascule seul
                           SUIVANT · <le prochain> ›››
 ```
 
