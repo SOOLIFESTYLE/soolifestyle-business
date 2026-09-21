@@ -29,8 +29,8 @@ Repris tel quel de la DA :
 |---|---|
 | Haut gauche | compteur `0/5` → `5/5`, le `/5` à 42 % d'opacité |
 | Haut droite | `SOOLIFESTYLE™` |
-| Bas gauche | `LE MIROIR™` (la série) |
 | Bas droite | `→` |
+| Bord bas | jauge de progression, remplissage rouge |
 
 ## Structure d'une slide-mécanisme (2 à 6)
 
