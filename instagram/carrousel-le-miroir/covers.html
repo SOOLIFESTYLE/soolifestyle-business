@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>Le miroir — 6 pistes de couverture (blanc)</title>
+<title>Le miroir — couverture, cadre + surlignage</title>
 <style>
   @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-500.ttf')  format('truetype'); font-weight:500; font-style:normal; }
   @font-face { font-family:'Display'; src:url('fonts/playfairdisplay-600.ttf')  format('truetype'); font-weight:600; font-style:normal; }
@@ -15,7 +15,7 @@
   :root{
     --red:#db0000;
     --ink:#0c0c0c;
-    --paper:#f7f5f0;   /* blanc profond, chaud */
+    --paper:#f7f5f0;
     --pad:72px;
   }
 
@@ -28,6 +28,9 @@
     -webkit-font-smoothing:antialiased;
   }
 
+  /* cadre rouge — dégagé de la jauge en bas */
+  .frame{ position:absolute; z-index:0; inset:44px 44px 68px; border:3px solid var(--red); }
+
   /* ---- habillage ---- */
   .m{
     position:absolute; z-index:3; font-family:'Sans', sans-serif;
@@ -35,7 +38,7 @@
   }
   .m-brand{ top:62px; left:var(--pad); font-weight:500; }
   .m-tag  { top:62px; right:var(--pad); font-weight:300; color:rgba(12,12,12,.45); letter-spacing:.24em; }
-  .m-next { bottom:58px; right:var(--pad); color:var(--red); font-weight:500;
+  .m-next { bottom:62px; right:var(--pad); color:var(--red); font-weight:500;
             font-size:24px; letter-spacing:.1em; }
   .m sup{ font-size:.55em; letter-spacing:0; vertical-align:.7em; }
 
@@ -43,168 +46,111 @@
         background:rgba(12,12,12,.09); }
   .bar i{ display:block; height:100%; width:154px; background:var(--red); }
 
-  /* ---- bloc titre : toujours au centre ---- */
+  /* ---- bloc titre, centré ---- */
   .wrap{
     position:absolute; z-index:1; left:0; right:0;
     top:50%; transform:translateY(-50%);
     padding:0 var(--pad); text-align:center;
   }
 
-  /* ---- briques typographiques ---- */
-  .eyebrow{
-    font-family:'Sans', sans-serif; font-weight:500; font-size:21px;
-    letter-spacing:.34em; text-transform:uppercase; color:var(--red);
-  }
-  .tiny{
-    font-family:'Sans', sans-serif; font-weight:400; font-size:29px;
-    letter-spacing:.44em; text-transform:uppercase; color:rgba(12,12,12,.66);
-  }
-  .serif{
+  .title{
     font-family:'Display', Georgia, serif; font-weight:600;
-    text-transform:uppercase; line-height:1.05; letter-spacing:-.005em;
+    text-transform:uppercase; line-height:1.26; letter-spacing:-.008em;
   }
-  .ital{
+  .chip{ display:inline-block; padding:4px 26px 14px; }
+  .chip.r{ background:var(--red); color:#fff; }
+  .chip.k{ background:var(--ink); color:var(--paper); }
+
+  .hr{ width:84px; height:3px; background:var(--red); margin:44px auto; }
+
+  /* chute — police du 4 : italique rouge, une seule ligne */
+  .end4{
     font-family:'Display', Georgia, serif; font-weight:500; font-style:italic;
-    line-height:1.1;
-  }
-  .sans{
-    font-family:'Sans', sans-serif; font-weight:500;
-    text-transform:uppercase; letter-spacing:.14em;
-  }
-  .hr{ width:84px; height:3px; background:var(--red); margin:40px auto; }
-  .red{ color:var(--red); }
-
-  .chip{                      /* surligneur rouge */
-    display:inline-block; background:var(--red); color:#fff;
-    font-family:'Sans', sans-serif; font-weight:500; font-size:30px;
-    letter-spacing:.16em; text-transform:uppercase; padding:22px 32px 20px;
-  }
-  .inkchip{                   /* bloc noir inversé */
-    display:inline-block; background:var(--ink); color:var(--paper);
-    padding:2px 22px 10px;
+    font-size:60px; line-height:1.1; color:var(--red);
   }
 
-  /* ---- dispositifs propres à certaines pistes ---- */
-  .band{                      /* bande rouge pleine largeur */
-    position:absolute; z-index:2; left:0; right:0;
-    background:var(--red); color:#fff; text-align:center;
-    padding:38px var(--pad) 34px;
-    font-family:'Sans', sans-serif; font-weight:500; font-size:34px;
-    letter-spacing:.18em; text-transform:uppercase;
+  /* chute — police du 5 : italique noir + POURQUOI en capitales rouges */
+  .end5a{
+    font-family:'Display', Georgia, serif; font-weight:500; font-style:italic;
+    font-size:54px; line-height:1.1;
   }
-  .frame{                     /* cadre rouge */
-    position:absolute; z-index:0; inset:44px; border:3px solid var(--red);
+  .end5b{
+    font-family:'Display', Georgia, serif; font-weight:600;
+    text-transform:uppercase; font-size:116px; line-height:1.02;
+    letter-spacing:-.01em; color:var(--red); margin-top:10px;
   }
-  .masthead{
-    position:absolute; z-index:3; top:76px; left:var(--pad); right:var(--pad);
-    text-align:center; font-family:'Sans', sans-serif; font-weight:500;
-    font-size:27px; letter-spacing:.56em; text-transform:uppercase;
-  }
-  .masthead b{ display:block; height:2px; background:var(--red); margin-top:26px; }
 </style>
 </head>
 <body>
 
-<!-- ══════════ 1 — LE SURLIGNEUR ══════════ -->
-<div class="cv" id="c1">
-  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
-  <div class="m m-tag">Psychologie &middot; Influence</div>
-
-  <div class="wrap">
-    <div class="eyebrow">&mdash;&nbsp;&nbsp;5 mécanismes&nbsp;&nbsp;&mdash;</div>
-    <div class="serif" style="font-size:90px; margin-top:46px">
-      Tu as arrêté<br>ton scroll<br>sur ce post.
-    </div>
-    <div style="margin-top:52px"><span class="chip">Voilà exactement pourquoi.</span></div>
-  </div>
-
-  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div>
-</div>
-
-<!-- ══════════ 2 — L'ÉCHELLE ══════════ -->
-<div class="cv" id="c2">
-  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
-  <div class="m m-tag">Psychologie &middot; Influence</div>
-
-  <div class="wrap">
-    <div class="tiny">Tu as arrêté</div>
-    <div class="serif" style="font-size:130px; line-height:1; margin:22px 0 20px">Ton scroll</div>
-    <div class="tiny">sur ce post.</div>
-    <div class="hr"></div>
-    <div class="serif" style="font-size:54px">Voilà exactement <span class="red">pourquoi.</span></div>
-  </div>
-
-  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div>
-</div>
-
-<!-- ══════════ 3 — LA BANDE ══════════ -->
-<div class="cv" id="c3">
-  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
-  <div class="m m-tag">Psychologie &middot; Influence</div>
-
-  <div class="wrap" style="top:40%">
-    <div class="eyebrow">5 mécanismes</div>
-    <div class="serif" style="font-size:88px; margin-top:44px">
-      Tu as arrêté<br>ton scroll<br>sur ce post.
-    </div>
-  </div>
-
-  <div class="band" style="top:880px">Voilà exactement pourquoi.</div>
-
-  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div>
-</div>
-
-<!-- ══════════ 4 — LE CADRE ══════════ -->
-<div class="cv" id="c4">
+<!-- ══════ 1 — surlignage ROUGE · chute italique (police du 4) ══════ -->
+<div class="cv" id="v1">
   <div class="frame"></div>
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
 
   <div class="wrap">
-    <div class="eyebrow">&mdash;&nbsp;&nbsp;5 mécanismes&nbsp;&nbsp;&mdash;</div>
-    <div class="serif" style="font-size:88px; margin-top:44px">
-      Tu as arrêté<br>ton scroll<br>sur ce post.
+    <div class="title" style="font-size:104px">
+      Tu as arrêté<br><span class="chip r">ton scroll</span><br>sur ce post.
     </div>
     <div class="hr"></div>
-    <div class="ital red" style="font-size:58px">Voilà exactement pourquoi.</div>
+    <div class="end4">Voilà exactement pourquoi.</div>
   </div>
 
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
   <div class="bar"><i></i></div>
 </div>
 
-<!-- ══════════ 5 — LE BANDEAU DE TÊTE ══════════ -->
-<div class="cv" id="c5">
-  <div class="masthead">Soolifestyle<b></b></div>
-  <div class="m m-tag" style="top:auto; bottom:58px; left:var(--pad); right:auto">Psychologie &middot; Influence</div>
-
-  <div class="wrap">
-    <div class="serif" style="font-size:92px">
-      Tu as arrêté<br>ton scroll<br>sur ce post.
-    </div>
-    <div class="ital" style="font-size:52px; margin-top:44px">Voilà exactement</div>
-    <div class="serif red" style="font-size:112px; margin-top:8px">Pourquoi.</div>
-  </div>
-
-  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
-  <div class="bar"><i></i></div>
-</div>
-
-<!-- ══════════ 6 — LE BLOC NOIR ══════════ -->
-<div class="cv" id="c6">
+<!-- ══════ 2 — surlignage NOIR · chute italique (police du 4) ══════ -->
+<div class="cv" id="v2">
+  <div class="frame"></div>
   <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
   <div class="m m-tag">Psychologie &middot; Influence</div>
 
   <div class="wrap">
-    <div class="eyebrow">&mdash;&nbsp;&nbsp;5 mécanismes&nbsp;&nbsp;&mdash;</div>
-    <div class="serif" style="font-size:92px; line-height:1.24; margin-top:44px">
-      Tu as arrêté<br><span class="inkchip">ton scroll</span><br>sur ce post.
+    <div class="title" style="font-size:104px">
+      Tu as arrêté<br><span class="chip k">ton scroll</span><br>sur ce post.
     </div>
     <div class="hr"></div>
-    <div class="sans red" style="font-size:34px">Voilà exactement pourquoi.</div>
+    <div class="end4">Voilà exactement pourquoi.</div>
+  </div>
+
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════ 3 — surlignage ROUGE · chute POURQUOI (police du 5) ══════ -->
+<div class="cv" id="v3">
+  <div class="frame"></div>
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap">
+    <div class="title" style="font-size:100px">
+      Tu as arrêté<br><span class="chip r">ton scroll</span><br>sur ce post.
+    </div>
+    <div class="hr"></div>
+    <div class="end5a">Voilà exactement</div>
+    <div class="end5b">Pourquoi.</div>
+  </div>
+
+  <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<!-- ══════ 4 — surlignage NOIR · chute POURQUOI (police du 5) ══════ -->
+<div class="cv" id="v4">
+  <div class="frame"></div>
+  <div class="m m-brand">Soolifestyle<sup>&#8482;</sup></div>
+  <div class="m m-tag">Psychologie &middot; Influence</div>
+
+  <div class="wrap">
+    <div class="title" style="font-size:100px">
+      Tu as arrêté<br><span class="chip k">ton scroll</span><br>sur ce post.
+    </div>
+    <div class="hr"></div>
+    <div class="end5a">Voilà exactement</div>
+    <div class="end5b">Pourquoi.</div>
   </div>
 
   <div class="m m-next">&rsaquo;&rsaquo;&rsaquo;</div>
