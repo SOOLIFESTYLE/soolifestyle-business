@@ -62,6 +62,19 @@ module.exports = {
       <div class="why">${p.why}</div>
     </div>`,
 
+  // la couverture n'est plus une affiche, c'est un document : un bulletin,
+  // des lignes à points de conduite, et la chute à la place du total.
+  // `kick` : l'en-tête du document. `rows` : [[libellé, valeur], …].
+  bulletin: (p) => `
+    <div class="wrap">
+      <div class="kick">${p.kick}</div>
+      <div class="title${p.case ? ' case' : ''}" style="font-size:${p.size}px">${DA.chipLines(p.lines, p.hi)}</div>
+      ${p.rows
+        .map(([l, v], i) => `<div class="ligne"${i ? '' : ' style="margin-top:44px"'}><span>${l}</span><i></i><b>${v}</b></div>`)
+        .join('')}
+      <div class="total"><span>${p.ital}</span><b>${p.why}</b></div>
+    </div>`,
+
   // interlignage écrasé, plus aucun filet, rien ne respire
   compression: (p) => `
     <div class="wrap">

@@ -28,7 +28,8 @@ const CSS = `${FONTS}
         align-items:center; gap:44px; padding:44px; }
 
   .sl{ position:relative; width:${TOKENS.w}px; height:${TOKENS.h}px; overflow:hidden;
-       background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased; }
+       background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased;
+       font-variant-numeric:lining-nums; } /* Playfair : sinon le 0 ressemble à un o */
   .sl.dark{ background:var(--black); color:var(--paper); }
 
   /* ── habillage : les quatre coins, identiques partout ── */
@@ -117,9 +118,23 @@ const CSS = `${FONTS}
   /* ── l'horizon : le bloc ne flotte plus, il pose ── */
   .wrap.bas{ top:auto; bottom:196px; transform:none; }
 
+  /* ── le bulletin : la couverture devient un document ── */
+  .kick{ font-family:'Sans',sans-serif; font-weight:500; font-size:20px; letter-spacing:.3em;
+         text-transform:uppercase; color:var(--red); margin-bottom:34px; }
+  .ligne{ display:flex; align-items:baseline; gap:18px; font-family:'Sans',sans-serif;
+          font-weight:300; font-size:36px; margin-top:26px; }
+  .ligne i{ flex:1; border-bottom:3px dotted rgba(12,12,12,.35); transform:translateY(-10px); }
+  .ligne b{ font-family:'Display',Georgia,serif; font-style:italic; font-weight:500; font-size:46px; }
+  .total{ display:flex; align-items:baseline; justify-content:space-between;
+          border-top:5px solid var(--ink); margin-top:40px; padding-top:26px; }
+  .total span{ font-family:'Sans',sans-serif; font-weight:500; font-size:22px;
+               letter-spacing:.28em; text-transform:uppercase; }
+  .total b{ font-family:'Display',Georgia,serif; font-weight:600; font-size:140px;
+            color:var(--red); line-height:.9; text-transform:uppercase; }
+
   /* ── le compte : l'arobase surligné, pas un bouton ── */
   .at{ display:inline-block; background:var(--red); color:#fff;
-       padding:2px 14px 6px; margin:0 4px; }
+       padding:2px 14px 6px; margin:0 2px 0 4px; }
 `;
 
 // Playfair capitales : une lettre avance d'environ 0,60 em.

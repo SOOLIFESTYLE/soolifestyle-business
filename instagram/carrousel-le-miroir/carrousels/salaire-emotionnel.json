@@ -3,11 +3,17 @@
   "tag": "Psychologie &middot; Influence",
 
   "cover": {
-    "layout": "compression",
+    "layout": "bulletin",
     "case": true,
-    "size": 108,
-    "lines": ["Ton patron", "te paie en", "compliments."],
+    "size": 88,
+    "kick": "Bulletin de salaire &mdash; mois en cours",
+    "lines": ["Ton patron", "te paie en"],
     "hi": 1,
+    "rows": [
+      ["Salaire de base", "compliments"],
+      ["Prime", "« super boulot »"],
+      ["Augmentation", "&mdash;"]
+    ],
     "ital": "Et tu lui dis",
     "why": "Merci."
   },
@@ -76,6 +82,6 @@
     "caps": 2,
     "body": [["« Merci. On en parle en euros ? »"]],
     "payoff": ["Envoie-le au collègue", "qui vient d’en recevoir un."],
-    "action": ["Abonne-toi <span class=\"at\">@soolifestyle</span>,", "demain, une règle de plus."]
+    "action": ["Abonne-toi <span class=\"at\">@soolifestyle</span>", "Demain, une règle de plus."]
   }
 }

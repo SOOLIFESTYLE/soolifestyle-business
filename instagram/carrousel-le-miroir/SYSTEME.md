@@ -75,7 +75,7 @@ du contraste de casse.
 
 ### Les gabarits
 
-Six façons de casser la symétrie. C'est ce qui empêche le feed de devenir plat.
+Huit façons de casser la symétrie. C'est ce qui empêche le feed de devenir plat.
 
 | Gabarit | Ce qu'il casse | À utiliser quand |
 |---|---|---|
@@ -86,6 +86,11 @@ Six façons de casser la symétrie. C'est ce qui empêche le feed de devenir pla
 | `desequilibre` | tout tombe en bas, le haut reste vide | la chute est brève et sèche |
 | `bande` | le surligneur traverse toute la largeur | une ligne entière est la punchline |
 | `filet` | le surligneur perd son aplat, il devient un contour | la ligne surlignée est longue, ou le feed a besoin d'air |
+| `bulletin` | la couverture devient un document : en-tête, lignes à points de conduite, la chute à la place du total | le sujet a une forme réelle (fiche de paie, facture, reçu, ordonnance…) |
+
+Le `bulletin` prend deux champs de plus : `kick` (l'en-tête du document) et
+`rows` (`[[libellé, valeur], …]`, trois lignes maximum). Le titre tient sur deux lignes.
+C'est le plus fort, et le plus reconnaissable : une fois par mois, pas plus.
 
 La taille du `debord` se calcule toute seule pour que le mot déborde quoi qu'il
 arrive — plafonnée à 340 px, de quoi faire sortir du cadre un mot de six signes.
@@ -99,7 +104,8 @@ Jamais deux fois le même sur une ligne de trois dans la grille.
 
 Sur un mois de publication, ça donne à peu près :
 `decalage` 25 % · `debord` 20 % · `compression` 20 % ·
-`inclinaison` 15 % · `filet` 10 % · `desequilibre` 5 % · `bande` 5 %.
+`inclinaison` 15 % · `filet` 10 % · `desequilibre` 5 % · `bande` 5 %,
+plus un `bulletin` par mois quand le sujet s'y prête.
 
 Le `bande` est le plus voyant, donc le plus vite lassant. Garde-le pour les posts
 qui comptent.
@@ -230,7 +236,7 @@ Pour tester des couvertures en série sans écrire les carrousels entiers,
 | Fichier | Rôle |
 |---|---|
 | `da.js` | **les invariants.** Palette, typo, habillage, jauge. Un seul endroit. |
-| `layouts-couverture.js` | les six gabarits de tension de la couverture |
+| `layouts-couverture.js` | les huit gabarits de tension de la couverture |
 | `rythmes.js` | les trois rythmes de l'intérieur |
 | `build-carrousel.js` | la slide finale et le rendu |
 | `carrousels/*.json` | le texte d'un carrousel |
