@@ -85,8 +85,10 @@ Six façons de casser la symétrie. C'est ce qui empêche le feed de devenir pla
 | `inclinaison` | le surligneur penche de 2,6° | le titre est court et net |
 | `desequilibre` | tout tombe en bas, le haut reste vide | la chute est brève et sèche |
 | `bande` | le surligneur traverse toute la largeur | une ligne entière est la punchline |
+| `filet` | le surligneur perd son aplat, il devient un contour | la ligne surlignée est longue, ou le feed a besoin d'air |
 
-La taille du `debord` se calcule toute seule pour que le mot déborde quoi qu'il arrive.
+La taille du `debord` se calcule toute seule pour que le mot déborde quoi qu'il
+arrive — plafonnée à 340 px, de quoi faire sortir du cadre un mot de six signes.
 
 ---
 
@@ -96,8 +98,8 @@ Jamais deux fois le même gabarit à la suite.
 Jamais deux fois le même sur une ligne de trois dans la grille.
 
 Sur un mois de publication, ça donne à peu près :
-`decalage` 30 % · `debord` 20 % · `compression` 20 % ·
-`inclinaison` 15 % · `desequilibre` 10 % · `bande` 5 %.
+`decalage` 25 % · `debord` 20 % · `compression` 20 % ·
+`inclinaison` 15 % · `filet` 10 % · `desequilibre` 5 % · `bande` 5 %.
 
 Le `bande` est le plus voyant, donc le plus vite lassant. Garde-le pour les posts
 qui comptent.

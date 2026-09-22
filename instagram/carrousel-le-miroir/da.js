@@ -109,6 +109,11 @@ const CSS = `${FONTS}
                             letter-spacing:.002em; }
   .case .chip{ padding:10px 24px 16px; }
 
+  /* le surligneur en filet : quand la ligne est longue, l'aplat devient
+     un pavé. Le filet dit la même chose sans écraser la page. */
+  .chip.filet{ background:none; color:var(--red);
+               box-shadow:inset 0 0 0 4px var(--red); }
+
   /* ── l'horizon : le bloc ne flotte plus, il pose ── */
   .wrap.bas{ top:auto; bottom:196px; transform:none; }
 
@@ -118,15 +123,15 @@ const CSS = `${FONTS}
 `;
 
 // Playfair capitales : une lettre avance d'environ 0,60 em.
-const debordSize = (mot) => Math.min(268, Math.round(1230 / (0.6 * mot.length)));
+const debordSize = (mot) => Math.min(340, Math.round(1230 / (0.6 * mot.length)));
 
 // La ligne surlignée. C'est la signature : elle est sur la couverture
 // ET sur chaque slide intérieure.
 // `hi` : la ligne surlignée. `caps` : une ligne en capitales sans surligneur.
-const chipLines = (lines, hi, chipStyle = '', caps = -1) =>
+const chipLines = (lines, hi, chipStyle = '', caps = -1, variante = '') =>
   lines
     .map((l, i) => {
-      if (i === hi) return `<span class="chip" style="${chipStyle}">${l}</span>`;
+      if (i === hi) return `<span class="chip ${variante}" style="${chipStyle}">${l}</span>`;
       if (i === caps) return `<span class="haut">${l}</span>`;
       return l;
     })

@@ -53,6 +53,15 @@ module.exports = {
       <div class="why">${p.why}</div>
     </div>`,
 
+  // le surligneur perd son aplat : il devient un filet. Le plus calme des sept.
+  filet: (p) => `
+    <div class="wrap">
+      <div class="title${p.case ? ' case' : ''}" style="font-size:${p.size}px">${DA.chipLines(p.lines, p.hi, '', -1, 'filet')}</div>
+      <div class="hr"></div>
+      <div class="ital">${p.ital}</div>
+      <div class="why">${p.why}</div>
+    </div>`,
+
   // interlignage écrasé, plus aucun filet, rien ne respire
   compression: (p) => `
     <div class="wrap">
