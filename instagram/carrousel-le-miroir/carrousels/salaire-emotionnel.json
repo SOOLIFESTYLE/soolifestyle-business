@@ -1,0 +1,81 @@
+{
+  "id": "salaire-emotionnel",
+  "tag": "Psychologie &middot; Influence",
+
+  "cover": {
+    "layout": "compression",
+    "case": true,
+    "size": 108,
+    "lines": ["Ton patron", "te paie en", "compliments."],
+    "hi": 1,
+    "ital": "Et tu lui dis",
+    "why": "Merci."
+  },
+
+  "slides": [
+    {
+      "rythme": "pose",
+      "label": "Le salaire émotionnel",
+      "size": 92,
+      "lines": ["Un « super boulot »", "coûte 0 €."],
+      "hi": 1,
+      "body": [
+        ["Ton augmentation, un peu plus."],
+        ["Le compliment te nourrit juste assez", "pour que tu ne demandes rien."]
+      ],
+      "next": "La dette affective"
+    },
+    {
+      "rythme": "bascule",
+      "label": "La dette affective",
+      "size": 96,
+      "lines": ["Après un compliment", "tu te sens", "redevable."],
+      "hi": 2,
+      "body": [["Demander une augmentation", "devient presque impoli."]],
+      "payoff": ["Il a inversé la dette."],
+      "next": "La famille"
+    },
+    {
+      "rythme": "claque",
+      "label": "La famille",
+      "size": 108,
+      "setup": "On ne négocie pas avec sa famille.",
+      "lines": ["« Ici, on est", "une famille. »"],
+      "hi": 1,
+      "close": ["On ne lui envoie pas de facture.", "On pardonne. On reste."],
+      "next": "Le titre"
+    },
+    {
+      "rythme": "pose",
+      "label": "Le titre",
+      "size": 100,
+      "lines": ["Ton nouveau titre", "ne paie pas", "ton loyer."],
+      "hi": 2,
+      "body": [
+        ["« Head of », « Lead », « Manager ».", "Un mot de plus sur LinkedIn."],
+        ["Zéro sur ta fiche de paie."]
+      ],
+      "next": "Le miroir"
+    },
+    {
+      "rythme": "bascule",
+      "label": "Le miroir",
+      "size": 104,
+      "lines": ["Tes abonnés", "font pareil."],
+      "hi": 1,
+      "body": [["« J’adore ton contenu. »", "« Trop inspirant 🔥 »", "Et zéro vente."]],
+      "payoff": ["Un like ne paie", "aucune facture."],
+      "next": "La sortie"
+    }
+  ],
+
+  "outro": {
+    "size": 72,
+    "lines": ["Au prochain", "« super boulot »", "réponds par un chiffre."],
+    "hi": -1,
+    "caps": 2,
+    "body": [["« Merci. On en parle en euros ? »"]],
+    "payoff": ["Envoie-le au collègue", "qui vient d’en recevoir un."],
+    "action": ["Abonne-toi <span class=\"at\">@soolifestyle</span>,", "demain, une règle de plus."]
+  }
+}
