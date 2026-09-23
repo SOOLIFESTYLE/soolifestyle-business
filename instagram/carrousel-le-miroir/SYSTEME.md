@@ -75,7 +75,7 @@ du contraste de casse.
 
 ### Les gabarits
 
-Huit façons de casser la symétrie. C'est ce qui empêche le feed de devenir plat.
+Neuf façons de casser la symétrie. C'est ce qui empêche le feed de devenir plat.
 
 | Gabarit | Ce qu'il casse | À utiliser quand |
 |---|---|---|
@@ -91,6 +91,11 @@ Huit façons de casser la symétrie. C'est ce qui empêche le feed de devenir pl
 Le `bulletin` prend deux champs de plus : `kick` (l'en-tête du document) et
 `rows` (`[[libellé, valeur], …]`, trois lignes maximum). Le titre tient sur deux lignes.
 C'est le plus fort, et le plus reconnaissable : une fois par mois, pas plus.
+
+| `qcm` | la couverture répond à ta place : deux cases, l'une déjà cochée | le carrousel est un test ou un quiz |
+
+Le `qcm` prend `cases`, `coche` (l'index cochée), `tous` (la pique sous les cases),
+`consigne`, `triche`, `mens`.
 
 La taille du `debord` se calcule toute seule pour que le mot déborde quoi qu'il
 arrive — plafonnée à 340 px, de quoi faire sortir du cadre un mot de six signes.
@@ -217,6 +222,23 @@ Le carrousel se referme comme il s'est ouvert.
 
 ---
 
+## Le format test
+
+Un carrousel peut être un test plutôt que cinq mécanismes. Trois rythmes de plus :
+
+| Rythme | Ce qu'il porte |
+|---|---|
+| `question` | scène (Jost) · réplique (Playfair, casse contrastée) · question (italique) · réponses A/B/C en lignes · barème · ce qu'on teste, en retrait rouge |
+| `score` | « Et là… TON SCORE : » puis les paliers : fourchette en rouge, titre en capitales, texte en Jost |
+| `verdict` | la slide noire : la fausse question barrée, la vraie en dessous, la série, le compte |
+
+Beaucoup de texte par slide : chaque bloc a sa texture, pour que l'œil sache
+toujours où il est. Une slide peut forcer son compteur avec `tag`
+(`1 / 5` sur les questions, `Ton score`, `Le piège` après). L'outro prend un
+`rythme` quand elle ne suit pas le modèle par défaut.
+
+---
+
 ## Fabriquer
 
 Un carrousel = un fichier dans `carrousels/`.
@@ -236,7 +258,7 @@ Pour tester des couvertures en série sans écrire les carrousels entiers,
 | Fichier | Rôle |
 |---|---|
 | `da.js` | **les invariants.** Palette, typo, habillage, jauge. Un seul endroit. |
-| `layouts-couverture.js` | les huit gabarits de tension de la couverture |
+| `layouts-couverture.js` | les neuf gabarits de tension de la couverture |
 | `rythmes.js` | les trois rythmes de l'intérieur |
 | `build-carrousel.js` | la slide finale et le rendu |
 | `carrousels/*.json` | le texte d'un carrousel |

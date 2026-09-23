@@ -9,7 +9,7 @@
 //   bascule  on explique, puis une phrase retourne tout en capitales rouges
 const DA = require('./da');
 
-const label = (s) => `<div class="label"><em>&mdash;</em>${s.label}</div>`;
+const label = (s) => (s.label ? `<div class="label"><em>&mdash;</em>${s.label}</div>` : '');
 const body = (s) =>
   (s.body || []).map((p) => `<div class="body">${p.join('<br>')}</div>`).join('');
 
@@ -37,9 +37,50 @@ const R = {
     <div class="wrap bas">
       ${label(s)}
       <div class="title case" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
+      ${s.lead ? `<div class="ital" style="margin-top:40px">${s.lead}</div>` : ''}
       <div class="hr"></div>
       ${body(s)}
       <div class="payoff">${s.payoff.join('<br>')}</div>
+    </div>`,
+
+  // ── les rythmes du test ──
+
+  // une question : la scène, la réplique, les réponses, le barème, ce qu'on teste
+  question: (s) => `
+    <div class="wrap">
+      ${label(s)}
+      ${s.scene ? `<div class="scene">${s.scene.join('<br>')}</div>` : ''}
+      <div class="title case" style="font-size:${s.size}px; line-height:1.18">${DA.chipLines(s.lines, s.hi)}</div>
+      ${s.apres ? `<div class="scene">${s.apres.join('<br>')}</div>` : ''}
+      <div class="ask">${s.ask}</div>
+      <div class="opts">${s.opts.map((o, i) => `<div class="opt"><b>${'ABC'[i]}</b><span>${o}</span></div>`).join('')}</div>
+      <div class="bareme"><em>Score</em>${s.score.map((n, i) => `<span><i>${'ABC'[i]}</i> = ${n}</span>`).join('')}</div>
+      <div class="teste">${s.teste.join('<br>')}</div>
+    </div>`,
+
+  // le score : le titre, puis les paliers
+  score: (s) => `
+    <div class="wrap">
+      <div class="entete">
+        <div class="ital">${s.ital}</div>
+        <div class="title case" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
+      </div>
+      <div class="paliers">${s.paliers
+        .map((p) => `<div class="palier"><div class="r">${p.r}</div><div><h3>${p.h}</h3><p>${p.p.join('<br>')}</p></div></div>`)
+        .join('')}</div>
+    </div>`,
+
+  // la slide finale d'un test : la fausse question barrée, la vraie en dessous
+  verdict: (s) => `
+    <div class="wrap bas">
+      <div class="setup">${s.faux}</div>
+      <div class="barre">${s.barre}</div>
+      <div class="setup" style="margin:44px 0 20px">${s.mais}</div>
+      <div class="title case" style="font-size:${s.size}px; line-height:1.18">${DA.chipLines(s.lines, s.hi, '', s.caps)}</div>
+      <div class="hr"></div>
+      <div class="serie">${s.serie}</div>
+      <div class="payoff" style="margin-top:18px">${s.payoff.join('<br>')}</div>
+      <div class="body" style="margin-top:36px">${s.action.join('<br>')}</div>
     </div>`,
 };
 

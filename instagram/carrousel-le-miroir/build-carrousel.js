@@ -20,7 +20,7 @@ const mechanism = (s, i) => `
   <div class="sl" id="s${i + 2}">
     ${RYTHMES[s.rythme](s)}
     ${DA.furniture({
-      tag: `<b>${i + 1}</b> / ${N}`,
+      tag: s.tag || `<b>${i + 1}</b> / ${N}`,
       fill: DA.fill(i + 2, TOTAL),
       next: s.next,
     })}
@@ -28,7 +28,11 @@ const mechanism = (s, i) => `
 
 /* ── la slide finale : noir profond, et une raison de s'abonner
       qui n'est pas « abonne-toi » mais ce qu'il y a demain ── */
-const outro = (o) => `
+const outro = (o) => o.rythme ? `
+  <div class="sl dark" id="s${TOTAL}">
+    ${RYTHMES[o.rythme](o)}
+    ${DA.furniture({ tag: c.tag, fill: DA.TOKENS.w, next: false })}
+  </div>` : `
   <div class="sl dark" id="s${TOTAL}">
     <div class="wrap bas">
       <div class="title case" style="font-size:${o.size}px">${DA.chipLines(o.lines, o.hi, '', o.caps)}</div>

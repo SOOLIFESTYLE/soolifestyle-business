@@ -132,6 +132,73 @@ const CSS = `${FONTS}
   .total b{ font-family:'Display',Georgia,serif; font-weight:600; font-size:140px;
             color:var(--red); line-height:.9; text-transform:uppercase; }
 
+  /* ── le QCM : la couverture qui te fait cocher ── */
+  .cases{ display:flex; justify-content:center; gap:70px; margin-top:54px;
+          font-family:'Sans',sans-serif; font-weight:500; font-size:30px;
+          letter-spacing:.24em; text-transform:uppercase; }
+  .cases span{ display:flex; align-items:center; gap:20px; }
+  .cases b{ display:inline-block; width:52px; height:52px; position:relative;
+            box-shadow:inset 0 0 0 4px var(--ink); }
+  .cases b.x::before, .cases b.x::after{ content:''; position:absolute; left:-8px; right:-8px;
+            top:50%; height:7px; margin-top:-3px; background:var(--red); transform:rotate(45deg); }
+  .cases b.x::after{ transform:rotate(-45deg); }
+  .tous{ font-family:'Display',Georgia,serif; font-style:italic; font-weight:500;
+         font-size:40px; margin-top:26px; }
+  .consigne{ font-family:'Sans',sans-serif; font-weight:300; font-size:36px; line-height:1.45;
+             color:rgba(12,12,12,.84); }
+  .triche{ font-family:'Display',Georgia,serif; font-weight:600; text-transform:uppercase;
+           font-size:44px; letter-spacing:.01em; margin-top:34px; line-height:1.1; }
+  .mens{ font-family:'Display',Georgia,serif; font-style:italic; font-weight:500;
+         font-size:38px; margin-top:10px; color:rgba(12,12,12,.70); }
+
+  /* ── la question : le test, slide par slide ──
+        Beaucoup de texte : chaque bloc a sa texture pour que l'œil
+        sache où il est. Scène en Jost, réplique en Playfair,
+        réponses en lignes, barème en capitales, explication en retrait. ── */
+  .scene{ font-family:'Sans',sans-serif; font-weight:300; font-size:35px; line-height:1.42;
+          color:rgba(12,12,12,.84); }
+  .scene + .title, .title + .scene{ margin-top:30px; }
+  .ask{ font-family:'Display',Georgia,serif; font-style:italic; font-weight:500;
+        font-size:46px; margin-top:40px; }
+  .opts{ margin-top:18px; }
+  .opt{ display:grid; grid-template-columns:58px 1fr; align-items:baseline;
+        font-family:'Sans',sans-serif; font-weight:300; font-size:33px; line-height:1.36;
+        padding:15px 0; border-top:2px solid rgba(12,12,12,.12); }
+  .opt:last-child{ border-bottom:2px solid rgba(12,12,12,.12); }
+  .opt b{ font-family:'Display',Georgia,serif; font-weight:600; font-size:38px; color:var(--red); }
+  .bareme{ display:flex; align-items:baseline; gap:36px; margin-top:30px;
+           font-family:'Sans',sans-serif; font-weight:500; font-size:20px;
+           letter-spacing:.28em; text-transform:uppercase; }
+  .bareme em{ font-style:normal; color:var(--red); margin-right:6px; }
+  .bareme span{ font-family:'Display',Georgia,serif; font-weight:600; font-size:36px;
+                letter-spacing:.02em; }
+  .bareme span i{ font-style:normal; color:var(--red); }
+  .teste{ margin-top:26px; padding-left:26px; border-left:4px solid var(--red);
+          font-family:'Sans',sans-serif; font-weight:300; font-size:29px; line-height:1.45;
+          color:rgba(12,12,12,.66); }
+
+  /* ── le score : quatre paliers, lisibles d'un coup d'œil ── */
+  .paliers{ margin-top:34px; }
+  .palier{ display:grid; grid-template-columns:180px 1fr; gap:0 24px; padding:17px 0;
+           border-top:2px solid rgba(12,12,12,.14); }
+  .palier .r{ font-family:'Display',Georgia,serif; font-weight:600; font-size:44px;
+              line-height:1.05; color:var(--red); white-space:nowrap; }
+  .palier h3{ font-family:'Display',Georgia,serif; font-weight:600; text-transform:uppercase;
+              font-size:26px; line-height:1.2; margin-bottom:8px; }
+  .palier p{ font-family:'Sans',sans-serif; font-weight:300; font-size:25px; line-height:1.38;
+             color:rgba(12,12,12,.80); }
+  .entete{ display:flex; align-items:baseline; gap:28px; }
+
+  /* ── la fausse question, barrée ── */
+  .barre{ display:inline-block; font-family:'Display',Georgia,serif; font-weight:600;
+          text-transform:uppercase; font-size:50px; color:rgba(247,245,240,.55);
+          position:relative; margin-top:14px; }
+  .barre::after{ content:''; position:absolute; left:-10px; right:-10px; top:52%;
+                 height:6px; background:var(--red); transform:rotate(-2deg); }
+  .serie{ font-family:'Sans',sans-serif; font-weight:500; font-size:20px; letter-spacing:.3em;
+          text-transform:uppercase; color:var(--red); }
+  .serie sup{ font-size:.55em; letter-spacing:0; vertical-align:.7em; }
+
   /* ── le compte : l'arobase surligné, pas un bouton ── */
   .at{ display:inline-block; background:var(--red); color:#fff;
        padding:2px 14px 6px; margin:0 2px 0 4px; }

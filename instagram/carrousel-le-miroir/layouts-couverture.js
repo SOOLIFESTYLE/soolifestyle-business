@@ -75,6 +75,21 @@ module.exports = {
       <div class="total"><span>${p.ital}</span><b>${p.why}</b></div>
     </div>`,
 
+  // la couverture pose la question et coche la réponse à la place du lecteur.
+  // Il continue pour prouver qu'il n'est pas « tout le monde ».
+  // `cases` : les options, `coche` : l'index cochée, `tous` : la pique en dessous.
+  qcm: (p) => `
+    <div class="wrap mid">
+      <div class="ital">${p.ital}</div>
+      <div class="title${p.case ? ' case' : ''}" style="font-size:${p.size}px; margin-top:40px">${DA.chipLines(p.lines, p.hi)}</div>
+      <div class="cases">${p.cases.map((c, i) => `<span><b${i === p.coche ? ' class="x"' : ''}></b>${c}</span>`).join('')}</div>
+      <div class="tous">${p.tous}</div>
+      <div class="hr"></div>
+      <div class="consigne">${p.consigne.join('<br>')}</div>
+      <div class="triche">${p.triche}</div>
+      <div class="mens">${p.mens}</div>
+    </div>`,
+
   // interlignage écrasé, plus aucun filet, rien ne respire
   compression: (p) => `
     <div class="wrap">
