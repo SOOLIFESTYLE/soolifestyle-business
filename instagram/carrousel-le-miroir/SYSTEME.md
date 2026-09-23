@@ -228,12 +228,14 @@ Un carrousel peut être un test plutôt que cinq mécanismes. Trois rythmes de p
 
 | Rythme | Ce qu'il porte |
 |---|---|
-| `question` | scène (Jost) · réplique (Playfair, casse contrastée) · question (italique) · réponses A/B/C en lignes · barème · ce qu'on teste, en retrait rouge |
+| `question` | scène (Jost) · réplique (Playfair, casse contrastée) · question (italique) · réponses A/B/C en lignes |
+| `points` | SCORE surligné · chaque réponse avec ses points, le plus gros en rouge · ce qu'on teste, mots-clés en gras |
 | `score` | « Et là… TON SCORE : » puis les paliers : fourchette en rouge, titre en capitales, texte en Jost |
 | `verdict` | la slide noire : la fausse question barrée, la vraie en dessous, la série, le compte |
 
-Beaucoup de texte par slide : chaque bloc a sa texture, pour que l'œil sache
-toujours où il est. Une slide peut forcer son compteur avec `tag`
+**Une question = deux slides.** Question et barème sur la même slide, c'est
+illisible, et le lecteur voit les points avant de répondre. Séparés : on répond,
+on swipe, on découvre. Chaque slide n'a qu'une tâche, le reste est de l'air. Une slide peut forcer son compteur avec `tag`
 (`1 / 5` sur les questions, `Ton score`, `Le piège` après). L'outro prend un
 `rythme` quand elle ne suit pas le modèle par défaut.
 
@@ -247,7 +249,15 @@ Un carrousel = un fichier dans `carrousels/`.
 node build-carrousel.js le-miroir
 ```
 
-Sept PNG dans `export/<id>/`, numérotés dans l'ordre de publication.
+Les PNG dans `export/<id>/`, numérotés dans l'ordre de publication.
+
+```bash
+node build-carrousel.js le-miroir --hd
+```
+
+La même chose en double définition (2160 × 2700) dans `export/<id>/hd/`.
+C'est celle-là qu'on poste : Instagram réduit à 1080 depuis une source plus
+nette, le texte fin souffre moins de sa compression.
 
 Pour tester des couvertures en série sans écrire les carrousels entiers,
 `posts.json` + `node build-covers.js` sortent les vignettes dans

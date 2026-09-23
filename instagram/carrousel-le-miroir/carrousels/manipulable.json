@@ -1,30 +1,43 @@
 {
   "id": "manipulable",
   "tag": "Psychologie &middot; Influence",
-
   "cover": {
     "layout": "qcm",
     "case": true,
     "size": 118,
     "ital": "Réponds honnêtement.",
-    "lines": ["Es-tu", "manipulable ?"],
+    "lines": [
+      "Es-tu",
+      "manipulable ?"
+    ],
     "hi": 1,
-    "cases": ["Oui", "Non"],
+    "cases": [
+      "Oui",
+      "Non"
+    ],
     "coche": 1,
     "tous": "C’est ce que tout le monde coche.",
-    "consigne": ["5 questions. Note tes réponses.", "Ton score est à la dernière slide."],
+    "consigne": [
+      "5 questions. Note tes réponses.",
+      "Ton score est à la dernière slide."
+    ],
     "triche": "Et ne triche pas.",
     "mens": "Tu ne fais que te mentir à toi-même."
   },
-
   "slides": [
     {
       "rythme": "question",
       "tag": "<b>1</b> / 5",
       "label": "Question 1",
-      "scene": ["Quelqu’un te fait une remarque qui te blesse.", "Quand tu lui dis que ça t’a dérangé, il répond :"],
-      "size": 76,
-      "lines": ["« T’es susceptible.", "Je rigolais. »"],
+      "scene": [
+        "Quelqu’un te fait une remarque qui te blesse.",
+        "Quand tu lui dis que ça t’a dérangé, il répond :"
+      ],
+      "size": 80,
+      "lines": [
+        "« T’es susceptible.",
+        "Je rigolais. »"
+      ],
       "hi": 0,
       "ask": "Tu fais quoi ?",
       "opts": [
@@ -32,17 +45,47 @@
         "Je lui explique pourquoi ça m’a dérangé.",
         "Je commence à me demander si j’ai vraiment surréagi."
       ],
-      "score": [2, 0, 3],
-      "teste": ["Pourquoi ? Parce qu’on teste ici ta tendance à douter", "de ton propre jugement sous pression sociale."],
+      "next": "Les points"
+    },
+    {
+      "rythme": "points",
+      "tag": "<b>1</b> / 5",
+      "label": "Question 1",
+      "size": 96,
+      "lines": [
+        "Score :"
+      ],
+      "hi": 0,
+      "opts": [
+        "Je laisse passer.",
+        "Je lui explique pourquoi ça m’a dérangé.",
+        "Je commence à me demander si j’ai vraiment surréagi."
+      ],
+      "score": [
+        2,
+        0,
+        3
+      ],
+      "teste": [
+        "Pourquoi ?",
+        "Parce qu’on teste ici ta tendance à<br><strong>douter de ton propre jugement</strong><br>sous pression sociale."
+      ],
       "next": "Question 2"
     },
     {
       "rythme": "question",
       "tag": "<b>2</b> / 5",
       "label": "Question 2",
-      "scene": ["Quelqu’un te demande un service.", "Tu refuses. Il répond :"],
-      "size": 64,
-      "lines": ["« T’inquiète. Je pensais juste", "que je pouvais", "compter sur toi. »"],
+      "scene": [
+        "Quelqu’un te demande un service.",
+        "Tu refuses. Il répond :"
+      ],
+      "size": 68,
+      "lines": [
+        "« T’inquiète. Je pensais",
+        "juste que je pouvais",
+        "compter sur toi. »"
+      ],
       "hi": 2,
       "ask": "Ta réaction ?",
       "opts": [
@@ -50,17 +93,45 @@
         "Je culpabilise et je finis par accepter.",
         "Je me justifie pendant 10 minutes."
       ],
-      "score": [0, 3, 2],
-      "teste": ["Ici, on teste la difficulté à maintenir une limite", "lorsqu’une émotion est activée."],
+      "next": "Les points"
+    },
+    {
+      "rythme": "points",
+      "tag": "<b>2</b> / 5",
+      "label": "Question 2",
+      "size": 96,
+      "lines": [
+        "Score :"
+      ],
+      "hi": 0,
+      "opts": [
+        "Je maintiens mon non.",
+        "Je culpabilise et je finis par accepter.",
+        "Je me justifie pendant 10 minutes."
+      ],
+      "score": [
+        0,
+        3,
+        2
+      ],
+      "teste": [
+        "Ici, on teste la difficulté à <strong>maintenir<br>une limite</strong> lorsqu’une émotion est activée."
+      ],
       "next": "Question 3"
     },
     {
       "rythme": "question",
       "tag": "<b>3</b> / 5",
       "label": "Question 3",
-      "scene": ["Tu rencontres quelqu’un.", "Il te couvre d’attention pendant quelques jours."],
-      "size": 68,
-      "lines": ["Puis devient soudainement", "beaucoup plus distant."],
+      "scene": [
+        "Tu rencontres quelqu’un.",
+        "Il te couvre d’attention pendant quelques jours."
+      ],
+      "size": 70,
+      "lines": [
+        "Puis devient soudainement",
+        "beaucoup plus distant."
+      ],
       "hi": 1,
       "ask": "Tu fais quoi ?",
       "opts": [
@@ -68,36 +139,96 @@
         "Je commence à chercher ce que j’ai fait de travers.",
         "Je fais pareil et je prends mes distances."
       ],
-      "score": [0, 3, 1],
-      "teste": ["Cette question est intéressante parce qu’elle touche", "l’incertitude + le besoin de comprendre", "+ la recherche d’approbation."],
+      "next": "Les points"
+    },
+    {
+      "rythme": "points",
+      "tag": "<b>3</b> / 5",
+      "label": "Question 3",
+      "size": 96,
+      "lines": [
+        "Score :"
+      ],
+      "hi": 0,
+      "opts": [
+        "Je demande directement ce qui a changé.",
+        "Je commence à chercher ce que j’ai fait de travers.",
+        "Je fais pareil et je prends mes distances."
+      ],
+      "score": [
+        0,
+        3,
+        1
+      ],
+      "teste": [
+        "Cette question est intéressante parce qu’elle touche",
+        "<strong>l’incertitude</strong><br>+ <strong>le besoin de comprendre</strong><br>+ <strong>la recherche d’approbation.</strong>"
+      ],
       "next": "Question 4"
     },
     {
       "rythme": "question",
       "tag": "<b>4</b> / 5",
       "label": "Question 4",
-      "scene": ["Quelqu’un te dit :"],
-      "size": 74,
-      "lines": ["« Tout le monde", "pense ça de toi. »"],
+      "scene": [
+        "Quelqu’un te dit :"
+      ],
+      "size": 84,
+      "lines": [
+        "« Tout le monde",
+        "pense ça de toi. »"
+      ],
       "hi": 0,
-      "apres": ["Mais il ne te donne aucun nom."],
+      "apres": [
+        "Mais il ne te donne aucun nom."
+      ],
       "ask": "Tu…",
       "opts": [
         "Demandes qui pense ça.",
         "Commences à te demander ce que les autres pensent réellement de toi.",
         "N’y accordes aucune importance."
       ],
-      "score": [0, 3, 0],
-      "teste": ["Celle-là, je l’aime beaucoup. Parce qu’elle exploite", "une phrase extrêmement simple, mais qui peut", "déclencher énormément de doute."],
+      "next": "Les points"
+    },
+    {
+      "rythme": "points",
+      "tag": "<b>4</b> / 5",
+      "label": "Question 4",
+      "size": 96,
+      "lines": [
+        "Score :"
+      ],
+      "hi": 0,
+      "opts": [
+        "Demandes qui pense ça.",
+        "Commences à te demander ce que les autres pensent réellement de toi.",
+        "N’y accordes aucune importance."
+      ],
+      "score": [
+        0,
+        3,
+        0
+      ],
+      "teste": [
+        "Celle-là, je l’aime beaucoup.",
+        "Parce qu’elle exploite une phrase <strong>extrêmement<br>simple</strong>, mais qui peut déclencher<br><strong>énormément de doute.</strong>"
+      ],
       "next": "Question 5"
     },
     {
       "rythme": "question",
       "tag": "<b>5</b> / 5",
       "label": "Question 5",
-      "scene": ["Tu viens de prendre une décision importante.", "Quelqu’un te dit :"],
-      "size": 76,
-      "lines": ["« Personnellement,", "je ne l’aurais", "jamais fait. »"],
+      "scene": [
+        "Tu viens de prendre une décision importante.",
+        "Quelqu’un te dit :"
+      ],
+      "size": 84,
+      "lines": [
+        "« Personnellement,",
+        "je ne l’aurais",
+        "jamais fait. »"
+      ],
       "hi": 2,
       "ask": "Tu ressens immédiatement…",
       "opts": [
@@ -105,8 +236,31 @@
         "Une envie de lui expliquer pourquoi j’ai raison.",
         "Un doute sur ma décision."
       ],
-      "score": [0, 1, 3],
-      "teste": ["Et là, on touche quelque chose de très humain :", "le besoin de validation."],
+      "next": "Les points"
+    },
+    {
+      "rythme": "points",
+      "tag": "<b>5</b> / 5",
+      "label": "Question 5",
+      "size": 96,
+      "lines": [
+        "Score :"
+      ],
+      "hi": 0,
+      "opts": [
+        "Rien de particulier.",
+        "Une envie de lui expliquer pourquoi j’ai raison.",
+        "Un doute sur ma décision."
+      ],
+      "score": [
+        0,
+        1,
+        3
+      ],
+      "teste": [
+        "Et là, on touche quelque chose de très humain :",
+        "<strong>le besoin de validation.</strong>"
+      ],
       "next": "Ton score"
     },
     {
@@ -114,28 +268,47 @@
       "tag": "Ton score",
       "ital": "Et là…",
       "size": 88,
-      "lines": ["ton score :"],
+      "lines": [
+        "ton score :"
+      ],
       "hi": 0,
       "paliers": [
         {
           "r": "0 → 3",
           "h": "Difficile à faire bouger",
-          "p": ["Tu sembles plutôt capable de maintenir tes limites", "et ton jugement sous pression.", "Mais personne n’est totalement immunisé."]
+          "p": [
+            "Tu sembles plutôt capable de maintenir tes limites",
+            "et ton jugement sous pression.",
+            "Mais personne n’est totalement immunisé."
+          ]
         },
         {
           "r": "4 → 7",
           "h": "Tu as des portes d’entrée",
-          "p": ["La culpabilité, le doute ou le besoin d’être compris", "peuvent parfois influencer tes décisions.", "Et quelqu’un qui les connaît peut s’en servir."]
+          "p": [
+            "La culpabilité, le doute ou le besoin d’être compris",
+            "peuvent parfois influencer tes décisions.",
+            "Et quelqu’un qui les connaît peut s’en servir."
+          ]
         },
         {
           "r": "8 → 12",
           "h": "Tu laisses parfois trop de place aux autres",
-          "p": ["Tu peux avoir tendance à douter de ton jugement,", "chercher l’approbation ou céder lorsqu’une émotion", "est activée. Ce n’est pas une faiblesse définitive.", "C’est une vulnérabilité que tu peux apprendre à reconnaître."]
+          "p": [
+            "Tu peux avoir tendance à douter de ton jugement,",
+            "chercher l’approbation ou céder lorsqu’une émotion",
+            "est activée. Ce n’est pas une faiblesse définitive.",
+            "C’est une vulnérabilité que tu peux apprendre à reconnaître."
+          ]
         },
         {
           "r": "13 → 15",
           "h": "Tu es peut-être plus influençable<br>que tu ne le penses",
-          "p": ["Et le plus dangereux n’est pas toujours de se faire manipuler.", "C’est de ne pas remarquer quand quelqu’un", "commence à influencer tes décisions."]
+          "p": [
+            "Et le plus dangereux n’est pas toujours de se faire manipuler.",
+            "C’est de ne pas remarquer quand quelqu’un",
+            "commence à influencer tes décisions."
+          ]
         }
       ],
       "next": "Le piège"
@@ -144,29 +317,50 @@
       "rythme": "bascule",
       "tag": "Le piège",
       "size": 112,
-      "lines": ["Mais voici", "le piège."],
+      "lines": [
+        "Mais voici",
+        "le piège."
+      ],
       "hi": 1,
       "lead": "Être « manipulable »<br>n’est pas un trait fixe.",
       "body": [
-        ["Tu peux être extrêmement difficile à influencer", "dans une situation… et beaucoup plus vulnérable", "dans une autre."],
-        ["Parce que la personne, le contexte, ton émotion,", "ton besoin et l’enjeu"]
+        [
+          "Tu peux être extrêmement difficile à influencer",
+          "dans une situation… et beaucoup plus vulnérable",
+          "dans une autre."
+        ],
+        [
+          "Parce que la personne, le contexte, ton émotion,",
+          "ton besoin et l’enjeu"
+        ]
       ],
-      "payoff": ["changent tout."],
+      "payoff": [
+        "changent tout."
+      ],
       "next": "La vraie question"
     }
   ],
-
   "outro": {
     "rythme": "verdict",
     "faux": "La vraie question n’est pas :",
     "barre": "« Suis-je manipulable ? »",
     "mais": "Mais :",
     "size": 68,
-    "lines": ["« Qu’est-ce qui peut", "me faire abandonner", "mon propre jugement ? »"],
+    "lines": [
+      "« Qu’est-ce qui peut",
+      "me faire abandonner",
+      "mon propre jugement ? »"
+    ],
     "hi": -1,
     "caps": 2,
     "serie": "Le Jeu Humain<sup>&#8482;</sup>",
-    "payoff": ["Tout le monde joue.", "Peu connaissent les règles."],
-    "action": ["Suis le compte <span class=\"at\">@soolifestyle</span>", "pour ne rien rater."]
+    "payoff": [
+      "Tout le monde joue.",
+      "Peu connaissent les règles."
+    ],
+    "action": [
+      "Suis le compte <span class=\"at\">@soolifestyle</span>",
+      "pour ne rien rater."
+    ]
   }
 }

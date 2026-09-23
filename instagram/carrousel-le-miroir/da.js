@@ -151,31 +151,36 @@ const CSS = `${FONTS}
   .mens{ font-family:'Display',Georgia,serif; font-style:italic; font-weight:500;
          font-size:38px; margin-top:10px; color:rgba(12,12,12,.70); }
 
-  /* ── la question : le test, slide par slide ──
-        Beaucoup de texte : chaque bloc a sa texture pour que l'œil
-        sache où il est. Scène en Jost, réplique en Playfair,
-        réponses en lignes, barème en capitales, explication en retrait. ── */
-  .scene{ font-family:'Sans',sans-serif; font-weight:300; font-size:35px; line-height:1.42;
-          color:rgba(12,12,12,.84); }
-  .scene + .title, .title + .scene{ margin-top:30px; }
+  /* ── la question : le test, en deux temps ──
+        Slide 1 : la situation et les réponses. Slide 2 : les points et
+        ce qu'on teste. Une slide = une seule tâche pour l'œil.
+        Tout le reste, c'est de l'air. ── */
+  .scene{ font-family:'Sans',sans-serif; font-weight:300; font-size:38px; line-height:1.45;
+          color:rgba(12,12,12,.80); }
+  .scene + .title, .title + .scene{ margin-top:40px; }
   .ask{ font-family:'Display',Georgia,serif; font-style:italic; font-weight:500;
-        font-size:46px; margin-top:40px; }
-  .opts{ margin-top:18px; }
-  .opt{ display:grid; grid-template-columns:58px 1fr; align-items:baseline;
-        font-family:'Sans',sans-serif; font-weight:300; font-size:33px; line-height:1.36;
-        padding:15px 0; border-top:2px solid rgba(12,12,12,.12); }
-  .opt:last-child{ border-bottom:2px solid rgba(12,12,12,.12); }
-  .opt b{ font-family:'Display',Georgia,serif; font-weight:600; font-size:38px; color:var(--red); }
-  .bareme{ display:flex; align-items:baseline; gap:36px; margin-top:30px;
-           font-family:'Sans',sans-serif; font-weight:500; font-size:20px;
-           letter-spacing:.28em; text-transform:uppercase; }
-  .bareme em{ font-style:normal; color:var(--red); margin-right:6px; }
-  .bareme span{ font-family:'Display',Georgia,serif; font-weight:600; font-size:36px;
-                letter-spacing:.02em; }
-  .bareme span i{ font-style:normal; color:var(--red); }
-  .teste{ margin-top:26px; padding-left:26px; border-left:4px solid var(--red);
-          font-family:'Sans',sans-serif; font-weight:300; font-size:29px; line-height:1.45;
-          color:rgba(12,12,12,.66); }
+        font-size:52px; margin-top:60px; }
+  .opts{ margin-top:26px; }
+  .opt{ display:grid; grid-template-columns:64px 1fr; align-items:baseline;
+        font-family:'Sans',sans-serif; font-weight:300; font-size:37px; line-height:1.38;
+        padding:22px 0; border-top:2px solid rgba(12,12,12,.10); }
+  .opt:last-child{ border-bottom:2px solid rgba(12,12,12,.10); }
+  .opt b{ font-family:'Display',Georgia,serif; font-weight:600; font-size:42px; color:var(--red); }
+
+  /* les points : la réponse à gauche, en retrait ; le chiffre à droite, énorme */
+  .pts{ margin-top:44px; }
+  .pt{ display:grid; grid-template-columns:64px 1fr 110px; align-items:center;
+       padding:18px 0; border-top:2px solid rgba(12,12,12,.10); }
+  .pt:last-child{ border-bottom:2px solid rgba(12,12,12,.10); }
+  .pt b{ font-family:'Display',Georgia,serif; font-weight:600; font-size:42px; color:var(--red); }
+  .pt span{ font-family:'Sans',sans-serif; font-weight:300; font-size:31px; line-height:1.35;
+            color:rgba(12,12,12,.62); padding-right:20px; }
+  .pt em{ font-style:normal; text-align:right; font-family:'Display',Georgia,serif;
+          font-weight:600; font-size:76px; line-height:1; }
+  .pt.max em{ color:var(--red); }
+  .teste{ font-family:'Sans',sans-serif; font-weight:300; font-size:38px; line-height:1.5;
+          color:rgba(12,12,12,.80); }
+  .teste strong{ font-weight:500; color:var(--ink); }
 
   /* ── le score : quatre paliers, lisibles d'un coup d'œil ── */
   .paliers{ margin-top:34px; }

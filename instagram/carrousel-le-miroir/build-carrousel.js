@@ -8,9 +8,11 @@ const COVERS = require('./layouts-couverture');
 const RYTHMES = require('./rythmes');
 
 const DIR = __dirname;
-const name = process.argv[2] || 'le-miroir';
+const name = process.argv.slice(2).find((a) => !a.startsWith('--')) || 'le-miroir';
+// --hd : double définition (2160 × 2700), pour qu'Instagram compresse depuis plus net
+const HD = process.argv.includes('--hd');
 const c = JSON.parse(fs.readFileSync(path.join(DIR, 'carrousels', `${name}.json`), 'utf8'));
-const OUT = path.join(DIR, 'export', c.id);
+const OUT = path.join(DIR, 'export', c.id, HD ? 'hd' : '');
 
 const TOTAL = 1 + c.slides.length + 1; // couverture + mécanismes + CTA
 const N = c.slides.length;
@@ -63,7 +65,7 @@ const html = DA.page(
   const browser = await chromium.launch();
   const tab = await browser.newPage({
     viewport: { width: DA.TOKENS.w, height: DA.TOKENS.h },
-    deviceScaleFactor: 1,
+    deviceScaleFactor: HD ? 2 : 1,
   });
   await tab.goto('file://' + file);
   await tab.evaluate(() => document.fonts.ready);

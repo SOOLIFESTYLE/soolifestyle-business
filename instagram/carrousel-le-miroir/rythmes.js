@@ -45,18 +45,32 @@ const R = {
 
   // ── les rythmes du test ──
 
-  // une question : la scène, la réplique, les réponses, le barème, ce qu'on teste
+  // une question, premier temps : la situation, la réplique, les réponses
   question: (s) => `
-    <div class="wrap">
+    <div class="wrap bas">
       ${label(s)}
       ${s.scene ? `<div class="scene">${s.scene.join('<br>')}</div>` : ''}
       <div class="title case" style="font-size:${s.size}px; line-height:1.18">${DA.chipLines(s.lines, s.hi)}</div>
       ${s.apres ? `<div class="scene">${s.apres.join('<br>')}</div>` : ''}
       <div class="ask">${s.ask}</div>
       <div class="opts">${s.opts.map((o, i) => `<div class="opt"><b>${'ABC'[i]}</b><span>${o}</span></div>`).join('')}</div>
-      <div class="bareme"><em>Score</em>${s.score.map((n, i) => `<span><i>${'ABC'[i]}</i> = ${n}</span>`).join('')}</div>
-      <div class="teste">${s.teste.join('<br>')}</div>
     </div>`,
+
+  // une question, second temps : les points, puis ce qu'on teste.
+  // Le plus gros chiffre passe en rouge : c'est lui qu'on redoute.
+  points: (s) => {
+    const max = Math.max(...s.score);
+    return `
+    <div class="wrap bas">
+      ${label(s)}
+      <div class="title case" style="font-size:${s.size}px">${DA.chipLines(s.lines, s.hi)}</div>
+      <div class="pts">${s.opts
+        .map((o, i) => `<div class="pt${s.score[i] === max ? ' max' : ''}"><b>${'ABC'[i]}</b><span>${o}</span><em>${s.score[i]}</em></div>`)
+        .join('')}</div>
+      <div class="hr"></div>
+      ${s.teste.map((p) => `<div class="teste">${p}</div>`).join('')}
+    </div>`;
+  },
 
   // le score : le titre, puis les paliers
   score: (s) => `
